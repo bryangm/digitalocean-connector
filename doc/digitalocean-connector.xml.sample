@@ -1,3 +1,21 @@
-<!-- BEGIN_INCLUDE(digitalocean:greet) -->
-    <digitalocean:greet config-ref="" friend="#[map-payload:friend]" />
-<!-- END_INCLUDE(digitalocean:greet) -->
+<!-- BEGIN_INCLUDE(digitalocean:getUserInformation) -->
+    <digitalocean:getUserInformation/>
+<!-- END_INCLUDE(digitalocean:getUserInformation) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllActions) -->
+    <digitalocean:listAllActions/>
+<!-- END_INCLUDE(digitalocean:listAllActions) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingAction) -->
+    <digitalocean:retrieveExistingAction actionId="36804636"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingAction) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllDomains) -->
+    <digitalocean:listAllDomains/>
+<!-- END_INCLUDE(digitalocean:listAllDomains) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDomain) -->
+    <digitalocean:retrieveExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingDomain) -->
+<!-- BEGIN_INCLUDE(digitalocean:createNewDomain) -->
+    <digitalocean:createNewDomain message=""/>
+<!-- END_INCLUDE(digitalocean:createNewDomain) -->
+<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomain) -->
+    <digitalocean:deleteExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
+<!-- END_INCLUDE(digitalocean:deleteExistingDomain) -->

@@ -28,19 +28,19 @@ import org.mule.api.annotations.rest.RestUriParam;
 public abstract class DigitalOceanConnector {
 
     /**
-     * Greeting message
+     * Pre-generated OAuth Token
      */
 	@RestHeaderParam("Authorization") 
     @Configurable
     private String token;
 
     /**
-     * Custom processor
+     * Get account information for the authenticated user.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:getUserInformation}
      *
      * @return The account information for the authenticated user.
-     * @throws IOException Comment for Exception
+     * @throws IOException A problem communication with DigitalOcean occurred.
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -49,15 +49,30 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String getUserInformation() throws IOException;  
     
-    
-    // Actions
+    /**
+     * List all of the actions that have been executed on the current account.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActions}
+     *
+     * @return List of actions.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */    
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions", 
     		method=HttpMethod.GET)
     public abstract String listAllActions() throws IOException;  
-    
+ 
+    /**
+     * Retrieve a specific action object.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingAction}
+     *
+     * @param  actionId	ID of the action.
+     * @return An action.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -67,15 +82,30 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("action") String actionId) 
     				throws IOException;  
     
-    
-    //Domains
+    /**
+     * List all of the actions that have been executed on the current account.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomains}
+     *
+     * @return List of domains.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains", 
     		method=HttpMethod.GET)
     public abstract String listAllDomains() throws IOException;  
-    
+ 
+    /**
+     * Get details about a specific domain.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomain}
+     *
+     * @param  domainName Name of the domain.
+     * @return A domain.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -85,6 +115,15 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
+    /**
+     * Create a new domain
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomain}
+     *
+     * @param  message The JSON request body.
+     * @return A domain.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -95,17 +134,24 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+    /**
+     * Delete a domain
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomain}
+     *
+     * @param  domainName Name of the domain.
+     * @throws IOException A problem communication with DigitalOcean occurred.
+     */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}", 
     		method=HttpMethod.DELETE)
-    public abstract String deleteExistingDomain(
+    public abstract void deleteExistingDomain(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
-    
-    //Domain Records
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -115,6 +161,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -125,6 +172,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("record") String recordId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -136,6 +184,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -148,6 +197,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -158,8 +208,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("record") String recordId) 
     				throws IOException;  
     
-    
-    //Droplets
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -167,6 +216,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String listAllDroplets() throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -176,6 +226,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -185,6 +236,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -194,6 +246,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -203,6 +256,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -212,6 +266,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -221,6 +276,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -231,6 +287,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -240,6 +297,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -247,6 +305,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String listAllDropletNeighbors() throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -254,8 +313,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String listDropletUpgrades() throws IOException;  
     
-    
-    //Droplet Actions
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -267,6 +325,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -277,8 +336,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("action") String actionId) 
     				throws IOException;      
     
-    
-    //Images
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -289,6 +347,7 @@ public abstract class DigitalOceanConnector {
     		@RestQueryParam("private") @Default("false") String privateImages) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -298,6 +357,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("image") String imageId) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -307,6 +367,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("image") String imageId) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -318,6 +379,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -328,7 +390,6 @@ public abstract class DigitalOceanConnector {
     				throws IOException;  
     
     
-    //Image Actions
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -340,6 +401,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -350,8 +412,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("action") String actionId) 
     				throws IOException;  
     
-    
-    //SSH Keys
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -359,6 +420,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String listAllKeys() throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -368,6 +430,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("key") String keyIdOrFingerprint) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -378,6 +441,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -389,6 +453,7 @@ public abstract class DigitalOceanConnector {
     		@Payload String message) 
     				throws IOException;  
     
+ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -398,8 +463,7 @@ public abstract class DigitalOceanConnector {
     		@RestUriParam("key") String keyIdOrFingerprint) 
     				throws IOException;  
     
-    
-    //Regions
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
@@ -407,8 +471,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET)
     public abstract String listAllRegions() throws IOException;  
     
-    
-    //Sizes
+
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
