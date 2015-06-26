@@ -168,6 +168,18 @@ public abstract class DigitalOceanConnector {
     public abstract String listDropletUpgrades() throws IOException;  
     
     
+    //Droplet Actions
+    @Processor
+    @ReconnectOn(exceptions = { Exception.class })
+    @RestCall(uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", method=HttpMethod.POST, contentType = "application/json")
+    public abstract String executeDropletAction(@RestUriParam("droplet") String dropletId, @Payload String message) throws IOException;  
+    
+    @Processor
+    @ReconnectOn(exceptions = { Exception.class })
+    @RestCall(uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", method=HttpMethod.GET)
+    public abstract String retrieveExistingDropletAction(@RestUriParam("droplet") String dropletId, @RestUriParam("action") String actionId) throws IOException;      
+    
+    
     //Images
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -193,18 +205,6 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(uri="https://api.digitalocean.com/v2/images/{image}", method=HttpMethod.DELETE)
     public abstract String deleteExistingImage(@RestUriParam("image") String imageId) throws IOException;  
-    
-    
-    //Droplet Actions
-    @Processor
-    @ReconnectOn(exceptions = { Exception.class })
-    @RestCall(uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", method=HttpMethod.POST, contentType = "application/json")
-    public abstract String executeDropletAction(@RestUriParam("droplet") String dropletId, @Payload String message) throws IOException;  
-    
-    @Processor
-    @ReconnectOn(exceptions = { Exception.class })
-    @RestCall(uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", method=HttpMethod.GET)
-    public abstract String retrieveExistingDropletAction(@RestUriParam("droplet") String dropletId, @RestUriParam("action") String actionId) throws IOException;      
     
     
     //Image Actions
@@ -243,7 +243,7 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(uri="https://api.digitalocean.com/v2/account/keys/{key}", method=HttpMethod.DELETE)
-    public abstract String deleteExistingKey(@RestUriParam("key") String keyIdOrFingerpring) throws IOException;  
+    public abstract String deleteExistingKey(@RestUriParam("key") String keyIdOrFingerprint) throws IOException;  
     
     
     //Regions
