@@ -14,7 +14,7 @@
     <digitalocean:retrieveExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
 <!-- END_INCLUDE(digitalocean:retrieveExistingDomain) -->
 <!-- BEGIN_INCLUDE(digitalocean:createNewDomain) -->
-    <digitalocean:createNewDomain message="{}"/>
+    <digitalocean:createNewDomain message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:createNewDomain) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomain) -->
     <digitalocean:deleteExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
@@ -26,10 +26,10 @@
     <digitalocean:retrieveExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
 <!-- END_INCLUDE(digitalocean:retrieveExistingDomainRecord) -->
 <!-- BEGIN_INCLUDE(digitalocean:createNewDomainRecord) -->
-    <digitalocean:createNewDomainRecord domainName="digitaloceanisthebombdiggity.com" message="{}"/>
+    <digitalocean:createNewDomainRecord domainName="digitaloceanisthebombdiggity.com" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:createNewDomainRecord) -->
 <!-- BEGIN_INCLUDE(digitalocean:updateExistingDomainRecord) -->
-    <digitalocean:updateExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896" message="{}"/>
+    <digitalocean:updateExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:updateExistingDomainRecord) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomainRecord) -->
     <digitalocean:deleteExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
@@ -56,7 +56,7 @@
     <digitalocean:listAllNeighborsForDroplet dropletId="3164494"/>
 <!-- END_INCLUDE(digitalocean:listAllNeighborsForDroplet) -->
 <!-- BEGIN_INCLUDE(digitalocean:createNewDroplet) -->
-    <digitalocean:createNewDroplet message="{}"/>
+    <digitalocean:createNewDroplet message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:createNewDroplet) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingDroplet) -->
     <digitalocean:deleteExistingDroplet dropletId="3164494"/>
@@ -68,7 +68,7 @@
     <digitalocean:listDropletUpgrades/>
 <!-- END_INCLUDE(digitalocean:listDropletUpgrades) -->
 <!-- BEGIN_INCLUDE(digitalocean:executeDropletAction) -->
-    <digitalocean:executeDropletAction dropletId="3164450" message="{}"/>
+    <digitalocean:executeDropletAction dropletId="3164450" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:executeDropletAction) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDropletAction) -->
     <digitalocean:retrieveExistingDropletAction dropletId="3164450" actionId="36804807"/>
@@ -83,13 +83,13 @@
     <digitalocean:listAllActionsForImage imageId="7555620"/>
 <!-- END_INCLUDE(digitalocean:listAllActionsForImage) -->
 <!-- BEGIN_INCLUDE(digitalocean:updateExistingImage) -->
-    <digitalocean:updateExistingImage imageId="7555620" message="{}"/>
+    <digitalocean:updateExistingImage imageId="7555620" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:updateExistingImage) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingImage) -->
     <digitalocean:deleteExistingImage imageId="7555620"/>
 <!-- END_INCLUDE(digitalocean:deleteExistingImage) -->
 <!-- BEGIN_INCLUDE(digitalocean:executeImageAction) -->
-    <digitalocean:executeImageAction imageId="7938291" message="{}"/>
+    <digitalocean:executeImageAction imageId="7938291" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:executeImageAction) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieveExistingImageAction) -->
     <digitalocean:retrieveExistingImageAction imageId="7938269" actionId="36805527"/>
@@ -101,10 +101,10 @@
     <digitalocean:retrieveExistingKey keyId="512190"/>
 <!-- END_INCLUDE(digitalocean:retrieveExistingKey) -->
 <!-- BEGIN_INCLUDE(digitalocean:createNewKey) -->
-    <digitalocean:createNewKey message="{}"/>
+    <digitalocean:createNewKey message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:createNewKey) -->
 <!-- BEGIN_INCLUDE(digitalocean:updateExistingKey) -->
-    <digitalocean:updateExistingKey keyId="512190" message="{}"/>
+    <digitalocean:updateExistingKey keyId="512190" message="#[payload]"/>
 <!-- END_INCLUDE(digitalocean:updateExistingKey) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingKey) -->
     <digitalocean:deleteExistingKey keyId="512190"/>
