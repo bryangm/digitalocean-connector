@@ -644,7 +644,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingKey}
      *
-     * @param  keyId Id of an SSH key.
+     * @param  keyIdOrFingerprint	
+     * 				Id or fingerprint of an SSH key.
      * @return An SSH Key.
      * @throws IOException A problem communication with DigitalOcean occurred.
      */  
@@ -681,7 +682,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingKey}
      *
-     * @param  keyId Id of an SSH key.
+     * @param  keyIdOrFingerprint	
+     * 				Id or fingerprint of an SSH key.
      * @param  message The JSON request body.
      * @return An SSH key.
      * @throws IOException A problem communication with DigitalOcean occurred.
@@ -702,7 +704,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingKey}
      *
-     * @param  keyId Id of an SSH key.
+     * @param  keyIdOrFingerprint	
+     * 				Id or fingerprint of an SSH key.
      * @throws IOException A problem communication with DigitalOcean occurred.
      */ 
     @Processor
@@ -750,7 +753,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Set OAuth Token
      *
-     * @param OAuth Token
+     * @param token	OAuth Token
      */
     public void setToken(String token) {
         this.token = token;
