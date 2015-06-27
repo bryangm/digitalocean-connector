@@ -14,8 +14,104 @@
     <digitalocean:retrieveExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
 <!-- END_INCLUDE(digitalocean:retrieveExistingDomain) -->
 <!-- BEGIN_INCLUDE(digitalocean:createNewDomain) -->
-    <digitalocean:createNewDomain message=""/>
+    <digitalocean:createNewDomain message="{}"/>
 <!-- END_INCLUDE(digitalocean:createNewDomain) -->
 <!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomain) -->
     <digitalocean:deleteExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
 <!-- END_INCLUDE(digitalocean:deleteExistingDomain) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllDomainRecords) -->
+    <digitalocean:listAllDomainRecords domainName="digitaloceanisthebombdiggity.com"/>
+<!-- END_INCLUDE(digitalocean:listAllDomainRecords) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDomainRecord) -->
+    <digitalocean:retrieveExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingDomainRecord) -->
+<!-- BEGIN_INCLUDE(digitalocean:createNewDomainRecord) -->
+    <digitalocean:createNewDomainRecord domainName="digitaloceanisthebombdiggity.com" message="{}"/>
+<!-- END_INCLUDE(digitalocean:createNewDomainRecord) -->
+<!-- BEGIN_INCLUDE(digitalocean:updateExistingDomainRecord) -->
+    <digitalocean:updateExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896" message="{}"/>
+<!-- END_INCLUDE(digitalocean:updateExistingDomainRecord) -->
+<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomainRecord) -->
+    <digitalocean:deleteExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
+<!-- END_INCLUDE(digitalocean:deleteExistingDomainRecord) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllDroplets) -->
+    <digitalocean:listAllDroplets/>
+<!-- END_INCLUDE(digitalocean:listAllDroplets) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDroplet) -->
+    <digitalocean:retrieveExistingDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllAvailableKernelsForDroplet) -->
+    <digitalocean:listAllAvailableKernelsForDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:listAllAvailableKernelsForDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllSnapshotsForDroplet) -->
+    <digitalocean:listAllSnapshotsForDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:listAllSnapshotsForDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllBackupsForDroplet) -->
+    <digitalocean:listAllBackupsForDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:listAllBackupsForDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllActionsForDroplet) -->
+    <digitalocean:listAllActionsForDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:listAllActionsForDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllNeighborsForDroplet) -->
+    <digitalocean:listAllNeighborsForDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:listAllNeighborsForDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:createNewDroplet) -->
+    <digitalocean:createNewDroplet message="{}"/>
+<!-- END_INCLUDE(digitalocean:createNewDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDroplet) -->
+    <digitalocean:deleteExistingDroplet dropletId="3164494"/>
+<!-- END_INCLUDE(digitalocean:deleteExistingDroplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllDropletNeighbors) -->
+    <digitalocean:listAllDropletNeighbors/>
+<!-- END_INCLUDE(digitalocean:listAllDropletNeighbors) -->
+<!-- BEGIN_INCLUDE(digitalocean:listDropletUpgrades) -->
+    <digitalocean:listDropletUpgrades/>
+<!-- END_INCLUDE(digitalocean:listDropletUpgrades) -->
+<!-- BEGIN_INCLUDE(digitalocean:executeDropletAction) -->
+    <digitalocean:executeDropletAction dropletId="3164450" message="{}"/>
+<!-- END_INCLUDE(digitalocean:executeDropletAction) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDropletAction) -->
+    <digitalocean:retrieveExistingDropletAction dropletId="3164450" actionId="36804807"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingDropletAction) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllImages) -->
+    <digitalocean:listAllImages/>
+<!-- END_INCLUDE(digitalocean:listAllImages) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingImage) -->
+    <digitalocean:retrieveExistingImage imageId="7555620"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingImage) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllActionsForImage) -->
+    <digitalocean:listAllActionsForImage imageId="7555620"/>
+<!-- END_INCLUDE(digitalocean:listAllActionsForImage) -->
+<!-- BEGIN_INCLUDE(digitalocean:updateExistingImage) -->
+    <digitalocean:updateExistingImage imageId="7555620" message="{}"/>
+<!-- END_INCLUDE(digitalocean:updateExistingImage) -->
+<!-- BEGIN_INCLUDE(digitalocean:deleteExistingImage) -->
+    <digitalocean:deleteExistingImage imageId="7555620"/>
+<!-- END_INCLUDE(digitalocean:deleteExistingImage) -->
+<!-- BEGIN_INCLUDE(digitalocean:executeImageAction) -->
+    <digitalocean:executeImageAction imageId="7938291" message="{}"/>
+<!-- END_INCLUDE(digitalocean:executeImageAction) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingImageAction) -->
+    <digitalocean:retrieveExistingImageAction imageId="7938269" actionId="36805527"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingImageAction) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllKeys) -->
+    <digitalocean:listAllKeys/>
+<!-- END_INCLUDE(digitalocean:listAllKeys) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingKey) -->
+    <digitalocean:retrieveExistingKey keyId="512190"/>
+<!-- END_INCLUDE(digitalocean:retrieveExistingKey) -->
+<!-- BEGIN_INCLUDE(digitalocean:createNewKey) -->
+    <digitalocean:createNewKey message="{}"/>
+<!-- END_INCLUDE(digitalocean:createNewKey) -->
+<!-- BEGIN_INCLUDE(digitalocean:updateExistingKey) -->
+    <digitalocean:updateExistingKey keyId="512190" message="{}"/>
+<!-- END_INCLUDE(digitalocean:updateExistingKey) -->
+<!-- BEGIN_INCLUDE(digitalocean:deleteExistingKey) -->
+    <digitalocean:deleteExistingKey keyId="512190"/>
+<!-- END_INCLUDE(digitalocean:deleteExistingKey) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllRegions) -->
+    <digitalocean:listAllRegions/>
+<!-- END_INCLUDE(digitalocean:listAllRegions) -->
+<!-- BEGIN_INCLUDE(digitalocean:listAllSizes) -->
+    <digitalocean:listAllSizes/>
+<!-- END_INCLUDE(digitalocean:listAllSizes) -->
