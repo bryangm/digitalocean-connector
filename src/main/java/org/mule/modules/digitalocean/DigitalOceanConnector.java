@@ -4,20 +4,24 @@
  */
 
 package org.mule.modules.digitalocean;
+import java.io.IOException;
+
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.Transformer;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Payload;
 import org.mule.api.annotations.Processor;
-
-import java.io.IOException;
-
 import org.mule.api.annotations.ReconnectOn;
 import org.mule.api.annotations.rest.HttpMethod;
 import org.mule.api.annotations.rest.RestCall;
 import org.mule.api.annotations.rest.RestHeaderParam;
 import org.mule.api.annotations.rest.RestQueryParam;
 import org.mule.api.annotations.rest.RestUriParam;
+
+import com.google.gson.Gson;
+
+import org.mule.modules.digitalocean.objects.responses.*;
 
 /**
  * Anypoint Connector
@@ -48,8 +52,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account", 
-    		method=HttpMethod.GET)
-    public abstract String getUserInformation() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract AccountResponse getUserInformation() throws IOException;  
     
     // Actions
     /**
@@ -65,8 +70,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActions() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponses listAllActions() throws IOException;  
  
     /**
      * Retrieve a specific action object.
@@ -82,8 +88,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingAction(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingAction(
     		@RestUriParam("action") String actionId) 
     				throws IOException;  
     
@@ -101,8 +108,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDomains() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainResponses listAllDomains() throws IOException;  
  
     /**
      * Get details about a specific domain.
@@ -118,8 +126,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDomain(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainResponse retrieveExistingDomain(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
@@ -139,7 +148,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDomain(
+    public abstract DomainResponse createNewDomain(
     		@Payload String message) 
     				throws IOException;  
     
@@ -176,8 +185,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDomainRecords(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainRecordResponses listAllDomainRecords(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
@@ -196,8 +206,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDomainRecord(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainRecordResponse retrieveExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") String recordId) 
     				throws IOException;  
@@ -219,7 +230,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDomainRecord(
+    public abstract DomainRecordResponse createNewDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@Payload String message) 
     				throws IOException;  
@@ -242,7 +253,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingDomainRecord(
+    public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") String recordId, 
     		@Payload String message) 
@@ -282,8 +293,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDroplets() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletResponses listAllDroplets() throws IOException;  
     
     /**
      * Get details about a specific droplet.
@@ -299,8 +311,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletResponse retrieveExistingDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -318,8 +331,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels", 
-    		method=HttpMethod.GET)
-    public abstract String listAllAvailableKernelsForDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KernelResponses listAllAvailableKernelsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -337,8 +351,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots", 
-    		method=HttpMethod.GET)
-    public abstract String listAllSnapshotsForDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageResponses listAllSnapshotsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -356,8 +371,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups", 
-    		method=HttpMethod.GET)
-    public abstract String listAllBackupsForDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageResponses listAllBackupsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -375,8 +391,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActionsForDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponses listAllActionsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -394,8 +411,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/neighbors", 
-    		method=HttpMethod.GET)
-    public abstract String listAllNeighborsForDroplet(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletResponses listAllNeighborsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -415,7 +433,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDroplet(
+    public abstract DropletResponse createNewDroplet(
     		@Payload String message) 
     				throws IOException;  
     
@@ -450,8 +468,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/reports/droplet_neighbors", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDropletNeighbors() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract NeighborsResponses listAllDropletNeighbors() throws IOException;  
     
     /**
      * List all droplets schedule to be upgraded.
@@ -466,8 +485,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplet_upgrades", 
-    		method=HttpMethod.GET)
-    public abstract String listDropletUpgrades() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract UpgradeResponses listDropletUpgrades() throws IOException;  
     
     // Droplet Actions
     /**
@@ -502,7 +522,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String executeDropletAction(
+    public abstract ActionResponse executeDropletAction(
     		@RestUriParam("droplet") String dropletId, 
     		@Payload String message) 
     				throws IOException;  
@@ -522,8 +542,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDropletAction(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingDropletAction(
     		@RestUriParam("droplet") String dropletId, 
     		@RestUriParam("action") String actionId) 
     				throws IOException;      
@@ -549,8 +570,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images?type=all&private=false", 
-    		method=HttpMethod.GET)
-    public abstract String listAllImages(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageResponses listAllImages(
     		@RestQueryParam("type") @Default("all") String imageType, 
     		@RestQueryParam("private") @Default("false") String privateImages) 
     				throws IOException;  
@@ -570,8 +592,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingImage(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageResponse retrieveExistingImage(
     		@RestUriParam("image") String imageId) 
     				throws IOException;  
     
@@ -589,8 +612,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActionsForImage(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponses listAllActionsForImage(
     		@RestUriParam("image") String imageId) 
     				throws IOException;  
     
@@ -611,7 +635,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingImage(
+    public abstract ImageResponse updateExistingImage(
     		@RestUriParam("image") String imageId, 
     		@Payload String message) 
     				throws IOException;  
@@ -653,7 +677,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String executeImageAction(
+    public abstract ActionResponse executeImageAction(
     		@RestUriParam("image") String imageId, 
     		@Payload String message) 
     				throws IOException;  
@@ -673,8 +697,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingImageAction(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingImageAction(
     		@RestUriParam("image") String imageId, 
     		@RestUriParam("action") String actionId) 
     				throws IOException;  
@@ -693,8 +718,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys", 
-    		method=HttpMethod.GET)
-    public abstract String listAllKeys() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KeyResponses listAllKeys() throws IOException;  
     
     /**
      * Get details about a specific SSH key.
@@ -711,8 +737,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingKey(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KeyResponse retrieveExistingKey(
     		@RestUriParam("key") String keyIdOrFingerprint) 
     				throws IOException;  
     
@@ -732,7 +759,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewKey(
+    public abstract KeyResponse createNewKey(
     		@Payload String message) 
     				throws IOException;  
     
@@ -754,7 +781,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingKey(
+    public abstract KeyResponse updateExistingKey(
     		@RestUriParam("key") String keyIdOrFingerprint, 
     		@Payload String message) 
     				throws IOException;  
@@ -792,8 +819,9 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/regions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllRegions() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract RegionResponses listAllRegions() throws IOException;  
      
     // Sizes
     /**
@@ -809,9 +837,137 @@ public abstract class DigitalOceanConnector {
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/sizes", 
-    		method=HttpMethod.GET)
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
     public abstract String listAllSizes() throws IOException;  
     
+
+    
+    @Transformer(sourceTypes = {String.class})
+    public static AccountResponse stringToAccountResponse(String json) {
+    	Gson gson = new Gson();
+    	AccountResponse response = gson.fromJson(json, AccountResponse.class);
+    	return response;
+    }
+    
+    @Transformer(sourceTypes = {String.class})
+    public static ActionResponses stringToActionResponses(String json) {
+    	Gson gson = new Gson();
+    	ActionResponses responses = gson.fromJson(json, ActionResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static ActionResponse stringToActionResponse(String json) {
+    	Gson gson = new Gson();
+    	ActionResponse response = gson.fromJson(json, ActionResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DomainResponses stringToDomainResponses(String json) {
+    	Gson gson = new Gson();
+    	DomainResponses responses = gson.fromJson(json, DomainResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DomainResponse stringToDomainResponse(String json) {
+    	Gson gson = new Gson();
+    	DomainResponse response = gson.fromJson(json, DomainResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DomainRecordResponses stringToDomainRecordResponses(String json) {
+    	Gson gson = new Gson();
+    	DomainRecordResponses responses = gson.fromJson(json, DomainRecordResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DomainRecordResponse stringToDomainRecordResponse(String json) {
+    	Gson gson = new Gson();
+    	DomainRecordResponse response = gson.fromJson(json, DomainRecordResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DropletResponses stringToDropletResponses(String json) {
+    	Gson gson = new Gson();
+    	DropletResponses responses = gson.fromJson(json, DropletResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static DropletResponse stringToDropletResponse(String json) {
+    	Gson gson = new Gson();
+    	DropletResponse response = gson.fromJson(json, DropletResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static KernelResponses stringToKernelResponses(String json) {
+    	Gson gson = new Gson();
+    	KernelResponses responses = gson.fromJson(json, KernelResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static NeighborsResponses stringToNeighborsResponses(String json) {
+    	Gson gson = new Gson();
+    	NeighborsResponses responses = gson.fromJson(json, NeighborsResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static UpgradeResponses stringToUpgradeResponses(String json) {
+    	Gson gson = new Gson();
+    	UpgradeResponses responses = gson.fromJson(json, UpgradeResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static ImageResponses stringToImageResponses(String json) {
+    	Gson gson = new Gson();
+    	ImageResponses responses = gson.fromJson(json, ImageResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static ImageResponse stringToImageResponse(String json) {
+    	Gson gson = new Gson();
+    	ImageResponse response = gson.fromJson(json, ImageResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static KeyResponses stringToKeyResponses(String json) {
+    	Gson gson = new Gson();
+    	KeyResponses responses = gson.fromJson(json, KeyResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static KeyResponse stringToKeyResponse(String json) {
+    	Gson gson = new Gson();
+    	KeyResponse response = gson.fromJson(json, KeyResponse.class);
+    	return response;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static RegionResponses stringToRegionResponses(String json) {
+    	Gson gson = new Gson();
+    	RegionResponses responses = gson.fromJson(json, RegionResponses.class);
+    	return responses;
+    } 
+    
+    @Transformer(sourceTypes = {String.class})
+    public static SizeResponses stringToSizeResponses(String json) {
+    	Gson gson = new Gson();
+    	SizeResponses responses = gson.fromJson(json, SizeResponses.class);
+    	return responses;
+    } 
     
     /**
      * Set OAuth Token
