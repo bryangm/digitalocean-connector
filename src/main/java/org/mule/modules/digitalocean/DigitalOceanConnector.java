@@ -33,7 +33,8 @@ import org.mule.modules.digitalocean.objects.responses.*;
 public abstract class DigitalOceanConnector {
 
     /**
-     * Previously generated OAuth Token
+     * OAuth Token
+     * Generated here: https://cloud.digitalocean.com/settings/applications
      */
 	@RestHeaderParam("Authorization") 
     @Configurable
