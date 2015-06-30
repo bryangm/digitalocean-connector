@@ -95,7 +95,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingAction(
-    		@RestUriParam("action") String actionId) 
+    		@RestUriParam("action") int actionId) 
     				throws IOException;  
     
     // Domains
@@ -219,7 +219,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordResponse retrieveExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId) 
+    		@RestUriParam("record") int recordId) 
     				throws IOException;  
     
     /**
@@ -266,7 +266,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId, 
+    		@RestUriParam("record") int recordId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -287,7 +287,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId) 
+    		@RestUriParam("record") int recordId) 
     				throws IOException;  
     
     // Droplets
@@ -327,7 +327,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DropletResponse retrieveExistingDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -348,7 +348,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -369,7 +369,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -390,7 +390,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllBackupsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -411,7 +411,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -432,7 +432,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DropletCollectionResponse listAllNeighborsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -471,7 +471,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -545,7 +545,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract ActionResponse executeDropletAction(
-    		@RestUriParam("droplet") String dropletId, 
+    		@RestUriParam("droplet") int dropletId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -568,8 +568,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingDropletAction(
-    		@RestUriParam("droplet") String dropletId, 
-    		@RestUriParam("action") String actionId) 
+    		@RestUriParam("droplet") int dropletId, 
+    		@RestUriParam("action") int actionId) 
     				throws IOException;      
     
     // Images
@@ -619,7 +619,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageResponse retrieveExistingImage(
-    		@RestUriParam("image") String imageId) 
+    		@RestUriParam("image") int imageId) 
     				throws IOException;  
     
     /**
@@ -640,7 +640,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForImage(
-    		@RestUriParam("image") String imageId) 
+    		@RestUriParam("image") int imageId) 
     				throws IOException;  
     
     /**
@@ -662,7 +662,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
     public abstract ImageResponse updateExistingImage(
-    		@RestUriParam("image") String imageId, 
+    		@RestUriParam("image") int imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -681,7 +681,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingImage(
-    		@RestUriParam("image") String imageId) 
+    		@RestUriParam("image") int imageId) 
     				throws IOException;  
 
     // Image Actions
@@ -705,7 +705,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract ActionResponse executeImageAction(
-    		@RestUriParam("image") String imageId, 
+    		@RestUriParam("image") int imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -728,8 +728,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingImageAction(
-    		@RestUriParam("image") String imageId, 
-    		@RestUriParam("action") String actionId) 
+    		@RestUriParam("image") int imageId, 
+    		@RestUriParam("action") int actionId) 
     				throws IOException;  
        
     // SSH Keys
@@ -756,8 +756,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingKey}
      *
-     * @param  	keyIdOrFingerprint	
-     * 						Id or fingerprint of an SSH key.
+     * @param  	keyId		Id of an SSH key.
      * @return 				An SSH Key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					KeyResponse
@@ -770,7 +769,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KeyResponse retrieveExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint) 
+    		@RestUriParam("key") String keyId) 
     				throws IOException;  
     
     /**
@@ -799,8 +798,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingKey}
      *
-     * @param  	keyIdOrFingerprint	
-     * 						Id or fingerprint of an SSH key.
+     * @param  	keyId		Id of an SSH key.
      * @param  	message 	The JSON request body submitted via #[payload].
      * @return 				An SSH key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -814,7 +812,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
     public abstract KeyResponse updateExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint, 
+    		@RestUriParam("key") int keyId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -823,8 +821,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingKey}
      *
-     * @param  	keyIdOrFingerprint	
-     * 						Id or fingerprint of an SSH key.
+     * @param  	keyId		Id of an SSH key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
      */ 
@@ -834,7 +831,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint) 
+    		@RestUriParam("key") int keyId) 
     				throws IOException;  
       
     // Regions
