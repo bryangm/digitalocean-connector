@@ -7,7 +7,7 @@ import org.mule.modules.digitalocean.objects.Links;
 import org.mule.modules.digitalocean.objects.Meta;
 import org.mule.modules.digitalocean.objects.Size;
 
-public class SizeResponses implements Serializable {
+public class SizeCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
 	
 	private List<Size> sizes;

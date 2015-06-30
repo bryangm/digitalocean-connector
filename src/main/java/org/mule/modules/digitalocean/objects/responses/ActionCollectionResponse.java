@@ -3,31 +3,31 @@ package org.mule.modules.digitalocean.objects.responses;
 import java.io.Serializable;
 import java.util.List;
 
+import org.mule.modules.digitalocean.objects.Action;
 import org.mule.modules.digitalocean.objects.Links;
 import org.mule.modules.digitalocean.objects.Meta;
-import org.mule.modules.digitalocean.objects.Region;
 
-public class RegionResponses implements Serializable {
+public class ActionCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
 	
-	private List<Region> regions;
+	private List<Action> actions;
 	
 	private Links links;
 	
 	private Meta meta;
 
 	/**
-	 * @return the regions
+	 * @return the actions
 	 */
-	public List<Region> getRegions() {
-		return regions;
+	public List<Action> getActions() {
+		return actions;
 	}
 
 	/**
-	 * @param regions the regions to set
+	 * @param actions the actions to set
 	 */
-	public void setRegions(List<Region> regions) {
-		this.regions = regions;
+	public void setActions(List<Action> actions) {
+		this.actions = actions;
 	}
 
 	/**
@@ -57,4 +57,5 @@ public class RegionResponses implements Serializable {
 	public void setMeta(Meta meta) {
 		this.meta = meta;
 	}
+
 }

@@ -3,31 +3,31 @@ package org.mule.modules.digitalocean.objects.responses;
 import java.io.Serializable;
 import java.util.List;
 
-import org.mule.modules.digitalocean.objects.Image;
+import org.mule.modules.digitalocean.objects.Domain;
 import org.mule.modules.digitalocean.objects.Links;
 import org.mule.modules.digitalocean.objects.Meta;
 
-public class ImageResponses implements Serializable {
+public class DomainCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
-	
-	private List<Image> images;
+
+	private List<Domain> domains;
 	
 	private Links links;
 	
 	private Meta meta;
 
 	/**
-	 * @return the images
+	 * @return the domains
 	 */
-	public List<Image> getImages() {
-		return images;
+	public List<Domain> getDomains() {
+		return domains;
 	}
 
 	/**
-	 * @param images the images to set
+	 * @param domains the domains to set
 	 */
-	public void setImages(List<Image> images) {
-		this.images = images;
+	public void setDomains(List<Domain> domains) {
+		this.domains = domains;
 	}
 
 	/**

@@ -3,31 +3,31 @@ package org.mule.modules.digitalocean.objects.responses;
 import java.io.Serializable;
 import java.util.List;
 
-import org.mule.modules.digitalocean.objects.Kernel;
 import org.mule.modules.digitalocean.objects.Links;
 import org.mule.modules.digitalocean.objects.Meta;
+import org.mule.modules.digitalocean.objects.Region;
 
-public class KernelResponses implements Serializable {
+public class RegionCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
-
-	private List<Kernel> kernels;
+	
+	private List<Region> regions;
 	
 	private Links links;
 	
 	private Meta meta;
 
 	/**
-	 * @return the kernels
+	 * @return the regions
 	 */
-	public List<Kernel> getKernels() {
-		return kernels;
+	public List<Region> getRegions() {
+		return regions;
 	}
 
 	/**
-	 * @param kernels the kernels to set
+	 * @param regions the regions to set
 	 */
-	public void setKernels(List<Kernel> kernels) {
-		this.kernels = kernels;
+	public void setRegions(List<Region> regions) {
+		this.regions = regions;
 	}
 
 	/**

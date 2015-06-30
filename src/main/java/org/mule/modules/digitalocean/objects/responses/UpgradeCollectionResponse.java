@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mule.modules.digitalocean.objects.Upgrade;
 
-public class UpgradeResponses implements Serializable {
+public class UpgradeCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
 	
 	private List<Upgrade> upgrades;

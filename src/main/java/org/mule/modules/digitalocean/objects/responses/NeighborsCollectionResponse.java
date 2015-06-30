@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.mule.modules.digitalocean.objects.Droplet;
 
-public class NeighborsResponses implements Serializable {
+public class NeighborsCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
 
 	private List<List<Droplet>> neighbors;

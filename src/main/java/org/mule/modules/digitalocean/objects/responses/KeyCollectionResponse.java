@@ -3,34 +3,31 @@ package org.mule.modules.digitalocean.objects.responses;
 import java.io.Serializable;
 import java.util.List;
 
-import org.mule.modules.digitalocean.objects.DomainRecord;
+import org.mule.modules.digitalocean.objects.Key;
 import org.mule.modules.digitalocean.objects.Links;
 import org.mule.modules.digitalocean.objects.Meta;
 
-import com.google.gson.annotations.SerializedName;
-
-public class DomainRecordResponses implements Serializable {
+public class KeyCollectionResponse implements Serializable {
 	private static final long serialVersionUID = -1L;
-
-	@SerializedName("domain_records")
-	private List<DomainRecord> domainsRecords;
+	
+	private List<Key> keys;
 	
 	private Links links;
 	
 	private Meta meta;
 
 	/**
-	 * @return the domainsRecords
+	 * @return the keys
 	 */
-	public List<DomainRecord> getDomainsRecords() {
-		return domainsRecords;
+	public List<Key> getKeys() {
+		return keys;
 	}
 
 	/**
-	 * @param domainsRecords the domainsRecords to set
+	 * @param keys the keys to set
 	 */
-	public void setDomainsRecords(List<DomainRecord> domainsRecords) {
-		this.domainsRecords = domainsRecords;
+	public void setKeys(List<Key> keys) {
+		this.keys = keys;
 	}
 
 	/**

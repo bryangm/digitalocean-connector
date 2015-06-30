@@ -72,7 +72,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/actions", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ActionResponses listAllActions() throws IOException;  
+    public abstract ActionCollectionResponse listAllActions() throws IOException;  
  
     /**
      * Retrieve a specific action object.
@@ -110,7 +110,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DomainResponses listAllDomains() throws IOException;  
+    public abstract DomainCollectionResponse listAllDomains() throws IOException;  
  
     /**
      * Get details about a specific domain.
@@ -187,7 +187,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DomainRecordResponses listAllDomainRecords(
+    public abstract DomainRecordCollectionResponse listAllDomainRecords(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
@@ -295,7 +295,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DropletResponses listAllDroplets() throws IOException;  
+    public abstract DropletCollectionResponse listAllDroplets() throws IOException;  
     
     /**
      * Get details about a specific droplet.
@@ -333,7 +333,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract KernelResponses listAllAvailableKernelsForDroplet(
+    public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -353,7 +353,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ImageResponses listAllSnapshotsForDroplet(
+    public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -373,7 +373,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ImageResponses listAllBackupsForDroplet(
+    public abstract ImageCollectionResponse listAllBackupsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -393,7 +393,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ActionResponses listAllActionsForDroplet(
+    public abstract ActionCollectionResponse listAllActionsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -413,7 +413,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/neighbors", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DropletResponses listAllNeighborsForDroplet(
+    public abstract DropletCollectionResponse listAllNeighborsForDroplet(
     		@RestUriParam("droplet") String dropletId) 
     				throws IOException;  
     
@@ -470,7 +470,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/reports/droplet_neighbors", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract NeighborsResponses listAllDropletNeighbors() throws IOException;  
+    public abstract NeighborsCollectionResponse listAllDropletNeighbors() throws IOException;  
     
     /**
      * List all droplets schedule to be upgraded.
@@ -487,7 +487,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplet_upgrades", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract UpgradeResponses listDropletUpgrades() throws IOException;  
+    public abstract UpgradeCollectionResponse listDropletUpgrades() throws IOException;  
     
     // Droplet Actions
     /**
@@ -572,7 +572,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images?type=all&private=false", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ImageResponses listAllImages(
+    public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") String imageType, 
     		@RestQueryParam("private") @Default("false") String privateImages) 
     				throws IOException;  
@@ -614,7 +614,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ActionResponses listAllActionsForImage(
+    public abstract ActionCollectionResponse listAllActionsForImage(
     		@RestUriParam("image") String imageId) 
     				throws IOException;  
     
@@ -720,7 +720,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract KeyResponses listAllKeys() throws IOException;  
+    public abstract KeyCollectionResponse listAllKeys() throws IOException;  
     
     /**
      * Get details about a specific SSH key.
@@ -821,7 +821,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/regions", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract RegionResponses listAllRegions() throws IOException;  
+    public abstract RegionCollectionResponse listAllRegions() throws IOException;  
      
     // Sizes
     /**
@@ -851,10 +851,10 @@ public abstract class DigitalOceanConnector {
     }
     
     @Transformer(sourceTypes = {String.class})
-    public static ActionResponses stringToActionResponses(String json) {
+    public static ActionCollectionResponse stringToActionResponses(String json) {
     	Gson gson = new Gson();
-    	ActionResponses responses = gson.fromJson(json, ActionResponses.class);
-    	return responses;
+    	ActionCollectionResponse response = gson.fromJson(json, ActionCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -865,10 +865,10 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static DomainResponses stringToDomainResponses(String json) {
+    public static DomainCollectionResponse stringToDomainResponses(String json) {
     	Gson gson = new Gson();
-    	DomainResponses responses = gson.fromJson(json, DomainResponses.class);
-    	return responses;
+    	DomainCollectionResponse response = gson.fromJson(json, DomainCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -879,10 +879,10 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static DomainRecordResponses stringToDomainRecordResponses(String json) {
+    public static DomainRecordCollectionResponse stringToDomainRecordResponses(String json) {
     	Gson gson = new Gson();
-    	DomainRecordResponses responses = gson.fromJson(json, DomainRecordResponses.class);
-    	return responses;
+    	DomainRecordCollectionResponse response = gson.fromJson(json, DomainRecordCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -893,10 +893,10 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static DropletResponses stringToDropletResponses(String json) {
+    public static DropletCollectionResponse stringToDropletResponses(String json) {
     	Gson gson = new Gson();
-    	DropletResponses responses = gson.fromJson(json, DropletResponses.class);
-    	return responses;
+    	DropletCollectionResponse response = gson.fromJson(json, DropletCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -907,31 +907,31 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static KernelResponses stringToKernelResponses(String json) {
+    public static KernelCollectionResponse stringToKernelResponses(String json) {
     	Gson gson = new Gson();
-    	KernelResponses responses = gson.fromJson(json, KernelResponses.class);
-    	return responses;
+    	KernelCollectionResponse response = gson.fromJson(json, KernelCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static NeighborsResponses stringToNeighborsResponses(String json) {
+    public static NeighborsCollectionResponse stringToNeighborsResponses(String json) {
     	Gson gson = new Gson();
-    	NeighborsResponses responses = gson.fromJson(json, NeighborsResponses.class);
-    	return responses;
+    	NeighborsCollectionResponse response = gson.fromJson(json, NeighborsCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static UpgradeResponses stringToUpgradeResponses(String json) {
+    public static UpgradeCollectionResponse stringToUpgradeResponses(String json) {
     	Gson gson = new Gson();
-    	UpgradeResponses responses = gson.fromJson(json, UpgradeResponses.class);
-    	return responses;
+    	UpgradeCollectionResponse response = gson.fromJson(json, UpgradeCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static ImageResponses stringToImageResponses(String json) {
+    public static ImageCollectionResponse stringToImageResponses(String json) {
     	Gson gson = new Gson();
-    	ImageResponses responses = gson.fromJson(json, ImageResponses.class);
-    	return responses;
+    	ImageCollectionResponse response = gson.fromJson(json, ImageCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -942,10 +942,10 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static KeyResponses stringToKeyResponses(String json) {
+    public static KeyCollectionResponse stringToKeyResponses(String json) {
     	Gson gson = new Gson();
-    	KeyResponses responses = gson.fromJson(json, KeyResponses.class);
-    	return responses;
+    	KeyCollectionResponse response = gson.fromJson(json, KeyCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
@@ -956,17 +956,17 @@ public abstract class DigitalOceanConnector {
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static RegionResponses stringToRegionResponses(String json) {
+    public static RegionCollectionResponse stringToRegionResponses(String json) {
     	Gson gson = new Gson();
-    	RegionResponses responses = gson.fromJson(json, RegionResponses.class);
-    	return responses;
+    	RegionCollectionResponse response = gson.fromJson(json, RegionCollectionResponse.class);
+    	return response;
     } 
     
     @Transformer(sourceTypes = {String.class})
-    public static SizeResponses stringToSizeResponses(String json) {
+    public static SizeCollectionResponse stringToSizeResponses(String json) {
     	Gson gson = new Gson();
-    	SizeResponses responses = gson.fromJson(json, SizeResponses.class);
-    	return responses;
+    	SizeCollectionResponse response = gson.fromJson(json, SizeCollectionResponse.class);
+    	return response;
     } 
     
     /**
