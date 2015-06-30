@@ -20,6 +20,7 @@ import org.mule.api.annotations.rest.RestQueryParam;
 import org.mule.api.annotations.rest.RestUriParam;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import org.mule.modules.digitalocean.objects.responses.*;
 
@@ -44,9 +45,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:getUserInformation}
      *
-     * @return The account information for the authenticated user.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#get-user-information">Get User Information</a>
+     * @return 				The account information for the authenticated user.
+     * @throws 	IOException	A problem communication with DigitalOcean occurred.
+     * @see					AccountResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#get-user-information">Get User Information</a>
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -62,9 +64,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActions}
      *
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions">List all Actions</a>
+     * @return 				List of actions.
+     * @throws 	IOException	A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions">List all Actions</a>
      */    
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -79,10 +82,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingAction}
      *
-     * @param  actionId	ID of the action.
-     * @return An action.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-action">Retrieve an existing Action</a>
+     * @param  	actionId	ID of the action.
+     * @return 				An action.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-action">Retrieve an existing Action</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -100,9 +104,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomains}
      *
-     * @return List of domains.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-domains">List all Domains</a>
+     * @return 				List of domains.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domains">List all Domains</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -117,10 +122,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomain}
      *
-     * @param  domainName Name of the domain.
-     * @return A domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain">Retrieve an existing Domain</a>
+     * @param  	domainName	Name of the domain.
+     * @return 				A domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain">Retrieve an existing Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -137,10 +143,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomain}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain">Create a new Domain</a>
+     * @param  	message		The JSON request body submitted via #[payload].
+     * @return 				A domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain">Create a new Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -157,9 +164,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomain}
      *
-     * @param  domainName Name of the domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain">Delete a Domain</a>
+     * @param  	domainName 	Name of the domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain">Delete a Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -176,10 +183,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomainRecords}
      *
-     * @param  domainName Name of the domain.
-     * @return List of domain records.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-domain-records">List all Domain Records</a>
+     * @param  	domainName 	Name of the domain.
+     * @return 				List of domain records.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domain-records">List all Domain Records</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -196,11 +204,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record">Retrieve an existing Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record">Retrieve an existing Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -218,11 +227,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record">Create a new Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record">Create a new Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -240,12 +250,13 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-a-domain-record">Update a Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-a-domain-record">Update a Domain Record</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -264,10 +275,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record">Delete a Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record">Delete a Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -285,9 +296,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDroplets}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplets">List all Droplets</a>
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplets">List all Droplets</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -302,10 +314,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id">Retrieve an existing Droplet by id</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id">Retrieve an existing Droplet by id</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -322,10 +335,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllAvailableKernelsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of kernels.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-available-kernels-for-a-droplet">List all available Kernels for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of kernels.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KernelCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-available-kernels-for-a-droplet">List all available Kernels for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -342,10 +356,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSnapshotsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of snapshots.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-snapshots-for-a-droplet">List snapshots for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of snapshots.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-snapshots-for-a-droplet">List snapshots for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -362,10 +377,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllBackupsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of backups.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-backups-for-a-droplet">List backups for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of backups.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-backups-for-a-droplet">List backups for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -382,10 +398,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-actions-for-a-droplet">List actions for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of actions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-actions-for-a-droplet">List actions for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -402,10 +419,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllNeighborsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-neighbors-for-a-droplet">List Neighbors for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-neighbors-for-a-droplet">List Neighbors for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -422,10 +440,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDroplet}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet">Create a new Droplet</a>
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet">Create a new Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -442,9 +461,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-droplet">Delete a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-droplet">Delete a Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -460,9 +479,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDropletNeighbors}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplet-neighbors">List all Droplet Neighbors</a>
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					NeighborsCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplet-neighbors">List all Droplet Neighbors</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -477,9 +497,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listDropletUpgrades}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-droplet-upgrades">List Droplet Upgrades</a>
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					UpgradeCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-droplet-upgrades">List Droplet Upgrades</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -495,26 +516,27 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeDropletAction}
      *
-     * @param  dropletId Id of a droplet.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#disable-backups">Disable Backups</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet">Reboot a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet">Power Cycle a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet">Shutdown a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet">Power Off a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet">Power On a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#restore-a-droplet">Restore a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet">Password Reset a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#resize-a-droplet">Resize a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet">Rebuild a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#rename-a-droplet">Rename a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#change-the-kernel">Change the Kernel</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#enable-ipv6">Enable IPv6</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#enable-private-networking">Enable Private Networking</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet">Snapshot a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#disable-backups">Disable Backups</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet">Reboot a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet">Power Cycle a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet">Shutdown a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet">Power Off a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet">Power On a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#restore-a-droplet">Restore a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet">Password Reset a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#resize-a-droplet">Resize a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet">Rebuild a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#rename-a-droplet">Rename a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#change-the-kernel">Change the Kernel</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#enable-ipv6">Enable IPv6</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#enable-private-networking">Enable Private Networking</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet">Snapshot a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -532,11 +554,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDropletAction}
      *
-     * @param  dropletId Id of a droplet.
-     * @param  actionId Id of an action.
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action">Retrieve a Droplet Action</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param  	actionId 	Id of an action.
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action">Retrieve a Droplet Action</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -555,16 +578,16 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllImages}
      *
-     * @param imageType	
-     * 				Type of images to return: application, distribution, all.  The default is all.
-     * @param privateImages
-     * 				Boolean to return the authenticated user's private images.  The default is false, which returns all images.
-     * @return List of images.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-images">List all Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-distribution-images">List all Distribution Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-application-images">List all Application Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-a-user-s-images">List a User's Images</a>
+     * @param 	imageType	Type of images to return: application, distribution, all.  The default is all.
+     * @param 	privateImages
+     * 						Boolean to return the authenticated user's private images.  The default is false, which returns all images.
+     * @return 				List of images.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-images">List all Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-distribution-images">List all Distribution Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-application-images">List all Application Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-a-user-s-images">List a User's Images</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -582,11 +605,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-id">Retrieve an existing Image by id</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-slug">Retrieve an existing Image by slug</a>
+     * @param  	imageId 	Id of an image.
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-id">Retrieve an existing Image by id</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-slug">Retrieve an existing Image by slug</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -603,10 +627,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForImage}
      *
-     * @param  imageId Id of an image.
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions-for-an-image">List all Actions for an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @return 				List of actions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions-for-an-image">List all Actions for an Image</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -623,11 +648,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-an-image">Update an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-an-image">Update an Image</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -645,9 +671,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-an-image">Delete an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-an-image">Delete an Image</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -664,12 +690,13 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeImageAction}
      *
-     * @param  imageId Id of an image.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#transfer-an-image">Transfer an Image</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
+     * @param  	imageId 	Id of an image.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#transfer-an-image">Transfer an Image</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -687,11 +714,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImageAction}
      *
-     * @param  imageId  Id of an image.
-     * @param  actionId Id of an action.
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-action">Retrieve an existing Image Action</a>
+     * @param  	imageId  	Id of an image.
+     * @param  	actionId 	Id of an action.
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-action">Retrieve an existing Image Action</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -710,9 +738,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllKeys}
      *
-     * @return List of SSH keys.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-keys">List all Keys</a>
+     * @return 				List of SSH keys.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-keys">List all Keys</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -727,11 +756,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @return An SSH Key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key">Retrieve an existing Key</a>
+     * @param  	keyIdOrFingerprint	
+     * 						Id or fingerprint of an SSH key.
+     * @return 				An SSH Key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key">Retrieve an existing Key</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -748,10 +778,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewKey}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-key">Create a new Key</a>
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-key">Create a new Key</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -768,12 +799,13 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-a-key">Update a Key</a>
+     * @param  	keyIdOrFingerprint	
+     * 						Id or fingerprint of an SSH key.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-a-key">Update a Key</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -791,10 +823,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
+     * @param  	keyIdOrFingerprint	
+     * 						Id or fingerprint of an SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -811,9 +843,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllRegions}
      *
-     * @return List of regions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-regions">List all Regions</a>
+     * @return 				List of regions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					RegionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-regions">List all Regions</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -829,9 +862,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSizes}
      *
-     * @return List of sizes.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-sizes">List all Sizes</a>
+     * @return 				List of sizes.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					SizeCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-sizes">List all Sizes</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -839,131 +873,310 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/sizes", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract String listAllSizes() throws IOException;  
+    public abstract SizeCollectionResponse listAllSizes() throws IOException;  
     
-
-    
+    // Transformers
+    /**
+     * Transforms a JSON string into an AccountResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToAccountResponse}
+     *
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An account.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static AccountResponse stringToAccountResponse(String json) {
+    public static AccountResponse stringToAccountResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	AccountResponse response = gson.fromJson(json, AccountResponse.class);
     	return response;
     }
     
+    /**
+     * Transforms a JSON string into an ActionCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of actions.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static ActionCollectionResponse stringToActionResponses(String json) {
+    public static ActionCollectionResponse stringToActionCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	ActionCollectionResponse response = gson.fromJson(json, ActionCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an ActionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An action.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static ActionResponse stringToActionResponse(String json) {
+    public static ActionResponse stringToActionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	ActionResponse response = gson.fromJson(json, ActionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DomainCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of domains.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DomainCollectionResponse stringToDomainResponses(String json) {
+    public static DomainCollectionResponse stringToDomainCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DomainCollectionResponse response = gson.fromJson(json, DomainCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DomainResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A domain.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DomainResponse stringToDomainResponse(String json) {
+    public static DomainResponse stringToDomainResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DomainResponse response = gson.fromJson(json, DomainResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DomainRecordCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of domain records.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DomainRecordCollectionResponse stringToDomainRecordResponses(String json) {
+    public static DomainRecordCollectionResponse stringToDomainRecordCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DomainRecordCollectionResponse response = gson.fromJson(json, DomainRecordCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DomainRecordResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A domain record.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DomainRecordResponse stringToDomainRecordResponse(String json) {
+    public static DomainRecordResponse stringToDomainRecordResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DomainRecordResponse response = gson.fromJson(json, DomainRecordResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DropletCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of droplets.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DropletCollectionResponse stringToDropletResponses(String json) {
+    public static DropletCollectionResponse stringToDropletCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DropletCollectionResponse response = gson.fromJson(json, DropletCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an DropletResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A droplet.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static DropletResponse stringToDropletResponse(String json) {
+    public static DropletResponse stringToDropletResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	DropletResponse response = gson.fromJson(json, DropletResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an KernelCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKernelCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of kernels.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static KernelCollectionResponse stringToKernelResponses(String json) {
+    public static KernelCollectionResponse stringToKernelCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	KernelCollectionResponse response = gson.fromJson(json, KernelCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an NeighborsCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToNeighborsCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				Lists of neighbor droplets.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static NeighborsCollectionResponse stringToNeighborsResponses(String json) {
+    public static NeighborsCollectionResponse stringToNeighborsCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	NeighborsCollectionResponse response = gson.fromJson(json, NeighborsCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an UpgradeCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToUpgradeCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of droplets to be upgraded.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static UpgradeCollectionResponse stringToUpgradeResponses(String json) {
+    public static UpgradeCollectionResponse stringToUpgradeCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	UpgradeCollectionResponse response = gson.fromJson(json, UpgradeCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an ImageCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of images.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static ImageCollectionResponse stringToImageResponses(String json) {
+    public static ImageCollectionResponse stringToImageCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	ImageCollectionResponse response = gson.fromJson(json, ImageCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an ImageResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An image.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static ImageResponse stringToImageResponse(String json) {
+    public static ImageResponse stringToImageResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	ImageResponse response = gson.fromJson(json, ImageResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an KeyCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of keys.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static KeyCollectionResponse stringToKeyResponses(String json) {
+    public static KeyCollectionResponse stringToKeyCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	KeyCollectionResponse response = gson.fromJson(json, KeyCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an KeyResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A key.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static KeyResponse stringToKeyResponse(String json) {
+    public static KeyResponse stringToKeyResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	KeyResponse response = gson.fromJson(json, KeyResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an RegionCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToRegionCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of regions.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static RegionCollectionResponse stringToRegionResponses(String json) {
+    public static RegionCollectionResponse stringToRegionCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	RegionCollectionResponse response = gson.fromJson(json, RegionCollectionResponse.class);
     	return response;
     } 
     
+    /**
+     * Transforms a JSON string into an SizeCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToSizeCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of sizes.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
     @Transformer(sourceTypes = {String.class})
-    public static SizeCollectionResponse stringToSizeResponses(String json) {
+    public static SizeCollectionResponse stringToSizeCollectionResponse(String json) throws JsonSyntaxException {
     	Gson gson = new Gson();
     	SizeCollectionResponse response = gson.fromJson(json, SizeCollectionResponse.class);
     	return response;

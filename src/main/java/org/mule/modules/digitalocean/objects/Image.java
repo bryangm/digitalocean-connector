@@ -2,6 +2,8 @@ package org.mule.modules.digitalocean.objects;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Image implements Serializable {
@@ -23,7 +25,7 @@ public class Image implements Serializable {
 	@SerializedName("public")
 	private boolean publicImage;
 	
-	private String[] regions;
+	private List<String> regions;
 	
 	@SerializedName("created_at")
 	private Date createdAt;
@@ -106,14 +108,14 @@ public class Image implements Serializable {
 	/**
 	 * @return the regions
 	 */
-	public String[] getRegions() {
+	public List<String> getRegions() {
 		return regions;
 	}
 
 	/**
 	 * @param regions the regions to set
 	 */
-	public void setRegions(String[] regions) {
+	public void setRegions(List<String> regions) {
 		this.regions = regions;
 	}
 

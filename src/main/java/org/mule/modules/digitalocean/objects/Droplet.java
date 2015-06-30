@@ -2,6 +2,7 @@ package org.mule.modules.digitalocean.objects;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -31,12 +32,12 @@ public class Droplet implements Serializable {
 	private String status;
 	
 	@SerializedName("backup_ids")
-	private int[] backupIds;
+	private List<Integer> backupIds;
 	
 	@SerializedName("snapshot_ids")
-	private int[] snapshotIds;
+	private List<Integer> snapshotIds;
 	
-	private String[] features;
+	private List<String> features;
 	
 	private Region region;
 	
@@ -167,42 +168,42 @@ public class Droplet implements Serializable {
 	/**
 	 * @return the backups
 	 */
-	public int[] getBackupIds() {
+	public List<Integer> getBackupIds() {
 		return backupIds;
 	}
 
 	/**
 	 * @param backups the backups to set
 	 */
-	public void setBackupIds(int[] backups) {
+	public void setBackupIds(List<Integer> backups) {
 		this.backupIds = backups;
 	}
 
 	/**
 	 * @return the snapshots
 	 */
-	public int[] getSnapshotIds() {
+	public List<Integer> getSnapshotIds() {
 		return snapshotIds;
 	}
 
 	/**
 	 * @param snapshots the snapshots to set
 	 */
-	public void setSnapshotIds(int[] snapshots) {
+	public void setSnapshotIds(List<Integer> snapshots) {
 		this.snapshotIds = snapshots;
 	}
 
 	/**
 	 * @return the features
 	 */
-	public String[] getFeatures() {
+	public List<String> getFeatures() {
 		return features;
 	}
 
 	/**
 	 * @param features the features to set
 	 */
-	public void setFeatures(String[] features) {
+	public void setFeatures(List<String> features) {
 		this.features = features;
 	}
 

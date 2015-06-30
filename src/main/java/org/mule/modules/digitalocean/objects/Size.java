@@ -2,6 +2,8 @@ package org.mule.modules.digitalocean.objects;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Size implements Serializable {
@@ -28,7 +30,7 @@ public class Size implements Serializable {
 	@SerializedName("price_hourly")
 	private BigDecimal priceHourly;
 	
-	private String[] regions;
+	private List<String> regions;
 	
 	private boolean available;
 
@@ -133,14 +135,14 @@ public class Size implements Serializable {
 	/**
 	 * @return the regions
 	 */
-	public String[] getRegions() {
+	public List<String> getRegions() {
 		return regions;
 	}
 
 	/**
 	 * @param regions the regions to set
 	 */
-	public void setRegions(String[] regions) {
+	public void setRegions(List<String> regions) {
 		this.regions = regions;
 	}
 

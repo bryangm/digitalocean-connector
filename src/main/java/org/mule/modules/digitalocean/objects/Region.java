@@ -1,6 +1,7 @@
 package org.mule.modules.digitalocean.objects;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Region implements Serializable {
 	private static final long serialVersionUID = -1L;
@@ -14,9 +15,9 @@ public class Region implements Serializable {
 	
 	private String slug;
 	
-	private String[] sizes;
+	private List<String> sizes;
 	
-	private String[] features;
+	private List<String> features;
 	
 	private boolean available;
 
@@ -51,28 +52,28 @@ public class Region implements Serializable {
 	/**
 	 * @return the sizes
 	 */
-	public String[] getSizes() {
+	public List<String> getSizes() {
 		return sizes;
 	}
 
 	/**
 	 * @param sizes the sizes to set
 	 */
-	public void setSizes(String[] sizes) {
+	public void setSizes(List<String> sizes) {
 		this.sizes = sizes;
 	}
 
 	/**
 	 * @return the features
 	 */
-	public String[] getFeatures() {
+	public List<String> getFeatures() {
 		return features;
 	}
 
 	/**
 	 * @param features the features to set
 	 */
-	public void setFeatures(String[] features) {
+	public void setFeatures(List<String> features) {
 		this.features = features;
 	}
 
