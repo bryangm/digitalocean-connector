@@ -4,20 +4,25 @@
  */
 
 package org.mule.modules.digitalocean;
+import java.io.IOException;
+
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Configurable;
+import org.mule.api.annotations.Transformer;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.param.Payload;
 import org.mule.api.annotations.Processor;
-
-import java.io.IOException;
-
 import org.mule.api.annotations.ReconnectOn;
 import org.mule.api.annotations.rest.HttpMethod;
 import org.mule.api.annotations.rest.RestCall;
 import org.mule.api.annotations.rest.RestHeaderParam;
 import org.mule.api.annotations.rest.RestQueryParam;
 import org.mule.api.annotations.rest.RestUriParam;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
+import org.mule.modules.digitalocean.objects.responses.*;
 
 /**
  * Anypoint Connector
@@ -28,7 +33,8 @@ import org.mule.api.annotations.rest.RestUriParam;
 public abstract class DigitalOceanConnector {
 
     /**
-     * Previously generated OAuth Token
+     * OAuth Token
+     * Generated here: https://cloud.digitalocean.com/settings/applications
      */
 	@RestHeaderParam("Authorization") 
     @Configurable
@@ -40,16 +46,18 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:getUserInformation}
      *
-     * @return The account information for the authenticated user.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#get-user-information">Get User Information</a>
+     * @return 				The account information for the authenticated user.
+     * @throws 	IOException	A problem communication with DigitalOcean occurred.
+     * @see					AccountResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#get-user-information">Get User Information</a>
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account", 
-    		method=HttpMethod.GET)
-    public abstract String getUserInformation() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract AccountResponse getUserInformation() throws IOException;  
     
     // Actions
     /**
@@ -57,34 +65,43 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActions}
      *
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions">List all Actions</a>
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of actions.
+     * @throws 	IOException	A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions">List all Actions</a>
      */    
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActions() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/actions?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionCollectionResponse listAllActions(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
  
     /**
      * Retrieve a specific action object.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingAction}
      *
-     * @param  actionId	ID of the action.
-     * @return An action.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-action">Retrieve an existing Action</a>
+     * @param  	actionId	ID of the action.
+     * @return 				An action.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-action">Retrieve an existing Action</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingAction(
-    		@RestUriParam("action") String actionId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingAction(
+    		@RestUriParam("action") int actionId) 
     				throws IOException;  
     
     // Domains
@@ -92,34 +109,43 @@ public abstract class DigitalOceanConnector {
      * List all domains.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomains}
-     *
-     * @return List of domains.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-domains">List all Domains</a>
+     * 
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of domains.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domains">List all Domains</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/domains", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDomains() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/domains?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainCollectionResponse listAllDomains(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;    
  
     /**
      * Get details about a specific domain.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomain}
      *
-     * @param  domainName Name of the domain.
-     * @return A domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain">Retrieve an existing Domain</a>
+     * @param  	domainName	Name of the domain.
+     * @return 				A domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain">Retrieve an existing Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDomain(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainResponse retrieveExistingDomain(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
     
@@ -128,10 +154,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomain}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain">Create a new Domain</a>
+     * @param  	message		The JSON request body submitted via #[payload].
+     * @return 				A domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain">Create a new Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -139,7 +166,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDomain(
+    public abstract DomainResponse createNewDomain(
     		@Payload String message) 
     				throws IOException;  
     
@@ -148,9 +175,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomain}
      *
-     * @param  domainName Name of the domain.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain">Delete a Domain</a>
+     * @param  	domainName 	Name of the domain.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain">Delete a Domain</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -167,18 +194,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomainRecords}
      *
-     * @param  domainName Name of the domain.
-     * @return List of domain records.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-domain-records">List all Domain Records</a>
+     * @param  	domainName 	Name of the domain.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of domain records.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domain-records">List all Domain Records</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDomainRecords(
-    		@RestUriParam("domain") String domainName) 
+    		uri="https://api.digitalocean.com/v2/domains/{domain}/records?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainRecordCollectionResponse listAllDomainRecords(
+    		@RestUriParam("domain") String domainName,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -186,20 +219,22 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record">Retrieve an existing Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record">Retrieve an existing Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDomainRecord(
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DomainRecordResponse retrieveExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId) 
+    		@RestUriParam("record") int recordId) 
     				throws IOException;  
     
     /**
@@ -207,11 +242,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record">Create a new Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record">Create a new Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -219,7 +255,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDomainRecord(
+    public abstract DomainRecordResponse createNewDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@Payload String message) 
     				throws IOException;  
@@ -229,12 +265,13 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-a-domain-record">Update a Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DomainRecordResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-a-domain-record">Update a Domain Record</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -242,9 +279,9 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingDomainRecord(
+    public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId, 
+    		@RestUriParam("record") int recordId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -253,10 +290,10 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomainRecord}
      *
-     * @param  domainName Name of the domain.
-     * @param  recordId Id of the domain record.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record">Delete a Domain Record</a>
+     * @param  	domainName 	Name of the domain.
+     * @param  	recordId 	Id of the domain record.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record">Delete a Domain Record</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -265,7 +302,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") String recordId) 
+    		@RestUriParam("record") int recordId) 
     				throws IOException;  
     
     // Droplets
@@ -274,34 +311,43 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDroplets}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplets">List all Droplets</a>
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplets">List all Droplets</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDroplets() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/droplets?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletCollectionResponse listAllDroplets(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
     /**
      * Get details about a specific droplet.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id">Retrieve an existing Droplet by id</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id">Retrieve an existing Droplet by id</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletResponse retrieveExistingDroplet(
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -309,18 +355,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllAvailableKernelsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of kernels.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-available-kernels-for-a-droplet">List all available Kernels for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of kernels.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KernelCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-available-kernels-for-a-droplet">List all available Kernels for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels", 
-    		method=HttpMethod.GET)
-    public abstract String listAllAvailableKernelsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -328,18 +380,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSnapshotsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of snapshots.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-snapshots-for-a-droplet">List snapshots for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of snapshots.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-snapshots-for-a-droplet">List snapshots for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots", 
-    		method=HttpMethod.GET)
-    public abstract String listAllSnapshotsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -347,18 +405,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllBackupsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of backups.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-backups-for-a-droplet">List backups for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of backups.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-backups-for-a-droplet">List backups for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups", 
-    		method=HttpMethod.GET)
-    public abstract String listAllBackupsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageCollectionResponse listAllBackupsForDroplet(
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -366,18 +430,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-actions-for-a-droplet">List actions for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of actions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-actions-for-a-droplet">List actions for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActionsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionCollectionResponse listAllActionsForDroplet(
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -385,18 +455,20 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllNeighborsForDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-neighbors-for-a-droplet">List Neighbors for a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-neighbors-for-a-droplet">List Neighbors for a Droplet</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/neighbors", 
-    		method=HttpMethod.GET)
-    public abstract String listAllNeighborsForDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract DropletCollectionResponse listAllNeighborsForDroplet(
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -404,10 +476,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDroplet}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet">Create a new Droplet</a>
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					DropletResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet">Create a new Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -415,7 +488,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewDroplet(
+    public abstract DropletResponse createNewDroplet(
     		@Payload String message) 
     				throws IOException;  
     
@@ -424,9 +497,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDroplet}
      *
-     * @param  dropletId Id of a droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-a-droplet">Delete a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-droplet">Delete a Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -434,7 +507,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDroplet(
-    		@RestUriParam("droplet") String dropletId) 
+    		@RestUriParam("droplet") int dropletId) 
     				throws IOException;  
     
     /**
@@ -442,32 +515,36 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDropletNeighbors}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplet-neighbors">List all Droplet Neighbors</a>
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					NeighborsCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplet-neighbors">List all Droplet Neighbors</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/reports/droplet_neighbors", 
-    		method=HttpMethod.GET)
-    public abstract String listAllDropletNeighbors() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract NeighborsCollectionResponse listAllDropletNeighbors() throws IOException;  
     
     /**
-     * List all droplets schedule to be upgraded.
+     * List all droplets scheduled to be upgraded.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listDropletUpgrades}
      *
-     * @return List of droplets.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-droplet-upgrades">List Droplet Upgrades</a>
+     * @return 				List of droplets.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					UpgradeCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-droplet-upgrades">List Droplet Upgrades</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplet_upgrades", 
-    		method=HttpMethod.GET)
-    public abstract String listDropletUpgrades() throws IOException;  
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract UpgradeCollectionResponse listDropletUpgrades() throws IOException;  
     
     // Droplet Actions
     /**
@@ -475,26 +552,27 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeDropletAction}
      *
-     * @param  dropletId Id of a droplet.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#disable-backups">Disable Backups</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet">Reboot a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet">Power Cycle a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet">Shutdown a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet">Power Off a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet">Power On a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#restore-a-droplet">Restore a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet">Password Reset a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#resize-a-droplet">Resize a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet">Rebuild a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#rename-a-droplet">Rename a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#change-the-kernel">Change the Kernel</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#enable-ipv6">Enable IPv6</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#enable-private-networking">Enable Private Networking</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet">Snapshot a Droplet</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#disable-backups">Disable Backups</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet">Reboot a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet">Power Cycle a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet">Shutdown a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet">Power Off a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet">Power On a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#restore-a-droplet">Restore a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet">Password Reset a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#resize-a-droplet">Resize a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet">Rebuild a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#rename-a-droplet">Rename a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#change-the-kernel">Change the Kernel</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#enable-ipv6">Enable IPv6</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#enable-private-networking">Enable Private Networking</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet">Snapshot a Droplet</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -502,8 +580,8 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String executeDropletAction(
-    		@RestUriParam("droplet") String dropletId, 
+    public abstract ActionResponse executeDropletAction(
+    		@RestUriParam("droplet") int dropletId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -512,20 +590,22 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDropletAction}
      *
-     * @param  dropletId Id of a droplet.
-     * @param  actionId Id of an action.
-     * @return A droplet.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action">Retrieve a Droplet Action</a>
+     * @param  	dropletId 	Id of a droplet.
+     * @param  	actionId 	Id of an action.
+     * @return 				A droplet.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action">Retrieve a Droplet Action</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingDropletAction(
-    		@RestUriParam("droplet") String dropletId, 
-    		@RestUriParam("action") String actionId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingDropletAction(
+    		@RestUriParam("droplet") int dropletId, 
+    		@RestUriParam("action") int actionId) 
     				throws IOException;      
     
     // Images
@@ -534,25 +614,30 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllImages}
      *
-     * @param imageType	
-     * 				Type of images to return: application, distribution, all.  The default is all.
-     * @param privateImages
-     * 				Boolean to return the authenticated user's private images.  The default is false, which returns all images.
-     * @return List of images.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-images">List all Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-distribution-images">List all Distribution Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-application-images">List all Application Images</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-a-user-s-images">List a User's Images</a>
+     * @param 	imageType	Type of images to return: application, distribution, all.  The default is all.
+     * @param 	privateImages
+     * 						Boolean to return the authenticated user's private images.  The default is false, which returns all images.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of images.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-images">List all Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-distribution-images">List all Distribution Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-application-images">List all Application Images</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-a-user-s-images">List a User's Images</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/images?type=all&private=false", 
-    		method=HttpMethod.GET)
-    public abstract String listAllImages(
+    		uri="https://api.digitalocean.com/v2/images?type=all&private=false&page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") String imageType, 
-    		@RestQueryParam("private") @Default("false") String privateImages) 
+    		@RestQueryParam("private") @Default("false") String privateImages,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -560,19 +645,21 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-id">Retrieve an existing Image by id</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-slug">Retrieve an existing Image by slug</a>
+     * @param  	imageId 	Id of an image.
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-id">Retrieve an existing Image by id</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-slug">Retrieve an existing Image by slug</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingImage(
-    		@RestUriParam("image") String imageId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ImageResponse retrieveExistingImage(
+    		@RestUriParam("image") int imageId) 
     				throws IOException;  
     
     /**
@@ -580,18 +667,24 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForImage}
      *
-     * @param  imageId Id of an image.
-     * @return List of actions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions-for-an-image">List all Actions for an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of actions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions-for-an-image">List all Actions for an Image</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllActionsForImage(
-    		@RestUriParam("image") String imageId) 
+    		uri="https://api.digitalocean.com/v2/images/{image}/actions?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionCollectionResponse listAllActionsForImage(
+    		@RestUriParam("image") int imageId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -599,11 +692,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-an-image">Update an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ImageResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-an-image">Update an Image</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -611,8 +705,8 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingImage(
-    		@RestUriParam("image") String imageId, 
+    public abstract ImageResponse updateExistingImage(
+    		@RestUriParam("image") int imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -621,9 +715,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingImage}
      *
-     * @param  imageId Id of an image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#delete-an-image">Delete an Image</a>
+     * @param  	imageId 	Id of an image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#delete-an-image">Delete an Image</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -631,7 +725,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingImage(
-    		@RestUriParam("image") String imageId) 
+    		@RestUriParam("image") int imageId) 
     				throws IOException;  
 
     // Image Actions
@@ -640,12 +734,13 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeImageAction}
      *
-     * @param  imageId Id of an image.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#transfer-an-image">Transfer an Image</a>
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
+     * @param  	imageId 	Id of an image.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#transfer-an-image">Transfer an Image</a>
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -653,8 +748,8 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String executeImageAction(
-    		@RestUriParam("image") String imageId, 
+    public abstract ActionResponse executeImageAction(
+    		@RestUriParam("image") int imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -663,20 +758,22 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImageAction}
      *
-     * @param  imageId  Id of an image.
-     * @param  actionId Id of an action.
-     * @return An image.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-action">Retrieve an existing Image Action</a>
+     * @param  	imageId  	Id of an image.
+     * @param  	actionId 	Id of an action.
+     * @return 				An image.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					ActionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-action">Retrieve an existing Image Action</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions/{action}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingImageAction(
-    		@RestUriParam("image") String imageId, 
-    		@RestUriParam("action") String actionId) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract ActionResponse retrieveExistingImageAction(
+    		@RestUriParam("image") int imageId, 
+    		@RestUriParam("action") int actionId) 
     				throws IOException;  
        
     // SSH Keys
@@ -685,35 +782,43 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllKeys}
      *
-     * @return List of SSH keys.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-keys">List all Keys</a>
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of SSH keys.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-keys">List all Keys</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/account/keys", 
-    		method=HttpMethod.GET)
-    public abstract String listAllKeys() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/account/keys?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KeyCollectionResponse listAllKeys(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
     /**
      * Get details about a specific SSH key.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @return An SSH Key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key">Retrieve an existing Key</a>
+     * @param  	keyId		Id of an SSH key.
+     * @return 				An SSH Key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key">Retrieve an existing Key</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
-    		method=HttpMethod.GET)
-    public abstract String retrieveExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint) 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract KeyResponse retrieveExistingKey(
+    		@RestUriParam("key") String keyId) 
     				throws IOException;  
     
     /**
@@ -721,10 +826,11 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewKey}
      *
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-key">Create a new Key</a>
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-key">Create a new Key</a>
      */  
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -732,7 +838,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys", 
     		method=HttpMethod.POST, 
     		contentType = "application/json")
-    public abstract String createNewKey(
+    public abstract KeyResponse createNewKey(
     		@Payload String message) 
     				throws IOException;  
     
@@ -741,12 +847,12 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @param  message The JSON request body submitted via #[payload].
-     * @return An SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#update-a-key">Update a Key</a>
+     * @param  	keyId		Id of an SSH key.
+     * @param  	message 	The JSON request body submitted via #[payload].
+     * @return 				An SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					KeyResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#update-a-key">Update a Key</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -754,8 +860,8 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
-    public abstract String updateExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint, 
+    public abstract KeyResponse updateExistingKey(
+    		@RestUriParam("key") int keyId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -764,10 +870,9 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingKey}
      *
-     * @param  keyIdOrFingerprint	
-     * 				Id or fingerprint of an SSH key.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
+     * @param  	keyId		Id of an SSH key.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -775,7 +880,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingKey(
-    		@RestUriParam("key") String keyIdOrFingerprint) 
+    		@RestUriParam("key") int keyId) 
     				throws IOException;  
       
     // Regions
@@ -784,16 +889,23 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllRegions}
      *
-     * @return List of regions.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-regions">List all Regions</a>
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of regions.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					RegionCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-regions">List all Regions</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/regions", 
-    		method=HttpMethod.GET)
-    public abstract String listAllRegions() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/regions?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract RegionCollectionResponse listAllRegions(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
      
     // Sizes
     /**
@@ -801,17 +913,330 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSizes}
      *
-     * @return List of sizes.
-     * @throws IOException A problem communication with DigitalOcean occurred.
-     * @see <a href="https://developers.digitalocean.com/documentation/v2/#list-all-sizes">List all Sizes</a>
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
+     * @return 				List of sizes.
+     * @throws 	IOException A problem communication with DigitalOcean occurred.
+     * @see					SizeCollectionResponse
+     * @see 				<a href="https://developers.digitalocean.com/documentation/v2/#list-all-sizes">List all Sizes</a>
      */ 
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/sizes", 
-    		method=HttpMethod.GET)
-    public abstract String listAllSizes() throws IOException;  
+    		uri="https://api.digitalocean.com/v2/sizes?page=1&per_page=20", 
+    		method=HttpMethod.GET, 
+    		contentType = "application/json")
+    public abstract SizeCollectionResponse listAllSizes(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
+    // Transformers
+    /**
+     * Transforms a JSON string into an AccountResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToAccountResponse}
+     *
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An account.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static AccountResponse stringToAccountResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	AccountResponse response = gson.fromJson(json, AccountResponse.class);
+    	return response;
+    }
+    
+    /**
+     * Transforms a JSON string into an ActionCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of actions.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static ActionCollectionResponse stringToActionCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	ActionCollectionResponse response = gson.fromJson(json, ActionCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an ActionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An action.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static ActionResponse stringToActionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	ActionResponse response = gson.fromJson(json, ActionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DomainCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of domains.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DomainCollectionResponse stringToDomainCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DomainCollectionResponse response = gson.fromJson(json, DomainCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DomainResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A domain.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DomainResponse stringToDomainResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DomainResponse response = gson.fromJson(json, DomainResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DomainRecordCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of domain records.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DomainRecordCollectionResponse stringToDomainRecordCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DomainRecordCollectionResponse response = gson.fromJson(json, DomainRecordCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DomainRecordResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A domain record.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DomainRecordResponse stringToDomainRecordResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DomainRecordResponse response = gson.fromJson(json, DomainRecordResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DropletCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of droplets.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DropletCollectionResponse stringToDropletCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DropletCollectionResponse response = gson.fromJson(json, DropletCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an DropletResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A droplet.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static DropletResponse stringToDropletResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	DropletResponse response = gson.fromJson(json, DropletResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an KernelCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKernelCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of kernels.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static KernelCollectionResponse stringToKernelCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	KernelCollectionResponse response = gson.fromJson(json, KernelCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an NeighborsCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToNeighborsCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				Lists of neighbor droplets.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static NeighborsCollectionResponse stringToNeighborsCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	NeighborsCollectionResponse response = gson.fromJson(json, NeighborsCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an UpgradeCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToUpgradeCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of droplets to be upgraded.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static UpgradeCollectionResponse stringToUpgradeCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	UpgradeCollectionResponse response = gson.fromJson(json, UpgradeCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an ImageCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of images.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static ImageCollectionResponse stringToImageCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	ImageCollectionResponse response = gson.fromJson(json, ImageCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an ImageResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				An image.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static ImageResponse stringToImageResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	ImageResponse response = gson.fromJson(json, ImageResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an KeyCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of keys.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static KeyCollectionResponse stringToKeyCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	KeyCollectionResponse response = gson.fromJson(json, KeyCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an KeyResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				A key.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static KeyResponse stringToKeyResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	KeyResponse response = gson.fromJson(json, KeyResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an RegionCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToRegionCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of regions.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static RegionCollectionResponse stringToRegionCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	RegionCollectionResponse response = gson.fromJson(json, RegionCollectionResponse.class);
+    	return response;
+    } 
+    
+    /**
+     * Transforms a JSON string into an SizeCollectionResponse
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToSizeCollectionResponse}
+     * 
+     * @param  	json		JSON response from DigitalOcean.
+     * @return 				List of sizes.
+     * @throws 	JsonSyntaxException
+     * 						If json is not a valid representation for an object of the specified class.
+     */ 
+    @Transformer(sourceTypes = {String.class})
+    public static SizeCollectionResponse stringToSizeCollectionResponse(String json) throws JsonSyntaxException {
+    	Gson gson = new Gson();
+    	SizeCollectionResponse response = gson.fromJson(json, SizeCollectionResponse.class);
+    	return response;
+    } 
     
     /**
      * Set OAuth Token
