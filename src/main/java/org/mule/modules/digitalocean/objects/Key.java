@@ -11,7 +11,7 @@ public class Key implements Serializable {
 	 *	See documentation at https://developers.digitalocean.com/documentation/v2/#ssh-keys
 	 */
 		
-	private int id;
+	private Integer id;
 	
 	private String fingerprint;
 	
@@ -23,14 +23,14 @@ public class Key implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	

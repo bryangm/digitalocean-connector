@@ -5,19 +5,19 @@ import java.io.Serializable;
 public class Meta implements Serializable {
 	private static final long serialVersionUID = -1L;
 	
-	private int total;
+	private Integer total;
 
 	/**
 	 * @return the total
 	 */
-	public int getTotal() {
+	public Integer getTotal() {
 		return this.total;
 	}
 
 	/**
 	 * @param total the total to set
 	 */
-	public void setTotal(int total) {
+	public void setTotal(Integer total) {
 		this.total = total;
 	}
 }

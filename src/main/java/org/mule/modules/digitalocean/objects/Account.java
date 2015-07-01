@@ -11,7 +11,7 @@ public class Account implements Serializable {
 	 *	See documentation at https://developers.digitalocean.com/documentation/v2/#account
 	 */
 	@SerializedName("droplet_limit")
-	private int dropletLimit;
+	private Integer dropletLimit;
 	
 	private String email;
 	
@@ -26,13 +26,13 @@ public class Account implements Serializable {
 	/**
 	 * @return the dropletLimit
 	 */
-	public int getDropletLimit() {
+	public Integer getDropletLimit() {
 		return dropletLimit;
 	}
 	/**
 	 * @param dropletLimit the dropletLimit to set
 	 */
-	public void setDropletLimit(int dropletLimit) {
+	public void setDropletLimit(Integer dropletLimit) {
 		this.dropletLimit = dropletLimit;
 	}
 	/**

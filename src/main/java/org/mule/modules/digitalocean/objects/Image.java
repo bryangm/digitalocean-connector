@@ -14,7 +14,7 @@ public class Image implements Serializable {
 	 *	See documentation at https://developers.digitalocean.com/documentation/v2/#images
 	 */
     
-    private int id;
+    private Integer id;
     
 	private String name;
 	
@@ -33,19 +33,19 @@ public class Image implements Serializable {
 	private String type;
 	
 	@SerializedName("min_disk_size")
-	private int minDiskSize;
+	private Integer minDiskSize;
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -150,14 +150,14 @@ public class Image implements Serializable {
 	/**
 	 * @return the minDiskSize
 	 */
-	public int getMinDiskSize() {
+	public Integer getMinDiskSize() {
 		return minDiskSize;
 	}
 
 	/**
 	 * @param minDiskSize the minDiskSize to set
 	 */
-	public void setMinDiskSize(int minDiskSize) {
+	public void setMinDiskSize(Integer minDiskSize) {
 		this.minDiskSize = minDiskSize;
 	}
 }

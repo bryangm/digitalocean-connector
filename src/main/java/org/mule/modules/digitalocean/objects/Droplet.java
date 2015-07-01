@@ -14,15 +14,15 @@ public class Droplet implements Serializable {
 	 *	See documentation at https://developers.digitalocean.com/documentation/v2/#droplets
 	 */
 	
-	private int id;
+	private Integer id;
 	
 	private String name;
 	
-	private int memory;
+	private Integer memory;
 	
-	private int vcpus;
+	private Integer vcpus;
 	
-	private int disk;
+	private Integer disk;
 	
 	private boolean locked;
 	
@@ -56,14 +56,14 @@ public class Droplet implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -84,42 +84,42 @@ public class Droplet implements Serializable {
 	/**
 	 * @return the memory
 	 */
-	public int getMemory() {
+	public Integer getMemory() {
 		return memory;
 	}
 
 	/**
 	 * @param memory the memory to set
 	 */
-	public void setMemory(int memory) {
+	public void setMemory(Integer memory) {
 		this.memory = memory;
 	}
 
 	/**
 	 * @return the vcpus
 	 */
-	public int getVcpus() {
+	public Integer getVcpus() {
 		return vcpus;
 	}
 
 	/**
 	 * @param vcpus the vcpus to set
 	 */
-	public void setVcpus(int vcpus) {
+	public void setVcpus(Integer vcpus) {
 		this.vcpus = vcpus;
 	}
 
 	/**
 	 * @return the disk
 	 */
-	public int getDisk() {
+	public Integer getDisk() {
 		return disk;
 	}
 
 	/**
 	 * @param disk the disk to set
 	 */
-	public void setDisk(int disk) {
+	public void setDisk(Integer disk) {
 		this.disk = disk;
 	}
 

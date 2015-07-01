@@ -12,7 +12,7 @@ public class Action implements Serializable {
 	 *	See documentation at https://developers.digitalocean.com/documentation/v2/#actions
 	 */
 	
-	private int id;
+	private Integer id;
 	
 	private String status;
 	
@@ -25,7 +25,7 @@ public class Action implements Serializable {
 	private Date completedAt;
 	
 	@SerializedName("resource_id")
-	private int resourceId;
+	private Integer resourceId;
 	
 	@SerializedName("resource_type")
 	private String resourceType;
@@ -38,14 +38,14 @@ public class Action implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -108,14 +108,14 @@ public class Action implements Serializable {
 	/**
 	 * @return the resourceId
 	 */
-	public int getResourceId() {
+	public Integer getResourceId() {
 		return resourceId;
 	}
 
 	/**
 	 * @param resourceId the resourceId to set
 	 */
-	public void setResourceId(int resourceId) {
+	public void setResourceId(Integer resourceId) {
 		this.resourceId = resourceId;
 	}
 

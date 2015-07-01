@@ -16,11 +16,11 @@ public class Size implements Serializable {
 	
     private String slug;
     
-	private int memory;
+	private Integer memory;
 	
-	private int vcpus;
+	private Integer vcpus;
 	
-	private int disk;
+	private Integer disk;
 	
 	private BigDecimal transfer;
 	
@@ -51,42 +51,42 @@ public class Size implements Serializable {
 	/**
 	 * @return the memory
 	 */
-	public int getMemory() {
+	public Integer getMemory() {
 		return memory;
 	}
 
 	/**
 	 * @param memory the memory to set
 	 */
-	public void setMemory(int memory) {
+	public void setMemory(Integer memory) {
 		this.memory = memory;
 	}
 
 	/**
 	 * @return the vcpus
 	 */
-	public int getVcpus() {
+	public Integer getVcpus() {
 		return vcpus;
 	}
 
 	/**
 	 * @param vcpus the vcpus to set
 	 */
-	public void setVcpus(int vcpus) {
+	public void setVcpus(Integer vcpus) {
 		this.vcpus = vcpus;
 	}
 
 	/**
 	 * @return the disk
 	 */
-	public int getDisk() {
+	public Integer getDisk() {
 		return disk;
 	}
 
 	/**
 	 * @param disk the disk to set
 	 */
-	public void setDisk(int disk) {
+	public void setDisk(Integer disk) {
 		this.disk = disk;
 	}
 
