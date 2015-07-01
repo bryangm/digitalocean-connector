@@ -14,7 +14,7 @@ public class Upgrade implements Serializable {
 	 */
 	
 	@SerializedName("droplet_id")
-	private int dropletId;
+	private Integer dropletId;
 	
 	@SerializedName("date_of_migration")
 	private Date dateOfMigration;
@@ -24,14 +24,14 @@ public class Upgrade implements Serializable {
 	/**
 	 * @return the dropletId
 	 */
-	public int getDropletId() {
+	public Integer getDropletId() {
 		return dropletId;
 	}
 
 	/**
 	 * @param dropletId the dropletId to set
 	 */
-	public void setDropletId(int dropletId) {
+	public void setDropletId(Integer dropletId) {
 		this.dropletId = dropletId;
 	}
 

@@ -14,7 +14,7 @@ public class Domain implements Serializable {
 	 private String name;
 	 
 	 @SerializedName("ttl")
-	 private int timeToLive;
+	 private Integer timeToLive;
 	 
 	 @SerializedName("zone_file")
 	 private String zoneFile;
@@ -36,14 +36,14 @@ public class Domain implements Serializable {
 	/**
 	 * @return the timeToLive
 	 */
-	public int getTimeToLive() {
+	public Integer getTimeToLive() {
 		return timeToLive;
 	}
 
 	/**
 	 * @param timeToLive the timeToLive to set
 	 */
-	public void setTimeToLive(int timeToLive) {
+	public void setTimeToLive(Integer timeToLive) {
 		this.timeToLive = timeToLive;
 	}
 

@@ -14,7 +14,7 @@ public class CreateDropletRequest implements Serializable {
 	
 	private String size;
 	
-	private int image;
+	private Integer image;
 	
 	@SerializedName("ssh_keys")
 	private List<Integer> sshKeys;
@@ -74,14 +74,14 @@ public class CreateDropletRequest implements Serializable {
 	/**
 	 * @return the image
 	 */
-	public int getImage() {
+	public Integer getImage() {
 		return image;
 	}
 
 	/**
 	 * @param image the image to set
 	 */
-	public void setImage(int image) {
+	public void setImage(Integer image) {
 		this.image = image;
 	}
 

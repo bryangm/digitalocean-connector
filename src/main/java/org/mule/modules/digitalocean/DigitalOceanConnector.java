@@ -79,8 +79,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActions(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
  
     /**
@@ -101,7 +101,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingAction(
-    		@RestUriParam("action") int actionId) 
+    		@RestUriParam("action") Integer actionId) 
     				throws IOException;  
     
     // Domains
@@ -124,8 +124,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DomainCollectionResponse listAllDomains(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;    
  
     /**
@@ -210,8 +210,8 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordCollectionResponse listAllDomainRecords(
     		@RestUriParam("domain") String domainName,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -234,7 +234,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordResponse retrieveExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") int recordId) 
+    		@RestUriParam("record") Integer recordId) 
     				throws IOException;  
     
     /**
@@ -281,7 +281,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") int recordId, 
+    		@RestUriParam("record") Integer recordId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -302,7 +302,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@RestUriParam("record") int recordId) 
+    		@RestUriParam("record") Integer recordId) 
     				throws IOException;  
     
     // Droplets
@@ -325,8 +325,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DropletCollectionResponse listAllDroplets(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -347,7 +347,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DropletResponse retrieveExistingDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
     
     /**
@@ -370,9 +370,9 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
-    		@RestUriParam("droplet") int dropletId,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestUriParam("droplet") Integer dropletId,
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -395,9 +395,9 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
-    		@RestUriParam("droplet") int dropletId,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestUriParam("droplet") Integer dropletId,
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -420,9 +420,9 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllBackupsForDroplet(
-    		@RestUriParam("droplet") int dropletId,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestUriParam("droplet") Integer dropletId,
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -445,9 +445,9 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForDroplet(
-    		@RestUriParam("droplet") int dropletId,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestUriParam("droplet") Integer dropletId,
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -468,7 +468,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DropletCollectionResponse listAllNeighborsForDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
     
     /**
@@ -507,7 +507,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
     
     /**
@@ -581,7 +581,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract ActionResponse executeDropletAction(
-    		@RestUriParam("droplet") int dropletId, 
+    		@RestUriParam("droplet") Integer dropletId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -604,8 +604,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingDropletAction(
-    		@RestUriParam("droplet") int dropletId, 
-    		@RestUriParam("action") int actionId) 
+    		@RestUriParam("droplet") Integer dropletId, 
+    		@RestUriParam("action") Integer actionId) 
     				throws IOException;      
     
     // Images
@@ -636,8 +636,8 @@ public abstract class DigitalOceanConnector {
     public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") String imageType, 
     		@RestQueryParam("private") @Default("false") String privateImages,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -659,7 +659,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageResponse retrieveExistingImage(
-    		@RestUriParam("image") int imageId) 
+    		@RestUriParam("image") Integer imageId) 
     				throws IOException;  
     
     /**
@@ -682,9 +682,9 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForImage(
-    		@RestUriParam("image") int imageId,
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestUriParam("image") Integer imageId,
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -706,7 +706,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
     public abstract ImageResponse updateExistingImage(
-    		@RestUriParam("image") int imageId, 
+    		@RestUriParam("image") Integer imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -725,7 +725,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingImage(
-    		@RestUriParam("image") int imageId) 
+    		@RestUriParam("image") Integer imageId) 
     				throws IOException;  
 
     // Image Actions
@@ -749,7 +749,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract ActionResponse executeImageAction(
-    		@RestUriParam("image") int imageId, 
+    		@RestUriParam("image") Integer imageId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -772,8 +772,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionResponse retrieveExistingImageAction(
-    		@RestUriParam("image") int imageId, 
-    		@RestUriParam("action") int actionId) 
+    		@RestUriParam("image") Integer imageId, 
+    		@RestUriParam("action") Integer actionId) 
     				throws IOException;  
        
     // SSH Keys
@@ -796,8 +796,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KeyCollectionResponse listAllKeys(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     /**
@@ -818,7 +818,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KeyResponse retrieveExistingKey(
-    		@RestUriParam("key") String keyId) 
+    		@RestUriParam("key") Integer keyId) 
     				throws IOException;  
     
     /**
@@ -861,7 +861,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.PUT, 
     		contentType = "application/json")
     public abstract KeyResponse updateExistingKey(
-    		@RestUriParam("key") int keyId, 
+    		@RestUriParam("key") Integer keyId, 
     		@Payload String message) 
     				throws IOException;  
     
@@ -880,7 +880,7 @@ public abstract class DigitalOceanConnector {
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.DELETE)
     public abstract void deleteExistingKey(
-    		@RestUriParam("key") int keyId) 
+    		@RestUriParam("key") Integer keyId) 
     				throws IOException;  
       
     // Regions
@@ -903,8 +903,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract RegionCollectionResponse listAllRegions(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
      
     // Sizes
@@ -927,8 +927,8 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract SizeCollectionResponse listAllSizes(
-    		@RestQueryParam("page") @Default("1") int page,
-    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    		@RestQueryParam("page") @Default("1") Integer page,
+    		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
     
     // Transformers

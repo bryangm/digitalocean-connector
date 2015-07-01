@@ -9,7 +9,7 @@ public class Pages implements Serializable {
 	private String first;
 	
 	@SerializedName("prev")
-	private String previos;
+	private String previous;
 	
 	private String next;
 	
@@ -28,16 +28,16 @@ public class Pages implements Serializable {
 		this.first = first;
 	}
 	/**
-	 * @return the previos
+	 * @return the previous
 	 */
-	public String getPrevios() {
-		return previos;
+	public String getPrevious() {
+		return previous;
 	}
 	/**
-	 * @param previos the previos to set
+	 * @param previos the previous to set
 	 */
-	public void setPrevios(String previos) {
-		this.previos = previos;
+	public void setPrevious(String previos) {
+		this.previous = previos;
 	}
 	/**
 	 * @return the next
