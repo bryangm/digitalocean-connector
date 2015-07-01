@@ -20,8 +20,10 @@ import org.mule.api.annotations.rest.RestQueryParam;
 import org.mule.api.annotations.rest.RestUriParam;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
+import org.mule.modules.digitalocean.objects.requests.*;
 import org.mule.modules.digitalocean.objects.responses.*;
 
 /**
@@ -44,7 +46,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get account information for the authenticated user.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:getUserInformation}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:get-user-information}
      *
      * @return 				The account information for the authenticated user.
      * @throws 	IOException	A problem communication with DigitalOcean occurred.
@@ -63,7 +65,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all actions that have been executed on the current account.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActions}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-actions}
      *
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -86,7 +88,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Retrieve a specific action object.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingAction}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-action}
      *
      * @param  	actionId	ID of the action.
      * @return 				An action.
@@ -108,7 +110,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all domains.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomains}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-domains}
      * 
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -131,7 +133,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific domain.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomain}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-domain}
      *
      * @param  	domainName	Name of the domain.
      * @return 				A domain.
@@ -152,7 +154,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Create a new domain.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomain}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-domain}
      *
      * @param  	message		The JSON request body submitted via #[payload].
      * @return 				A domain.
@@ -173,7 +175,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Delete a domain.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomain}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:delete-existing-domain}
      *
      * @param  	domainName 	Name of the domain.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -192,7 +194,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all domain records for a domain.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomainRecords}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-domain-records}
      *
      * @param  	domainName 	Name of the domain.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -217,7 +219,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific domain record.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDomainRecord}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-domain-record}
      *
      * @param  	domainName 	Name of the domain.
      * @param  	recordId 	Id of the domain record.
@@ -240,7 +242,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Create a new domain record.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDomainRecord}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-domain-record}
      *
      * @param  	domainName 	Name of the domain.
      * @param  	message 	The JSON request body submitted via #[payload].
@@ -263,7 +265,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Update a domain record.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingDomainRecord}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-existing-domain-record}
      *
      * @param  	domainName 	Name of the domain.
      * @param  	recordId 	Id of the domain record.
@@ -288,7 +290,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Delete a domain record.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDomainRecord}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:delete-existing-domain-record}
      *
      * @param  	domainName 	Name of the domain.
      * @param  	recordId 	Id of the domain record.
@@ -309,7 +311,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all droplets.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDroplets}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-droplets}
      *
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -332,7 +334,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @return 				A droplet.
@@ -353,7 +355,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all available kernels for a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllAvailableKernelsForDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-available-kernels-for-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -378,7 +380,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all snapshots for a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSnapshotsForDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-snapshots-for-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -403,7 +405,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all backups for a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllBackupsForDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-backups-for-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -428,7 +430,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all actions that have been executed on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-actions-for-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -453,7 +455,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all neighbors for a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllNeighborsForDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-neighbors-for-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @return 				List of droplets.
@@ -474,7 +476,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Create a new droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-droplet}
      *
      * @param  	message 	The JSON request body submitted via #[payload].
      * @return 				A droplet.
@@ -495,7 +497,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Delete a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingDroplet}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:delete-existing-droplet}
      *
      * @param  	dropletId 	Id of a droplet.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -513,7 +515,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all droplet neighbors.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDropletNeighbors}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-droplet-neighbors}
      *
      * @return 				List of droplets.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -531,7 +533,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all droplets scheduled to be upgraded.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listDropletUpgrades}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-droplet-upgrades}
      *
      * @return 				List of droplets.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -550,7 +552,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeDropletAction}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-droplet-action}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param  	message 	The JSON request body submitted via #[payload].
@@ -588,7 +590,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific droplet action.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingDropletAction}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-droplet-action}
      *
      * @param  	dropletId 	Id of a droplet.
      * @param  	actionId 	Id of an action.
@@ -612,7 +614,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all images.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllImages}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-images}
      *
      * @param 	imageType	Type of images to return: application, distribution, all.  The default is all.
      * @param 	privateImages
@@ -643,7 +645,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific image.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImage}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-image}
      *
      * @param  	imageId 	Id of an image.
      * @return 				An image.
@@ -665,7 +667,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all actions that have been executed on an image.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForImage}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-actions-for-image}
      *
      * @param  	imageId 	Id of an image.
      * @param	page		Specified page in the result set. Default value is 1.
@@ -690,7 +692,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Update an image.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingImage}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-existing-image}
      *
      * @param  	imageId 	Id of an image.
      * @param  	message 	The JSON request body submitted via #[payload].
@@ -713,7 +715,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Delete an image.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingImage}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:delete-existing-image}
      *
      * @param  	imageId 	Id of an image.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -732,7 +734,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action on an image.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:executeImageAction}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-image-action}
      *
      * @param  	imageId 	Id of an image.
      * @param  	message 	The JSON request body submitted via #[payload].
@@ -756,7 +758,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific image action.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingImageAction}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-image-action}
      *
      * @param  	imageId  	Id of an image.
      * @param  	actionId 	Id of an action.
@@ -780,7 +782,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all SSH keys.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllKeys}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-keys}
      *
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -803,7 +805,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific SSH key.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieveExistingKey}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-key}
      *
      * @param  	keyId		Id of an SSH key.
      * @return 				An SSH Key.
@@ -824,7 +826,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Create a new SSH key.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:createNewKey}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-key}
      *
      * @param  	message 	The JSON request body submitted via #[payload].
      * @return 				An SSH key.
@@ -845,7 +847,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Update an SSH key.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:updateExistingKey}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-existing-key}
      *
      * @param  	keyId		Id of an SSH key.
      * @param  	message 	The JSON request body submitted via #[payload].
@@ -868,7 +870,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Delete an SSH key.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:deleteExistingKey}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:delete-existing-key}
      *
      * @param  	keyId		Id of an SSH key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
@@ -887,7 +889,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all regions.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllRegions}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-regions}
      *
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -911,7 +913,7 @@ public abstract class DigitalOceanConnector {
     /**
      * List all sizes.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSizes}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:list-all-sizes}
      *
      * @param	page		Specified page in the result set. Default value is 1.
      * @param	perPage		Number of items return per page in the result set. Default value is 20.
@@ -935,7 +937,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an AccountResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToAccountResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-account-response}
      *
      * @param  	json		JSON response from DigitalOcean.
      * @return 				An account.
@@ -952,7 +954,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an ActionCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-action-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of actions.
@@ -969,7 +971,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an ActionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToActionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-action-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				An action.
@@ -986,7 +988,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DomainCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-domain-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of domains.
@@ -1003,7 +1005,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DomainResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-domain-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				A domain.
@@ -1020,7 +1022,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DomainRecordCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-domain-record-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of domain records.
@@ -1037,7 +1039,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DomainRecordResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDomainRecordResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-domain-record-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				A domain record.
@@ -1054,7 +1056,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DropletCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-droplet-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of droplets.
@@ -1071,7 +1073,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an DropletResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToDropletResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-droplet-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				A droplet.
@@ -1088,7 +1090,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an KernelCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKernelCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-kernel-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of kernels.
@@ -1105,7 +1107,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an NeighborsCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToNeighborsCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-neighbors-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				Lists of neighbor droplets.
@@ -1122,7 +1124,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an UpgradeCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToUpgradeCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-upgrade-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of droplets to be upgraded.
@@ -1139,7 +1141,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an ImageCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-image-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of images.
@@ -1156,7 +1158,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an ImageResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToImageResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-image-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				An image.
@@ -1173,7 +1175,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an KeyCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-key-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of keys.
@@ -1190,7 +1192,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an KeyResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToKeyResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-key-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				A key.
@@ -1207,7 +1209,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an RegionCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToRegionCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-region-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of regions.
@@ -1224,7 +1226,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Transforms a JSON string into an SizeCollectionResponse
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:stringToSizeCollectionResponse}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:string-to-size-collection-response}
      * 
      * @param  	json		JSON response from DigitalOcean.
      * @return 				List of sizes.
@@ -1237,6 +1239,125 @@ public abstract class DigitalOceanConnector {
     	SizeCollectionResponse response = gson.fromJson(json, SizeCollectionResponse.class);
     	return response;
     } 
+    
+    /**
+     * Transforms a CreateDomainRecordRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-domain-record-request-to-string}
+     * 
+     * @param  	request		CreateDomainRecordRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of CreateDomainRecordRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {CreateDomainRecordRequest.class})
+    public static String createDomainRecordRequestToString(CreateDomainRecordRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a CreateDomainRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-domain-request-to-string}
+     * 
+     * @param  	request		CreateDomainRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of CreateDomainRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {CreateDomainRequest.class})
+    public static String createDomainRequestToString(CreateDomainRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a CreateDropletRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-droplet-request-to-string}
+     * 
+     * @param  	request		CreateDropletRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of CreateDropletRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {CreateDropletRequest.class})
+    public static String createDropletRequestToString(CreateDropletRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a CreateKeyRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-key-request-to-string}
+     * 
+     * @param  	request		CreateKeyRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of CreateKeyRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {CreateKeyRequest.class})
+    public static String createKeyRequestToString(CreateKeyRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a UpdateDomainRecordRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-domain-record-request-to-string}
+     * 
+     * @param  	request		UpdateDomainRecordRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of UpdateDomainRecordRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {UpdateDomainRecordRequest.class})
+    public static String updateDomainRecordRequestToString(UpdateDomainRecordRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a UpdateImageRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-image-request-to-string}
+     * 
+     * @param  	request		UpdateImageRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of UpdateImageRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {UpdateImageRequest.class})
+    public static String updateImageRequestToString(UpdateImageRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
+    
+    /**
+     * Transforms a UpdateKeyRequest into a JSON string
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-key-request-to-string}
+     * 
+     * @param  	request		UpdateKeyRequest object to be sent to DigitalOcean.
+     * @return 				JSON representation of UpdateKeyRequest object.
+     * @throws 	JsonIOException
+     * 						If there was a problem writing to the writer.
+     */ 
+    @Transformer(sourceTypes = {UpdateKeyRequest.class})
+    public static String updateKeyRequestToString(UpdateKeyRequest request) throws JsonIOException {
+    	Gson gson = new Gson();
+    	String response = gson.toJson(request);
+    	return response;
+    }
     
     /**
      * Set OAuth Token
