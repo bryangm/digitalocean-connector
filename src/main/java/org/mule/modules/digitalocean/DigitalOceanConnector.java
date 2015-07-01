@@ -156,7 +156,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-domain}
      *
-     * @param  	message		The JSON request body submitted via #[payload].
+     * @param  	domain		The CreateDomainRequest object to be created.
      * @return 				A domain.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DomainResponse
@@ -169,7 +169,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract DomainResponse createNewDomain(
-    		@Payload String message) 
+    		CreateDomainRequest domain) 
     				throws IOException;  
     
     /**
@@ -245,7 +245,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-domain-record}
      *
      * @param  	domainName 	Name of the domain.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	domainRecord
+     * 				The CreateDomainRecordRequest object to be created.
      * @return 				A domain record.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DomainRecordResponse
@@ -259,7 +260,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract DomainRecordResponse createNewDomainRecord(
     		@RestUriParam("domain") String domainName, 
-    		@Payload String message) 
+    		CreateDomainRecordRequest domainRecord) 
     				throws IOException;  
     
     /**
@@ -269,7 +270,8 @@ public abstract class DigitalOceanConnector {
      *
      * @param  	domainName 	Name of the domain.
      * @param  	recordId 	Id of the domain record.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	domainRecord
+     * 				The UpdateDomainRecordRequest object to be created.
      * @return 				A domain record.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DomainRecordResponse
@@ -284,7 +286,7 @@ public abstract class DigitalOceanConnector {
     public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") Integer recordId, 
-    		@Payload String message) 
+    		UpdateDomainRecordRequest domainRecord) 
     				throws IOException;  
     
     /**
@@ -478,7 +480,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-droplet}
      *
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	droplet 	The CreateDropletRequest object to be created.
      * @return 				A droplet.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DropletResponse
@@ -491,7 +493,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract DropletResponse createNewDroplet(
-    		@Payload String message) 
+    		CreateDropletRequest droplet) 
     				throws IOException;  
     
     /**
@@ -555,7 +557,7 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-droplet-action}
      *
      * @param  	dropletId 	Id of a droplet.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	action	 	The ExecuteActionRequest object to be created.
      * @return 				A droplet.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ActionResponse
@@ -584,7 +586,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract ActionResponse executeDropletAction(
     		@RestUriParam("droplet") Integer dropletId, 
-    		@Payload String message) 
+    		ExecuteActionRequest action) 
     				throws IOException;  
     
     /**
@@ -695,7 +697,7 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-existing-image}
      *
      * @param  	imageId 	Id of an image.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	image	 	The UpdateImageRequest object to be created.
      * @return 				An image.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ImageResponse
@@ -709,7 +711,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract ImageResponse updateExistingImage(
     		@RestUriParam("image") Integer imageId, 
-    		@Payload String message) 
+    		UpdateImageRequest image) 
     				throws IOException;  
     
     /**
@@ -737,7 +739,7 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-image-action}
      *
      * @param  	imageId 	Id of an image.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	action 		The ExecuteActionRequest object to be created.
      * @return 				An image.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ActionResponse
@@ -752,7 +754,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract ActionResponse executeImageAction(
     		@RestUriParam("image") Integer imageId, 
-    		@Payload String message) 
+    		ExecuteActionRequest action) 
     				throws IOException;  
     
     /**
@@ -828,7 +830,7 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:create-new-key}
      *
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	key		 	The CreateKeyRequest object to be created.
      * @return 				An SSH key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					KeyResponse
@@ -841,7 +843,7 @@ public abstract class DigitalOceanConnector {
     		method=HttpMethod.POST, 
     		contentType = "application/json")
     public abstract KeyResponse createNewKey(
-    		@Payload String message) 
+    		CreateKeyRequest key) 
     				throws IOException;  
     
     /**
@@ -850,7 +852,7 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:update-existing-key}
      *
      * @param  	keyId		Id of an SSH key.
-     * @param  	message 	The JSON request body submitted via #[payload].
+     * @param  	key		 	The UpdateKeyRequest object to be created.
      * @return 				An SSH key.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					KeyResponse
@@ -864,7 +866,7 @@ public abstract class DigitalOceanConnector {
     		contentType = "application/json")
     public abstract KeyResponse updateExistingKey(
     		@RestUriParam("key") Integer keyId, 
-    		@Payload String message) 
+    		UpdateKeyRequest key) 
     				throws IOException;  
     
     /**

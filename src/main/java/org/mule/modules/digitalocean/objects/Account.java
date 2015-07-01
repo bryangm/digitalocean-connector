@@ -18,7 +18,7 @@ public class Account implements Serializable {
 	private String uuid;
 	
 	@SerializedName("email_verified")
-	private boolean emailVerified;
+	private Boolean emailVerified;
 	
 	public Account(String json) {
 		// TODO Auto-generated constructor stub
@@ -62,13 +62,13 @@ public class Account implements Serializable {
 	/**
 	 * @return the emailVerified
 	 */
-	public boolean isEmailVerified() {
+	public Boolean isEmailVerified() {
 		return emailVerified;
 	}
 	/**
 	 * @param emailVerified the emailVerified to set
 	 */
-	public void setEmailVerified(boolean emailVerified) {
+	public void setEmailVerified(Boolean emailVerified) {
 		this.emailVerified = emailVerified;
 	}
 }

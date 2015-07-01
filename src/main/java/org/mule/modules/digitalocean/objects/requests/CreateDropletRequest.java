@@ -19,12 +19,12 @@ public class CreateDropletRequest implements Serializable {
 	@SerializedName("ssh_keys")
 	private List<Integer> sshKeys;
 	
-	private boolean backups;
+	private Boolean backups;
 	
-	private boolean ipv6;
+	private Boolean ipv6;
 	
 	@SerializedName("private_networking")
-	private boolean privateNetworking;
+	private Boolean privateNetworking;
 	
 	@SerializedName("user_data")
 	private String userData;
@@ -102,42 +102,42 @@ public class CreateDropletRequest implements Serializable {
 	/**
 	 * @return the backups
 	 */
-	public boolean isBackups() {
+	public Boolean isBackups() {
 		return backups;
 	}
 
 	/**
 	 * @param backups the backups to set
 	 */
-	public void setBackups(boolean backups) {
+	public void setBackups(Boolean backups) {
 		this.backups = backups;
 	}
 
 	/**
 	 * @return the ipv6
 	 */
-	public boolean isIpv6() {
+	public Boolean isIpv6() {
 		return ipv6;
 	}
 
 	/**
 	 * @param ipv6 the ipv6 to set
 	 */
-	public void setIpv6(boolean ipv6) {
+	public void setIpv6(Boolean ipv6) {
 		this.ipv6 = ipv6;
 	}
 
 	/**
 	 * @return the privateNetworking
 	 */
-	public boolean isPrivateNetworking() {
+	public Boolean isPrivateNetworking() {
 		return privateNetworking;
 	}
 
 	/**
 	 * @param privateNetworking the privateNetworking to set
 	 */
-	public void setPrivateNetworking(boolean privateNetworking) {
+	public void setPrivateNetworking(Boolean privateNetworking) {
 		this.privateNetworking = privateNetworking;
 	}
 
