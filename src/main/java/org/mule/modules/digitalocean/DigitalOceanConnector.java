@@ -65,6 +65,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActions}
      *
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of actions.
      * @throws 	IOException	A problem communication with DigitalOcean occurred.
      * @see					ActionCollectionResponse
@@ -73,10 +75,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/actions", 
+    		uri="https://api.digitalocean.com/v2/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract ActionCollectionResponse listAllActions() throws IOException;  
+    public abstract ActionCollectionResponse listAllActions(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
  
     /**
      * Retrieve a specific action object.
@@ -104,7 +109,9 @@ public abstract class DigitalOceanConnector {
      * List all domains.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomains}
-     *
+     * 
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of domains.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DomainCollectionResponse
@@ -113,10 +120,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/domains", 
+    		uri="https://api.digitalocean.com/v2/domains?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DomainCollectionResponse listAllDomains() throws IOException;  
+    public abstract DomainCollectionResponse listAllDomains(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;    
  
     /**
      * Get details about a specific domain.
@@ -185,6 +195,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDomainRecords}
      *
      * @param  	domainName 	Name of the domain.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of domain records.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DomainRecordCollectionResponse
@@ -193,11 +205,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
+    		uri="https://api.digitalocean.com/v2/domains/{domain}/records?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract DomainRecordCollectionResponse listAllDomainRecords(
-    		@RestUriParam("domain") String domainName) 
+    		@RestUriParam("domain") String domainName,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -297,6 +311,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllDroplets}
      *
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of droplets.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					DropletCollectionResponse
@@ -305,10 +321,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets", 
+    		uri="https://api.digitalocean.com/v2/droplets?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract DropletCollectionResponse listAllDroplets() throws IOException;  
+    public abstract DropletCollectionResponse listAllDroplets(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
     /**
      * Get details about a specific droplet.
@@ -337,6 +356,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllAvailableKernelsForDroplet}
      *
      * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of kernels.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					KernelCollectionResponse
@@ -345,11 +366,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels", 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -358,6 +381,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSnapshotsForDroplet}
      *
      * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of snapshots.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ImageCollectionResponse
@@ -366,11 +391,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots", 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -379,6 +406,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllBackupsForDroplet}
      *
      * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of backups.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ImageCollectionResponse
@@ -387,11 +416,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups", 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllBackupsForDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -400,6 +431,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForDroplet}
      *
      * @param  	dropletId 	Id of a droplet.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of actions.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ActionCollectionResponse
@@ -408,11 +441,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForDroplet(
-    		@RestUriParam("droplet") int dropletId) 
+    		@RestUriParam("droplet") int dropletId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -494,7 +529,7 @@ public abstract class DigitalOceanConnector {
     public abstract NeighborsCollectionResponse listAllDropletNeighbors() throws IOException;  
     
     /**
-     * List all droplets schedule to be upgraded.
+     * List all droplets scheduled to be upgraded.
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listDropletUpgrades}
      *
@@ -582,6 +617,8 @@ public abstract class DigitalOceanConnector {
      * @param 	imageType	Type of images to return: application, distribution, all.  The default is all.
      * @param 	privateImages
      * 						Boolean to return the authenticated user's private images.  The default is false, which returns all images.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of images.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ImageCollectionResponse
@@ -593,12 +630,14 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/images?type=all&private=false", 
+    		uri="https://api.digitalocean.com/v2/images?type=all&private=false&page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") String imageType, 
-    		@RestQueryParam("private") @Default("false") String privateImages) 
+    		@RestQueryParam("private") @Default("false") String privateImages,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -629,6 +668,8 @@ public abstract class DigitalOceanConnector {
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllActionsForImage}
      *
      * @param  	imageId 	Id of an image.
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of actions.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					ActionCollectionResponse
@@ -637,11 +678,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
+    		uri="https://api.digitalocean.com/v2/images/{image}/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
     public abstract ActionCollectionResponse listAllActionsForImage(
-    		@RestUriParam("image") int imageId) 
+    		@RestUriParam("image") int imageId,
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
     				throws IOException;  
     
     /**
@@ -739,6 +782,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllKeys}
      *
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of SSH keys.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					KeyCollectionResponse
@@ -747,10 +792,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/account/keys", 
+    		uri="https://api.digitalocean.com/v2/account/keys?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract KeyCollectionResponse listAllKeys() throws IOException;  
+    public abstract KeyCollectionResponse listAllKeys(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
     /**
      * Get details about a specific SSH key.
@@ -841,6 +889,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllRegions}
      *
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of regions.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					RegionCollectionResponse
@@ -849,10 +899,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/regions", 
+    		uri="https://api.digitalocean.com/v2/regions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract RegionCollectionResponse listAllRegions() throws IOException;  
+    public abstract RegionCollectionResponse listAllRegions(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
      
     // Sizes
     /**
@@ -860,6 +913,8 @@ public abstract class DigitalOceanConnector {
      *
      * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:listAllSizes}
      *
+     * @param	page		Specified page in the result set. Default value is 1.
+     * @param	perPage		Number of items return per page in the result set. Default value is 20.
      * @return 				List of sizes.
      * @throws 	IOException A problem communication with DigitalOcean occurred.
      * @see					SizeCollectionResponse
@@ -868,10 +923,13 @@ public abstract class DigitalOceanConnector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
-    		uri="https://api.digitalocean.com/v2/sizes", 
+    		uri="https://api.digitalocean.com/v2/sizes?page=1&per_page=20", 
     		method=HttpMethod.GET, 
     		contentType = "application/json")
-    public abstract SizeCollectionResponse listAllSizes() throws IOException;  
+    public abstract SizeCollectionResponse listAllSizes(
+    		@RestQueryParam("page") @Default("1") int page,
+    		@RestQueryParam("per_page") @Default("20") int perPage) 
+    				throws IOException;  
     
     // Transformers
     /**
