@@ -10,7 +10,6 @@ import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Transformer;
 import org.mule.api.annotations.param.Default;
-import org.mule.api.annotations.param.Payload;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.ReconnectOn;
 import org.mule.api.annotations.rest.HttpMethod;
