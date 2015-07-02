@@ -15,7 +15,7 @@
 <!-- END_INCLUDE(digitalocean:retrieve-existing-domain) -->
 <!-- BEGIN_INCLUDE(digitalocean:create-new-domain) -->
     <digitalocean:create-new-domain config-ref="DigitalOcean">
-        <digitalocean:domain name="digitaloceanisthebombdiggity.com" ipAddress="1.2.3.4"/>
+        <digitalocean:create-domain name="digitaloceanisthebombdiggity.com" ipAddress="1.2.3.4"/>
     </digitalocean:create-new-domain>
 <!-- END_INCLUDE(digitalocean:create-new-domain) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-domain) -->
@@ -29,12 +29,12 @@
 <!-- END_INCLUDE(digitalocean:retrieve-existing-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:create-new-domain-record) -->
     <digitalocean:create-new-domain-record config-ref="DigitalOcean"domainName="digitaloceanisthebombdiggity.com">
-        <digitalocean:domain-record type="CNAME" name="customdomainrecord.com" data="162.10.66.0"/>
+        <digitalocean:create-domain-record type="CNAME" name="customdomainrecord.com" data="162.10.66.0"/>
     </digitalocean:create-new-domain-record>
 <!-- END_INCLUDE(digitalocean:create-new-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:update-existing-domain-record) -->
     <digitalocean:update-existing-domain-record config-ref="DigitalOcean" domainName="digitaloceanisthebombdiggity.com" recordId="3352896">
-        <digitalocean:domain-record type="CNAME" name="updated.customdomainrecord.com" data="162.10.66.1"/>
+        <digitalocean:update-domain-record type="CNAME" name="updated.customdomainrecord.com" data="162.10.66.1"/>
     </digitalocean:update-existing-domain-record>
 <!-- END_INCLUDE(digitalocean:update-existing-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-domain-record) -->
@@ -63,7 +63,7 @@
 <!-- END_INCLUDE(digitalocean:list-all-neighbors-for-droplet) -->
 <!-- BEGIN_INCLUDE(digitalocean:create-new-droplet) -->
     <digitalocean:create-new-droplet config-ref="DigitalOcean">
-        <digitalocean:droplet name="example.com" region="nyc3" size="512mb" image="ubuntu-14-04-x64" ipv6="true"/>
+        <digitalocean:create-droplet name="example.com" region="nyc3" size="512mb" image="ubuntu-14-04-x64" ipv6="true"/>
     </digitalocean:create-new-droplet>
 <!-- END_INCLUDE(digitalocean:create-new-droplet) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-droplet) -->
@@ -77,7 +77,7 @@
 <!-- END_INCLUDE(digitalocean:list-droplet-upgrades) -->
 <!-- BEGIN_INCLUDE(digitalocean:execute-droplet-action) -->
     <digitalocean:execute-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:action type="disable_backups"/>
+        <digitalocean:execute-action type="disable_backups"/>
     </digitalocean:execute-droplet-action>
 <!-- END_INCLUDE(digitalocean:execute-droplet-action) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-droplet-action) -->
@@ -94,7 +94,7 @@
 <!-- END_INCLUDE(digitalocean:list-all-actions-for-image) -->
 <!-- BEGIN_INCLUDE(digitalocean:update-existing-image) -->
     <digitalocean:update-existing-image config-ref="DigitalOcean" imageId="7938391">
-        <digitalocean:image name="new-image-name"/>
+        <digitalocean:update-image name="new-image-name"/>
     </digitalocean:update-existing-image>
 <!-- END_INCLUDE(digitalocean:update-existing-image) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-image) -->
@@ -102,7 +102,7 @@
 <!-- END_INCLUDE(digitalocean:delete-existing-image) -->
 <!-- BEGIN_INCLUDE(digitalocean:execute-image-action) -->
     <digitalocean:execute-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:action type="transfer" region="nyc2"/>
+        <digitalocean:execute-action type="transfer" region="nyc2"/>
     </digitalocean:execute-droplet-action>
 <!-- END_INCLUDE(digitalocean:execute-image-action) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-image-action) -->
@@ -116,12 +116,12 @@
 <!-- END_INCLUDE(digitalocean:retrieve-existing-key) -->
 <!-- BEGIN_INCLUDE(digitalocean:create-new-key) -->
     <digitalocean:create-new-key config-ref="DigitalOcean">
-        <digitalocean:key name="My SSH Public Key" publicKey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"/>
+        <digitalocean:create-key name="My SSH Public Key" publicKey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"/>
     </digitalocean:create-new-key>
 <!-- END_INCLUDE(digitalocean:create-new-key) -->
 <!-- BEGIN_INCLUDE(digitalocean:update-existing-key) -->
     <digitalocean:update-existing-key config-ref="DigitalOcean" keyId="512190">
-        <digitalocean:key name="Renamed SSH Key"/>
+        <digitalocean:update-key name="Renamed SSH Key"/>
     </digitalocean:update-existing-key>
 <!-- END_INCLUDE(digitalocean:update-existing-key) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-key) -->
