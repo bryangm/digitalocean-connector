@@ -16,6 +16,8 @@ public class ExecuteActionRequest implements Serializable {
 	private String name;
 	
 	private Integer kernel;
+	
+	private String region;
 
 	/**
 	 * @return the type
@@ -99,5 +101,19 @@ public class ExecuteActionRequest implements Serializable {
 	 */
 	public void setKernel(Integer kernel) {
 		this.kernel = kernel;
+	}
+
+	/**
+	 * @return the region
+	 */
+	public String getRegion() {
+		return region;
+	}
+
+	/**
+	 * @param region the region to set
+	 */
+	public void setRegion(String region) {
+		this.region = region;
 	}
 }
