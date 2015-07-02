@@ -54,7 +54,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#get-user-information">Get User Information</a>
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account", 
     		method=HttpMethod.GET, 
@@ -78,7 +77,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions">List all Actions</a>
      */    
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -102,7 +100,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-action">Retrieve an existing Action</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/actions/{action}", 
     		method=HttpMethod.GET, 
@@ -128,7 +125,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domains">List all Domains</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -152,7 +148,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain">Retrieve an existing Domain</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}", 
     		method=HttpMethod.GET, 
@@ -175,7 +170,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain">Create a new Domain</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains", 
     		method=HttpMethod.POST, 
@@ -196,7 +190,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain">Delete a Domain</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}", 
     		method=HttpMethod.DELETE)
@@ -223,7 +216,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-domain-records">List all Domain Records</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -250,7 +242,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-domain-record">Retrieve an existing Domain Record</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method=HttpMethod.GET, 
@@ -276,7 +267,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-domain-record">Create a new Domain Record</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records", 
     		method=HttpMethod.POST, 
@@ -304,7 +294,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#update-a-domain-record">Update a Domain Record</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method=HttpMethod.PUT, 
@@ -329,7 +318,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-domain-record">Delete a Domain Record</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method=HttpMethod.DELETE)
@@ -355,7 +343,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplets">List all Droplets</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -379,7 +366,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-droplet-by-id">Retrieve an existing Droplet by id</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method=HttpMethod.GET, 
@@ -406,7 +392,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-available-kernels-for-a-droplet">List all available Kernels for a Droplet</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/kernels?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -435,7 +420,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-snapshots-for-a-droplet">List snapshots for a Droplet</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/snapshots?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -464,7 +448,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-backups-for-a-droplet">List backups for a Droplet</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/backups?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -493,7 +476,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-actions-for-a-droplet">List actions for a Droplet</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -518,7 +500,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-neighbors-for-a-droplet">List Neighbors for a Droplet</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/neighbors", 
     		method=HttpMethod.GET, 
@@ -541,7 +522,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-droplet">Create a new Droplet</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets", 
     		method=HttpMethod.POST, 
@@ -562,7 +542,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#delete-a-droplet">Delete a Droplet</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method=HttpMethod.DELETE)
@@ -582,7 +561,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-droplet-neighbors">List all Droplet Neighbors</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/reports/droplet_neighbors", 
     		method=HttpMethod.GET, 
@@ -601,7 +579,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-droplet-upgrades">List Droplet Upgrades</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplet_upgrades", 
     		method=HttpMethod.GET, 
@@ -640,7 +617,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method=HttpMethod.POST, 
@@ -666,7 +642,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-a-droplet-action">Retrieve a Droplet Action</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", 
     		method=HttpMethod.GET, 
@@ -700,7 +675,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-a-user-s-images">List a User's Images</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images?type=all&private=false&page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -727,7 +701,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-by-slug">Retrieve an existing Image by slug</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.GET, 
@@ -754,7 +727,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-actions-for-an-image">List all Actions for an Image</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -781,7 +753,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#update-an-image">Update an Image</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.PUT, 
@@ -803,7 +774,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#delete-an-image">Delete an Image</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}", 
     		method=HttpMethod.DELETE)
@@ -829,7 +799,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions", 
     		method=HttpMethod.POST, 
@@ -855,7 +824,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-image-action">Retrieve an existing Image Action</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/images/{image}/actions/{action}", 
     		method=HttpMethod.GET, 
@@ -882,7 +850,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-keys">List all Keys</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -906,7 +873,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#retrieve-an-existing-key">Retrieve an existing Key</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.GET, 
@@ -929,7 +895,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#create-a-new-key">Create a new Key</a>
      */  
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys", 
     		method=HttpMethod.POST, 
@@ -954,7 +919,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#update-a-key">Update a Key</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.PUT, 
@@ -976,7 +940,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#destroy-a-key">Destroy a Key</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/account/keys/{key}", 
     		method=HttpMethod.DELETE)
@@ -1001,7 +964,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-regions">List all Regions</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/regions?page=1&per_page=20", 
     		method=HttpMethod.GET, 
@@ -1028,7 +990,6 @@ public abstract class DigitalOceanConnector {
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#list-all-sizes">List all Sizes</a>
      */ 
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
     @RestCall(
     		uri="https://api.digitalocean.com/v2/sizes?page=1&per_page=20", 
     		method=HttpMethod.GET, 
