@@ -9,7 +9,6 @@ import java.io.IOException;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Configurable;
 import org.mule.api.annotations.Transformer;
-import org.mule.api.annotations.display.FriendlyName;
 import org.mule.api.annotations.display.Placement;
 import org.mule.api.annotations.param.Default;
 import org.mule.api.annotations.Processor;
@@ -615,11 +614,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to disable backups on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:disable-droplet-backups-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:disable-droplet-backups}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	disableDropletBackups
+     * @param  	disableDropletBackupsRequest
      * 			 	The DisableDropletBackupsRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -641,11 +640,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to reboot a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reboot-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reboot-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	rebootDroplet
+     * @param  	rebootDropletRequest
      * 			 	The RebootDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -667,11 +666,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to power cycle a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-cycle-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-cycle-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	powerCycleDroplet
+     * @param  	powerCycleDropletRequest
      * 			 	The PowerCycleDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -693,11 +692,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to shutdown a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:shutdown-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:shutdown-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	shutdownDroplet
+     * @param  	shutdownDropletRequest
      * 			 	The ShutdownDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -719,11 +718,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to power off a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-off-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-off-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	powerOffDroplet
+     * @param  	powerOffDropletRequest
      * 			 	The PowerOffDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -745,11 +744,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to power on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-on-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-on-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	powerOnDroplet
+     * @param  	powerOnDropletRequest
      * 			 	The PowerOnDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -771,11 +770,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to restore a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:restore-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:restore-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	restoreDroplet
+     * @param  	restoreDropletRequest
      * 			 	The RestoreDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -797,11 +796,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to reset a password on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reset-droplet-password-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reset-droplet-password}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	resetDropletPassword
+     * @param  	resetDropletPasswordRequest
      * 			 	The ResetDropletPasswordRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -823,11 +822,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to rezise a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:resize-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:resize-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	resizeDroplet
+     * @param  	resizeDropletRequest
      * 			 	The ResizeDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -849,11 +848,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action rebuild a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rebuild-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rebuild-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	rebuildDroplet
+     * @param  	rebuildDropletRequest
      * 			 	The RebuildDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -875,11 +874,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to rename a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rename-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rename-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	renameDroplet
+     * @param  	renameDropletRequest
      * 			 	The RenameDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -901,11 +900,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to change the kernel of a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:change-droplet-kernel-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:change-droplet-kernel}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	changeDropletKernel
+     * @param  	changeDropletKernelRequest
      * 			 	The ChangeDropletKernelRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -927,11 +926,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to enable IPv6 in a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-ipv6-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-ipv6}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	enableDropletIpv6
+     * @param  	enableDropletIpv6Request
      * 			 	The EnableDropletIpv6Request object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -953,11 +952,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to enable private networking on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-private-networking-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-private-networking}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	enableDropletPrivateNetworking
+     * @param  	enableDropletPrivateNetworkingRequest
      * 			 	The EnableDropletPrivateNetworkingRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -979,11 +978,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to snapshot a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:snapshot-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:snapshot-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	snapshotDroplet
+     * @param  	snapshotDropletRequest
      * 			 	The SnapshotDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -1005,11 +1004,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action to upgrade a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:upgrade-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:upgrade-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	upgradeDroplet
+     * @param  	upgradeDropletRequest
      * 			 	The UpgradeDropletRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -1031,7 +1030,7 @@ public abstract class DigitalOceanConnector {
     /**
      * Get details about a specific droplet action.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:retrieve-existing-droplet}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
@@ -1193,11 +1192,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action of transfering an image to another region.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:transfer-image-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:transfer-image}
      *
      * @param  	imageId 	
      * 				Id of an image.
-     * @param  	transferImage
+     * @param  	transferImageRequest
      * 		 		The TransferImageRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
@@ -1219,11 +1218,11 @@ public abstract class DigitalOceanConnector {
     /**
      * Executes an action of converting an image to a snapshot.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:convert-image-to-snapshot-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:convert-image-to-snapshot}
      *
      * @param  	imageId 	
      * 				Id of an image.
-     * @param  	convertImageToSnapshot
+     * @param  	convertImageToSnapshotRequest
      * 		 		The ConvertImageToSnapshotRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
