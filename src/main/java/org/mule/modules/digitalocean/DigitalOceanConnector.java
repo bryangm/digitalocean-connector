@@ -611,33 +611,408 @@ public abstract class DigitalOceanConnector {
     
     // Droplet Actions
     /**
-     * Executes an action on a droplet.
+     * Executes an action to disable backups on a droplet.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-droplet-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:disable-droplet-backups-action}
      *
      * @param  	dropletId 	
      * 				Id of a droplet.
-     * @param  	executeAction
-     * 			 	The ExecuteActionRequest object to be created.
+     * @param  	disableDropletBackups
+     * 			 	The DisableDropletBackupsRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
      * 				A problem communication with DigitalOcean occurred.
      * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#disable-backups">Disable Backups</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse disableDropletBackupsAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		DisableDropletBackupsRequest disableDropletBackups) 
+    				throws IOException;  
+
+    /**
+     * Executes an action to reboot a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reboot-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	rebootDroplet
+     * 			 	The RebootDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#reboot-a-droplet">Reboot a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse rebootDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		RebootDropletRequest rebootDroplet) 
+    				throws IOException;  
+
+    /**
+     * Executes an action to power cycle a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-cycle-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	powerCycleDroplet
+     * 			 	The PowerCycleDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#power-cycle-a-droplet">Power Cycle a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse powerCycleDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		PowerCycleDropletRequest powerCycleDroplet) 
+    				throws IOException;  
+
+    /**
+     * Executes an action to shutdown a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:shutdown-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	shutdownDroplet
+     * 			 	The ShutdownDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#shutdown-a-droplet">Shutdown a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse shutdownDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		ShutdownDropletRequest shutdownDroplet) 
+    				throws IOException;  
+
+    /**
+     * Executes an action to power off a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-off-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	powerOffDroplet
+     * 			 	The PowerOffDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#power-off-a-droplet">Power Off a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse powerOffDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		PowerOffDropletRequest powerOffDroplet) 
+    				throws IOException;  
+ 
+    /**
+     * Executes an action to power on a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:power-on-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	powerOnDroplet
+     * 			 	The PowerOnDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#power-on-a-droplet">Power On a Droplet</a>
+     */ 
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse powerOnDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		PowerOnDropletRequest powerOnDroplet) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to restore a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:restore-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	restoreDroplet
+     * 			 	The RestoreDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#restore-a-droplet">Restore a Droplet</a>
+     */ 
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse restoreDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		RestoreDropletRequest restoreDroplet) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to reset a password on a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:reset-droplet-password-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	resetDropletPassword
+     * 			 	The ResetDropletPasswordRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#password-reset-a-droplet">Password Reset a Droplet</a>
+     */ 
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse resetDropletPasswordAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		ResetDropletPasswordRequest resetDropletPassword) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to rezise a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:resize-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	resizeDroplet
+     * 			 	The ResizeDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#resize-a-droplet">Resize a Droplet</a>
+     */ 
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse resizeDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		ResizeDropletRequest resizeDroplet) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action rebuild a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rebuild-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	rebuildDroplet
+     * 			 	The RebuildDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#rebuild-a-droplet">Rebuild a Droplet</a>
+     */ 
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse rebuildDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		RebuildDropletRequest rebuildDroplet) 
+    				throws IOException;  
+  
+    /**
+     * Executes an action to rename a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:rename-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	renameDroplet
+     * 			 	The RenameDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#rename-a-droplet">Rename a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse renameDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		RenameDropletRequest renameDroplet) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to change the kernel of a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:change-droplet-kernel-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	changeDropletKernel
+     * 			 	The ChangeDropletKernelRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#change-the-kernel">Change the Kernel</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse changeDropletKernelAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		ChangeDropletKernelRequest changeDropletKernel) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to enable IPv6 in a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-ipv6-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	enableDropletIpv6
+     * 			 	The EnableDropletIpv6Request object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#enable-ipv6">Enable IPv6</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse enableDropletIpv6Action(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		EnableDropletIpv6Request enableDropletIpv6) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to enable private networking on a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:enable-droplet-private-networking-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	enableDropletPrivateNetworking
+     * 			 	The EnableDropletPrivateNetworkingRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#enable-private-networking">Enable Private Networking</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse enableDropletPrivateNetworkingAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		EnableDropletPrivateNetworkingRequest enableDropletPrivateNetworking) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action to snapshot a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:snapshot-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	snapshotDroplet
+     * 			 	The SnapshotDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#snapshot-a-droplet">Snapshot a Droplet</a>
+     */  
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse snapshotDropletAction(
+    		@RestUriParam("droplet") Integer dropletId, 
+    		SnapshotDropletRequest snapshotDroplet) 
+    				throws IOException;   
+    
+    /**
+     * Executes an action to upgrade a droplet.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:upgrade-droplet-action}
+     *
+     * @param  	dropletId 	
+     * 				Id of a droplet.
+     * @param  	upgradeDroplet
+     * 			 	The UpgradeDropletRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#upgrade-a-droplet">Upgrade a Droplet</a>
      */  
     @Processor
@@ -646,10 +1021,10 @@ public abstract class DigitalOceanConnector {
     		method = HttpMethod.POST, 
     		contentType = "application/json",
     	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
-    public abstract ActionResponse executeDropletAction(
+    public abstract ActionResponse upgradeDropletAction(
     		@RestUriParam("droplet") Integer dropletId, 
-    		ExecuteActionRequest executeAction) 
-    				throws IOException;  
+    		UpgradeDropletRequest upgradeDroplet) 
+    				throws IOException; 
     
     /**
      * Get details about a specific droplet action.
@@ -685,7 +1060,7 @@ public abstract class DigitalOceanConnector {
      *
      * @param 	imageType	
      * 				Type of images to return: application, distribution, all.  The default is all.
-     * @param 	privateImages
+     * @param 	privateUserImagesOnly
      * 				Boolean to return the authenticated user's private images.  The default is false, which returns all images.
      * @param	page		
      * 				Specified page in the result set. Default value is 1.
@@ -708,7 +1083,7 @@ public abstract class DigitalOceanConnector {
     	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
     public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") ImageType imageType, 
-    		@RestQueryParam("private") @Default("false") String privateImages,
+    		@RestQueryParam("private") @Default("false") Boolean privateUserImagesOnly,
     		@RestQueryParam("page") @Default("1") Integer page,
     		@RestQueryParam("per_page") @Default("20") Integer perPage) 
     				throws IOException;  
@@ -814,19 +1189,44 @@ public abstract class DigitalOceanConnector {
 
     // Image Actions
     /**
-     * Executes an action on an image.
+     * Executes an action of transfering an image to another region.
      *
-     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:execute-image-action}
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:transfer-image-action}
      *
      * @param  	imageId 	
      * 				Id of an image.
-     * @param  	executeAction
-     * 		 		The ExecuteActionRequest object to be created.
+     * @param  	transferImage
+     * 		 		The TransferImageRequest object to be created.
      * @return 	ActionResponse object containing an action.
      * @throws 	IOException 
      * 				A problem communication with DigitalOcean occurred.
      * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#transfer-an-image">Transfer an Image</a>
+     */      
+    @Processor
+    @RestCall(
+    		uri = "https://api.digitalocean.com/v2/images/{image}/actions", 
+    		method = HttpMethod.POST, 
+    		contentType = "application/json",
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    public abstract ActionResponse transferImageAction(
+    		@RestUriParam("image") Integer imageId, 
+    		TransferImageRequest transferImage) 
+    				throws IOException;  
+    
+    /**
+     * Executes an action of converting an image to a snapshot.
+     *
+     * {@sample.xml ../../../doc/digitalocean-connector.xml.sample digitalocean:convert-image-to-snapshot-action}
+     *
+     * @param  	imageId 	
+     * 				Id of an image.
+     * @param  	convertImageToSnapshot
+     * 		 		The ConvertImageToSnapshotRequest object to be created.
+     * @return 	ActionResponse object containing an action.
+     * @throws 	IOException 
+     * 				A problem communication with DigitalOcean occurred.
+     * @see		ActionResponse
      * @see 	<a href="https://developers.digitalocean.com/documentation/v2/#convert-an-image-to-a-snapshot">Convert an Image to a Snapshot</a>
      */  
     @Processor
@@ -835,9 +1235,9 @@ public abstract class DigitalOceanConnector {
     		method = HttpMethod.POST, 
     		contentType = "application/json",
     	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
-    public abstract ActionResponse executeImageAction(
+    public abstract ActionResponse convertImageToSnapshopAction(
     		@RestUriParam("image") Integer imageId, 
-    		ExecuteActionRequest executeAction) 
+    		ConvertImageToSnapshotRequest convertImageToSnapshot) 
     				throws IOException;  
     
     /**
