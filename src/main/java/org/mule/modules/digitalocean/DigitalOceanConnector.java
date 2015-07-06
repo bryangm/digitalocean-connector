@@ -24,6 +24,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 
 import org.mule.modules.digitalocean.common.ImageType;
+import org.mule.modules.digitalocean.exceptions.DigitalOceanException;
 import org.mule.modules.digitalocean.objects.requests.*;
 import org.mule.modules.digitalocean.objects.responses.*;
 
@@ -60,7 +61,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/account", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    		exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    		exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract AccountResponse getUserInformation() throws IOException;  
     
     // Actions
@@ -84,7 +85,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/actions?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionCollectionResponse listAllActions(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
@@ -108,7 +109,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/actions/{action}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse retrieveExistingAction(
     		@RestUriParam("action") Integer actionId) 
     				throws IOException;  
@@ -134,7 +135,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainCollectionResponse listAllDomains(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
@@ -158,7 +159,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains/{domain}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainResponse retrieveExistingDomain(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
@@ -181,7 +182,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainResponse createNewDomain(
     		CreateDomainRequest createDomain) 
     				throws IOException;  
@@ -201,7 +202,7 @@ public abstract class DigitalOceanConnector {
     @RestCall(
     		uri = "https://api.digitalocean.com/v2/domains/{domain}", 
     		method = HttpMethod.DELETE,
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract void deleteExistingDomain(
     		@RestUriParam("domain") String domainName) 
     				throws IOException;  
@@ -229,7 +230,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains/{domain}/records?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainRecordCollectionResponse listAllDomainRecords(
     		@RestUriParam("domain") String domainName,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -256,7 +257,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainRecordResponse retrieveExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") Integer domainRecordId) 
@@ -282,7 +283,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains/{domain}/records", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainRecordResponse createNewDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		CreateDomainRecordRequest createDomainRecord) 
@@ -310,7 +311,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method = HttpMethod.PUT, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DomainRecordResponse updateExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") Integer domainRecordId, 
@@ -334,7 +335,7 @@ public abstract class DigitalOceanConnector {
     @RestCall(
     		uri = "https://api.digitalocean.com/v2/domains/{domain}/records/{record}", 
     		method = HttpMethod.DELETE,
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract void deleteExistingDomainRecord(
     		@RestUriParam("domain") String domainName, 
     		@RestUriParam("record") Integer domainRecordId) 
@@ -361,7 +362,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DropletCollectionResponse listAllDroplets(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
@@ -385,7 +386,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DropletResponse retrieveExistingDroplet(
     		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
@@ -412,7 +413,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/kernels?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract KernelCollectionResponse listAllAvailableKernelsForDroplet(
     		@RestUriParam("droplet") Integer dropletId,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -441,7 +442,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/snapshots?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ImageCollectionResponse listAllSnapshotsForDroplet(
     		@RestUriParam("droplet") Integer dropletId,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -470,7 +471,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/backups?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ImageCollectionResponse listAllBackupsForDroplet(
     		@RestUriParam("droplet") Integer dropletId,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -499,7 +500,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionCollectionResponse listAllActionsForDroplet(
     		@RestUriParam("droplet") Integer dropletId,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -524,7 +525,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/neighbors", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DropletCollectionResponse listAllNeighborsForDroplet(
     		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
@@ -547,7 +548,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract DropletResponse createNewDroplet(
     		CreateDropletRequest createDroplet) 
     				throws IOException;  
@@ -567,7 +568,7 @@ public abstract class DigitalOceanConnector {
     @RestCall(
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}", 
     		method = HttpMethod.DELETE,
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract void deleteExistingDroplet(
     		@RestUriParam("droplet") Integer dropletId) 
     				throws IOException;  
@@ -588,7 +589,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/reports/droplet_neighbors", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract NeighborsCollectionResponse listAllDropletNeighbors() throws IOException;  
     
     /**
@@ -607,7 +608,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplet_upgrades", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract UpgradeCollectionResponse listDropletUpgrades() throws IOException;  
     
     // Droplet Actions
@@ -631,7 +632,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse disableDropletBackups(
     		@RestUriParam("droplet") Integer dropletId, 
     		DisableDropletBackupsRequest disableDropletBackupsRequest) 
@@ -657,7 +658,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse rebootDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		RebootDropletRequest rebootDropletRequest) 
@@ -683,7 +684,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse powerCycleDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		PowerCycleDropletRequest powerCycleDropletRequest) 
@@ -709,7 +710,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse shutdownDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		ShutdownDropletRequest shutdownDropletRequest) 
@@ -735,7 +736,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse powerOffDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		PowerOffDropletRequest powerOffDropletRequest) 
@@ -761,7 +762,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse powerOnDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		PowerOnDropletRequest powerOnDropletRequest) 
@@ -787,7 +788,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse restoreDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		RestoreDropletRequest restoreDropletRequest) 
@@ -813,7 +814,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse resetDropletPassword(
     		@RestUriParam("droplet") Integer dropletId, 
     		ResetDropletPasswordRequest resetDropletPasswordRequest) 
@@ -839,7 +840,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse resizeDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		ResizeDropletRequest resizeDropletRequest) 
@@ -865,7 +866,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse rebuildDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		RebuildDropletRequest rebuildDropletRequest) 
@@ -891,7 +892,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse renameDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		RenameDropletRequest renameDropletRequest) 
@@ -917,7 +918,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse changeDropletKernel(
     		@RestUriParam("droplet") Integer dropletId, 
     		ChangeDropletKernelRequest changeDropletKernelRequest) 
@@ -943,7 +944,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse enableDropletIpv6(
     		@RestUriParam("droplet") Integer dropletId, 
     		EnableDropletIpv6Request enableDropletIpv6Request) 
@@ -969,7 +970,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse enableDropletPrivateNetworking(
     		@RestUriParam("droplet") Integer dropletId, 
     		EnableDropletPrivateNetworkingRequest enableDropletPrivateNetworkingRequest) 
@@ -995,7 +996,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse snapshotDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		SnapshotDropletRequest snapshotDropletRequest) 
@@ -1021,7 +1022,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse upgradeDroplet(
     		@RestUriParam("droplet") Integer dropletId, 
     		UpgradeDropletRequest upgradeDropletRequest) 
@@ -1047,7 +1048,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/droplets/{droplet}/actions/{action}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse retrieveExistingDropletAction(
     		@RestUriParam("droplet") Integer dropletId, 
     		@RestUriParam("action") Integer actionId) 
@@ -1081,7 +1082,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images?type=all&private=false&page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ImageCollectionResponse listAllImages(
     		@RestQueryParam("type") @Default("all") ImageType imageType, 
     		@RestQueryParam("private") @Default("false") Boolean privateUserImagesOnly,
@@ -1108,7 +1109,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ImageResponse retrieveExistingImage(
     		@RestUriParam("image") String imageIdOrSlug) 
     				throws IOException;  
@@ -1135,7 +1136,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}/actions?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionCollectionResponse listAllActionsForImage(
     		@RestUriParam("image") Integer imageId,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
@@ -1162,7 +1163,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}", 
     		method = HttpMethod.PUT, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ImageResponse updateExistingImage(
     		@RestUriParam("image") Integer imageId, 
     		UpdateImageRequest updateImage) 
@@ -1183,7 +1184,7 @@ public abstract class DigitalOceanConnector {
     @RestCall(
     		uri = "https://api.digitalocean.com/v2/images/{image}", 
     		method = HttpMethod.DELETE,
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract void deleteExistingImage(
     		@RestUriParam("image") Integer imageId) 
     				throws IOException;  
@@ -1209,7 +1210,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse transferImage(
     		@RestUriParam("image") Integer imageId, 
     		TransferImageRequest transferImageRequest) 
@@ -1235,7 +1236,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}/actions", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse convertImageToSnapshop(
     		@RestUriParam("image") Integer imageId, 
     		ConvertImageToSnapshotRequest convertImageToSnapshotRequest) 
@@ -1261,7 +1262,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/images/{image}/actions/{action}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract ActionResponse retrieveExistingImageAction(
     		@RestUriParam("image") Integer imageId, 
     		@RestUriParam("action") Integer actionId) 
@@ -1288,7 +1289,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/account/keys?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract KeyCollectionResponse listAllKeys(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
@@ -1312,7 +1313,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/account/keys/{key}", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract KeyResponse retrieveExistingKey(
     		@RestUriParam("key") String keyIdOrFingerprint) 
     				throws IOException;  
@@ -1335,7 +1336,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/account/keys", 
     		method = HttpMethod.POST, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract KeyResponse createNewKey(
     		CreateKeyRequest createKey) 
     				throws IOException;  
@@ -1360,7 +1361,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/account/keys/{key}", 
     		method = HttpMethod.PUT, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract KeyResponse updateExistingKey(
     		@RestUriParam("key") String keyIdOrFingerprint, 
     		UpdateKeyRequest updateKey) 
@@ -1381,7 +1382,7 @@ public abstract class DigitalOceanConnector {
     @RestCall(
     		uri = "https://api.digitalocean.com/v2/account/keys/{key}", 
     		method = HttpMethod.DELETE,
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract void deleteExistingKey(
     		@RestUriParam("key") String keyIdOrFingerprint) 
     				throws IOException;  
@@ -1407,7 +1408,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/regions?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract RegionCollectionResponse listAllRegions(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
@@ -1434,7 +1435,7 @@ public abstract class DigitalOceanConnector {
     		uri = "https://api.digitalocean.com/v2/sizes?page=1&per_page=20", 
     		method = HttpMethod.GET, 
     		contentType = "application/json",
-    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]")})
+    	    exceptions = {@RestExceptionOn(expression = "#[!message.inboundProperties['http.status'].startsWith('2')]", exception = DigitalOceanException.class)})
     public abstract SizeCollectionResponse listAllSizes(
     		@Placement(group = "Paging", order = 1) @RestQueryParam("page") @Default("1") Integer page,
     		@Placement(group = "Paging", order = 1) @RestQueryParam("per_page") @Default("20") Integer perPage) 
