@@ -25,7 +25,7 @@
     <digitalocean:list-all-domain-records domainName="digitaloceanisthebombdiggity.com" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:list-all-domain-records) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-domain-record) -->
-    <digitalocean:retrieve-existing-domain-record domainName="digitaloceanisthebombdiggity.com" recordId="3352896" config-ref="DigitalOcean"/>
+    <digitalocean:retrieve-existing-domain-record domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:retrieve-existing-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:create-new-domain-record) -->
     <digitalocean:create-new-domain-record config-ref="DigitalOcean"domainName="digitaloceanisthebombdiggity.com">
@@ -33,12 +33,12 @@
     </digitalocean:create-new-domain-record>
 <!-- END_INCLUDE(digitalocean:create-new-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:update-existing-domain-record) -->
-    <digitalocean:update-existing-domain-record config-ref="DigitalOcean" domainName="digitaloceanisthebombdiggity.com" recordId="3352896">
+    <digitalocean:update-existing-domain-record config-ref="DigitalOcean" domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896">
         <digitalocean:update-domain-record type="CNAME" name="updated.customdomainrecord.com" data="162.10.66.1"/>
     </digitalocean:update-existing-domain-record>
 <!-- END_INCLUDE(digitalocean:update-existing-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-domain-record) -->
-    <digitalocean:delete-existing-domain-record domainName="digitaloceanisthebombdiggity.com" recordId="3352896" config-ref="DigitalOcean"/>
+    <digitalocean:delete-existing-domain-record domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:delete-existing-domain-record) -->
 <!-- BEGIN_INCLUDE(digitalocean:list-all-droplets) -->
     <digitalocean:list-all-droplets config-ref="DigitalOcean"/>
@@ -75,86 +75,86 @@
 <!-- BEGIN_INCLUDE(digitalocean:list-droplet-upgrades) -->
     <digitalocean:list-droplet-upgrades config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:list-droplet-upgrades) -->
-<!-- BEGIN_INCLUDE(digitalocean:disable-droplet-backups-action) -->
-    <digitalocean:disable-droplet-backups-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:disable-droplet-backups type="disable_backups"/>
-    </digitalocean:disable-droplet-backups-action>
-<!-- END_INCLUDE(digitalocean:disable-droplet-backups-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:reboot-droplet-action) -->
-    <digitalocean:reboot-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:reboot-droplet type="reboot"/>
-    </digitalocean:reboot-droplet-action>
-<!-- END_INCLUDE(digitalocean:reboot-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:power-cycle-droplet-action) -->
-    <digitalocean:power-cycle-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:power-cycle-droplet type="power_cycle"/>
-    </digitalocean:power-cycle-droplet-action>
-<!-- END_INCLUDE(digitalocean:power-cycle-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:shutdown-droplet-action) -->
-    <digitalocean:shutdown-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:shutdown-droplet type="shutdown"/>
-    </digitalocean:shutdown-droplet-action>
-<!-- END_INCLUDE(digitalocean:shutdown-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:power-off-droplet-action) -->
-    <digitalocean:power-off-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:power-off-droplet type="power_off"/>
-    </digitalocean:power-off-droplet-action>
-<!-- END_INCLUDE(digitalocean:power-off-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:power-on-droplet-action) -->
-    <digitalocean:power-on-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:power-on-droplet type="power_on"/>
-    </digitalocean:power-on-droplet-action>
-<!-- END_INCLUDE(digitalocean:power-on-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:restore-droplet-action) -->
-    <digitalocean:restore-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:restore-droplet type="restore" image="12389723"/>
-    </digitalocean:restore-droplet-action>
-<!-- END_INCLUDE(digitalocean:restore-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:reset-droplet-password-action) -->
-    <digitalocean:reset-droplet-password-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:reset-droplet-password type="password_reset"/>
-    </digitalocean:reset-droplet-password-action>
-<!-- END_INCLUDE(digitalocean:reset-droplet-password-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:resize-droplet-action) -->
-    <digitalocean:resize-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:resize-droplet type="resize" size="1gb" disk="true"/>
-    </digitalocean:resize-droplet-action>
-<!-- END_INCLUDE(digitalocean:resize-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:rebuild-droplet-action) -->
-    <digitalocean:rebuild-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:rebuild-droplet type="rebuild" image="ubuntu-14-04-x64"/>
-    </digitalocean:rebuild-droplet-action>
-<!-- END_INCLUDE(digitalocean:rebuild-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:rename-droplet-action) -->
-    <digitalocean:rename-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:rename-droplet type="rename" name="nifty-new-name"/>
-    </digitalocean:rename-droplet-action>
-<!-- END_INCLUDE(digitalocean:rename-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:change-droplet-kernel-action) -->
-    <digitalocean:change-droplet-kernel-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:change-droplet-kernel type="change_kernel" kernel="991"/>
-    </digitalocean:change-droplet-kernel-action>
-<!-- END_INCLUDE(digitalocean:change-droplet-kernel-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-ipv6-action) -->
-    <digitalocean:enable-droplet-ipv6-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:enable-droplet-ipv6 type="enable_ipv6"/>
-    </digitalocean:enable-droplet-ipv6-action>
-<!-- END_INCLUDE(digitalocean:enable-droplet-ipv6-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-private-networking-action) -->
-    <digitalocean:enable-droplet-private-networking-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:enable-droplet-private-networking type="enable_private_networking"/>
-    </digitalocean:enable-droplet-private-networking-action>
-<!-- END_INCLUDE(digitalocean:enable-droplet-private-networking-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:snapshot-droplet-action) -->
-    <digitalocean:snapshot-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:snapshot-droplet type="snapshot"/>
-    </digitalocean:snapshot-droplet-action>
-<!-- END_INCLUDE(digitalocean:snapshot-droplet-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:upgrade-droplet-action) -->
-    <digitalocean:upgrade-droplet-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:upgrade-droplet type="upgrade"/>
-    </digitalocean:upgrade-droplet-actionn>
-<!-- END_INCLUDE(digitalocean:upgrade-droplet-action) -->
+<!-- BEGIN_INCLUDE(digitalocean:disable-droplet-backups) -->
+    <digitalocean:disable-droplet-backups config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:disable-droplet-backups-request type="disable_backups"/>
+    </digitalocean:disable-droplet-backups>
+<!-- END_INCLUDE(digitalocean:disable-droplet-backups) -->
+<!-- BEGIN_INCLUDE(digitalocean:reboot-droplet) -->
+    <digitalocean:reboot-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:reboot-droplet-request type="reboot"/>
+    </digitalocean:reboot-droplet>
+<!-- END_INCLUDE(digitalocean:reboot-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-cycle-droplet) -->
+    <digitalocean:power-cycle-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-cycle-droplet-request type="power_cycle"/>
+    </digitalocean:power-cycle-droplet>
+<!-- END_INCLUDE(digitalocean:power-cycle-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:shutdown-droplet) -->
+    <digitalocean:shutdown-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:shutdown-droplet-request type="shutdown"/>
+    </digitalocean:shutdown-droplettion>
+<!-- END_INCLUDE(digitalocean:shutdown-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-off-droplet) -->
+    <digitalocean:power-off-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-off-droplet-request type="power_off"/>
+    </digitalocean:power-off-droplet>
+<!-- END_INCLUDE(digitalocean:power-off-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-on-droplet) -->
+    <digitalocean:power-on-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-on-droplet-request type="power_on"/>
+    </digitalocean:power-on-droplet>
+<!-- END_INCLUDE(digitalocean:power-on-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:restore-droplet) -->
+    <digitalocean:restore-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:restore-droplet-request type="restore" image="12389723"/>
+    </digitalocean:restore-droplet>
+<!-- END_INCLUDE(digitalocean:restore-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:reset-droplet-password) -->
+    <digitalocean:reset-droplet-password config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:reset-droplet-password-request type="password_reset"/>
+    </digitalocean:reset-droplet-password>
+<!-- END_INCLUDE(digitalocean:reset-droplet-password) -->
+<!-- BEGIN_INCLUDE(digitalocean:resize-droplet) -->
+    <digitalocean:resize-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:resize-droplet-request type="resize" size="1gb" disk="true"/>
+    </digitalocean:resize-droplet>
+<!-- END_INCLUDE(digitalocean:resize-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:rebuild-droplet) -->
+    <digitalocean:rebuild-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:rebuild-droplet-request type="rebuild" image="ubuntu-14-04-x64"/>
+    </digitalocean:rebuild-droplet>
+<!-- END_INCLUDE(digitalocean:rebuild-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:rename-droplet) -->
+    <digitalocean:rename-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:rename-droplet-request type="rename" name="nifty-new-name"/>
+    </digitalocean:rename-droplet>
+<!-- END_INCLUDE(digitalocean:rename-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:change-droplet-kernel) -->
+    <digitalocean:change-droplet-kernel config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:change-droplet-kernel-request type="change_kernel" kernel="991"/>
+    </digitalocean:change-droplet-kernel>
+<!-- END_INCLUDE(digitalocean:change-droplet-kernel) -->
+<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-ipv6) -->
+    <digitalocean:enable-droplet-ipv6 config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:enable-droplet-ipv6-request type="enable_ipv6"/>
+    </digitalocean:enable-droplet-ipv6>
+<!-- END_INCLUDE(digitalocean:enable-droplet-ipv6) -->
+<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-private-networking) -->
+    <digitalocean:enable-droplet-private-networking config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:enable-droplet-private-networking-request type="enable_private_networking"/>
+    </digitalocean:enable-droplet-private-networking>
+<!-- END_INCLUDE(digitalocean:enable-droplet-private-networking) -->
+<!-- BEGIN_INCLUDE(digitalocean:snapshot-droplet) -->
+    <digitalocean:snapshot-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:snapshot-droplet-request type="snapshot"/>
+    </digitalocean:snapshot-droplet>
+<!-- END_INCLUDE(digitalocean:snapshot-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:upgrade-droplet) -->
+    <digitalocean:upgrade-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:upgrade-droplet-request type="upgrade"/>
+    </digitalocean:upgrade-droplet>
+<!-- END_INCLUDE(digitalocean:upgrade-droplet) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-droplet-action) -->
     <digitalocean:retrieve-existing-droplet-action dropletId="3164450" actionId="36804807" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:retrieve-existing-droplet-action) -->
@@ -175,16 +175,16 @@
 <!-- BEGIN_INCLUDE(digitalocean:delete-existing-image) -->
     <digitalocean:delete-existing-image imageId="7555620" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:delete-existing-image) -->
-<!-- BEGIN_INCLUDE(digitalocean:transfer-image-action) -->
-    <digitalocean:transfer-image-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:transfer-image type="transfer" region="nyc2"/>
-    </digitalocean:transfer-image-action>
-<!-- END_INCLUDE(digitalocean:transfer-image-action) -->
-<!-- BEGIN_INCLUDE(digitalocean:convert-image-to-snapshot-action) -->
-    <digitalocean:convert-image-to-snapshot-action config-ref="DigitalOcean" dropletId="3164450">
-        <digitalocean:convert-image-to-snapshot type="convert"/>
-    </digitalocean:convert-image-to-snapshot-action>
-<!-- END_INCLUDE(digitalocean:convert-image-to-snapshot-action) -->
+<!-- BEGIN_INCLUDE(digitalocean:transfer-image) -->
+    <digitalocean:transfer-image config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:transfer-image-request type="transfer" region="nyc2"/>
+    </digitalocean:transfer-image>
+<!-- END_INCLUDE(digitalocean:transfer-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:convert-image-to-snapshot) -->
+    <digitalocean:convert-image-to-snapshot config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:convert-image-to-snapshot-request type="convert"/>
+    </digitalocean:convert-image-to-snapshot>
+<!-- END_INCLUDE(digitalocean:convert-image-to-snapshot) -->
 <!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-image-action) -->
     <digitalocean:retrieve-existing-image-action imageId="7938269" actionId="36805527" config-ref="DigitalOcean"/>
 <!-- END_INCLUDE(digitalocean:retrieve-existing-image-action) -->

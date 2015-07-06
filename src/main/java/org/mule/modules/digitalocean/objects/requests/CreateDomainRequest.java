@@ -2,6 +2,8 @@ package org.mule.modules.digitalocean.objects.requests;
 
 import java.io.Serializable;
 
+import org.mule.api.annotations.display.FriendlyName;
+
 import com.google.gson.annotations.SerializedName;
 
 public class CreateDomainRequest implements Serializable {
@@ -10,6 +12,7 @@ public class CreateDomainRequest implements Serializable {
 	private String name;
 	
 	@SerializedName("ip_address")
+	@FriendlyName("IP Address")
 	private String ipAddress;
 
 	/**

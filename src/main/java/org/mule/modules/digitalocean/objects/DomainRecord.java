@@ -2,6 +2,8 @@ package org.mule.modules.digitalocean.objects;
 
 import java.io.Serializable;
 
+import org.mule.modules.digitalocean.common.DomainRecordType;
+
 public class DomainRecord implements Serializable {
 	private static final long serialVersionUID = -1L;
 
@@ -12,7 +14,7 @@ public class DomainRecord implements Serializable {
     
     private Integer id;
     
-	private String type;
+	private DomainRecordType type;
 	
 	private String name;
 	
@@ -41,14 +43,14 @@ public class DomainRecord implements Serializable {
 	/**
 	 * @return the type
 	 */
-	public String getType() {
+	public DomainRecordType getType() {
 		return type;
 	}
 
 	/**
 	 * @param type the type to set
 	 */
-	public void setType(String type) {
+	public void setType(DomainRecordType type) {
 		this.type = type;
 	}
 
