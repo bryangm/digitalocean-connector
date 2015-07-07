@@ -1,171 +1,290 @@
-<!-- BEGIN_INCLUDE(digitalocean:getUserInformation) -->
-    <digitalocean:getUserInformation/>
-<!-- END_INCLUDE(digitalocean:getUserInformation) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllActions) -->
-    <digitalocean:listAllActions/>
-<!-- END_INCLUDE(digitalocean:listAllActions) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingAction) -->
-    <digitalocean:retrieveExistingAction actionId="36804636"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingAction) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllDomains) -->
-    <digitalocean:listAllDomains/>
-<!-- END_INCLUDE(digitalocean:listAllDomains) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDomain) -->
-    <digitalocean:retrieveExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingDomain) -->
-<!-- BEGIN_INCLUDE(digitalocean:createNewDomain) -->
-    <digitalocean:createNewDomain message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:createNewDomain) -->
-<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomain) -->
-    <digitalocean:deleteExistingDomain domainName="digitaloceanisthebombdiggity.com"/>
-<!-- END_INCLUDE(digitalocean:deleteExistingDomain) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllDomainRecords) -->
-    <digitalocean:listAllDomainRecords domainName="digitaloceanisthebombdiggity.com"/>
-<!-- END_INCLUDE(digitalocean:listAllDomainRecords) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDomainRecord) -->
-    <digitalocean:retrieveExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingDomainRecord) -->
-<!-- BEGIN_INCLUDE(digitalocean:createNewDomainRecord) -->
-    <digitalocean:createNewDomainRecord domainName="digitaloceanisthebombdiggity.com" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:createNewDomainRecord) -->
-<!-- BEGIN_INCLUDE(digitalocean:updateExistingDomainRecord) -->
-    <digitalocean:updateExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:updateExistingDomainRecord) -->
-<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDomainRecord) -->
-    <digitalocean:deleteExistingDomainRecord domainName="digitaloceanisthebombdiggity.com" recordId="3352896"/>
-<!-- END_INCLUDE(digitalocean:deleteExistingDomainRecord) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllDroplets) -->
-    <digitalocean:listAllDroplets/>
-<!-- END_INCLUDE(digitalocean:listAllDroplets) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDroplet) -->
-    <digitalocean:retrieveExistingDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllAvailableKernelsForDroplet) -->
-    <digitalocean:listAllAvailableKernelsForDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:listAllAvailableKernelsForDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllSnapshotsForDroplet) -->
-    <digitalocean:listAllSnapshotsForDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:listAllSnapshotsForDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllBackupsForDroplet) -->
-    <digitalocean:listAllBackupsForDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:listAllBackupsForDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllActionsForDroplet) -->
-    <digitalocean:listAllActionsForDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:listAllActionsForDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllNeighborsForDroplet) -->
-    <digitalocean:listAllNeighborsForDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:listAllNeighborsForDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:createNewDroplet) -->
-    <digitalocean:createNewDroplet message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:createNewDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:deleteExistingDroplet) -->
-    <digitalocean:deleteExistingDroplet dropletId="3164494"/>
-<!-- END_INCLUDE(digitalocean:deleteExistingDroplet) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllDropletNeighbors) -->
-    <digitalocean:listAllDropletNeighbors/>
-<!-- END_INCLUDE(digitalocean:listAllDropletNeighbors) -->
-<!-- BEGIN_INCLUDE(digitalocean:listDropletUpgrades) -->
-    <digitalocean:listDropletUpgrades/>
-<!-- END_INCLUDE(digitalocean:listDropletUpgrades) -->
-<!-- BEGIN_INCLUDE(digitalocean:executeDropletAction) -->
-    <digitalocean:executeDropletAction dropletId="3164450" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:executeDropletAction) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingDropletAction) -->
-    <digitalocean:retrieveExistingDropletAction dropletId="3164450" actionId="36804807"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingDropletAction) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllImages) -->
-    <digitalocean:listAllImages/>
-<!-- END_INCLUDE(digitalocean:listAllImages) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingImage) -->
-    <digitalocean:retrieveExistingImage imageId="7555620"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingImage) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllActionsForImage) -->
-    <digitalocean:listAllActionsForImage imageId="7555620"/>
-<!-- END_INCLUDE(digitalocean:listAllActionsForImage) -->
-<!-- BEGIN_INCLUDE(digitalocean:updateExistingImage) -->
-    <digitalocean:updateExistingImage imageId="7555620" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:updateExistingImage) -->
-<!-- BEGIN_INCLUDE(digitalocean:deleteExistingImage) -->
-    <digitalocean:deleteExistingImage imageId="7555620"/>
-<!-- END_INCLUDE(digitalocean:deleteExistingImage) -->
-<!-- BEGIN_INCLUDE(digitalocean:executeImageAction) -->
-    <digitalocean:executeImageAction imageId="7938291" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:executeImageAction) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingImageAction) -->
-    <digitalocean:retrieveExistingImageAction imageId="7938269" actionId="36805527"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingImageAction) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllKeys) -->
-    <digitalocean:listAllKeys/>
-<!-- END_INCLUDE(digitalocean:listAllKeys) -->
-<!-- BEGIN_INCLUDE(digitalocean:retrieveExistingKey) -->
-    <digitalocean:retrieveExistingKey keyId="512190"/>
-<!-- END_INCLUDE(digitalocean:retrieveExistingKey) -->
-<!-- BEGIN_INCLUDE(digitalocean:createNewKey) -->
-    <digitalocean:createNewKey message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:createNewKey) -->
-<!-- BEGIN_INCLUDE(digitalocean:updateExistingKey) -->
-    <digitalocean:updateExistingKey keyId="512190" message="#[payload]"/>
-<!-- END_INCLUDE(digitalocean:updateExistingKey) -->
-<!-- BEGIN_INCLUDE(digitalocean:deleteExistingKey) -->
-    <digitalocean:deleteExistingKey keyId="512190"/>
-<!-- END_INCLUDE(digitalocean:deleteExistingKey) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllRegions) -->
-    <digitalocean:listAllRegions/>
-<!-- END_INCLUDE(digitalocean:listAllRegions) -->
-<!-- BEGIN_INCLUDE(digitalocean:listAllSizes) -->
-    <digitalocean:listAllSizes/>
-<!-- END_INCLUDE(digitalocean:listAllSizes) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToAccountResponse) -->
-    <digitalocean:stringToAccountResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToAccountResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToActionCollectionResponse) -->
-    <digitalocean:stringToActionCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToActionCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToActionResponse) -->
-    <digitalocean:stringToActionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToActionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDomainCollectionResponse) -->
-    <digitalocean:stringToDomainCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDomainCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDomainResponse) -->
-    <digitalocean:stringToDomainResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDomainResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDomainRecordCollectionResponse) -->
-    <digitalocean:stringToDomainRecordCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDomainRecordCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDomainRecordResponse) -->
-    <digitalocean:stringToDomainRecordResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDomainRecordResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDropletCollectionResponse) -->
-    <digitalocean:stringToDropletCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDropletCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToDropletResponse) -->
-    <digitalocean:stringToDropletResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToDropletResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToKernelCollectionResponse) -->
-    <digitalocean:stringToKernelCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToKernelCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToNeighborsCollectionResponse) -->
-    <digitalocean:stringToNeighborsCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToNeighborsCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToUpgradeCollectionResponse) -->
-    <digitalocean:stringToUpgradeCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToUpgradeCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToImageCollectionResponse) -->
-    <digitalocean:stringToImageCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToImageCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToImageResponse) -->
-    <digitalocean:stringToImageResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToImageResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToKeyCollectionResponse) -->
-    <digitalocean:stringToKeyCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToKeyCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToKeyResponse) -->
-    <digitalocean:stringToKeyResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToKeyResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToRegionCollectionResponse) -->
-    <digitalocean:stringToRegionCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToRegionCollectionResponse) -->
-<!-- BEGIN_INCLUDE(digitalocean:stringToSizeCollectionResponse) -->
-    <digitalocean:stringToSizeCollectionResponse json="{sample:'object'}"/>
-<!-- END_INCLUDE(digitalocean:stringToSizeCollectionResponse) -->
+<!-- BEGIN_INCLUDE(digitalocean:get-user-information) -->
+    <digitalocean:get-user-information config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:get-user-information) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-actions) -->
+    <digitalocean:list-all-actions config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-actions) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-action) -->
+    <digitalocean:retrieve-existing-action actionId="36804636" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-action) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-domains) -->
+    <digitalocean:list-all-domains config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-domains) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-domain) -->
+    <digitalocean:retrieve-existing-domain domainName="digitaloceanisthebombdiggity.com" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-domain) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-new-domain) -->
+    <digitalocean:create-new-domain config-ref="DigitalOcean">
+        <digitalocean:create-domain name="digitaloceanisthebombdiggity.com" ipAddress="1.2.3.4"/>
+    </digitalocean:create-new-domain>
+<!-- END_INCLUDE(digitalocean:create-new-domain) -->
+<!-- BEGIN_INCLUDE(digitalocean:delete-existing-domain) -->
+    <digitalocean:delete-existing-domain domainName="digitaloceanisthebombdiggity.com" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:delete-existing-domain) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-domain-records) -->
+    <digitalocean:list-all-domain-records domainName="digitaloceanisthebombdiggity.com" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-domain-records) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-domain-record) -->
+    <digitalocean:retrieve-existing-domain-record domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-domain-record) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-new-domain-record) -->
+    <digitalocean:create-new-domain-record config-ref="DigitalOcean"domainName="digitaloceanisthebombdiggity.com">
+        <digitalocean:create-domain-record type="CNAME" name="customdomainrecord.com" data="162.10.66.0"/>
+    </digitalocean:create-new-domain-record>
+<!-- END_INCLUDE(digitalocean:create-new-domain-record) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-existing-domain-record) -->
+    <digitalocean:update-existing-domain-record config-ref="DigitalOcean" domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896">
+        <digitalocean:update-domain-record type="CNAME" name="updated.customdomainrecord.com" data="162.10.66.1"/>
+    </digitalocean:update-existing-domain-record>
+<!-- END_INCLUDE(digitalocean:update-existing-domain-record) -->
+<!-- BEGIN_INCLUDE(digitalocean:delete-existing-domain-record) -->
+    <digitalocean:delete-existing-domain-record domainName="digitaloceanisthebombdiggity.com" domainRecordId="3352896" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:delete-existing-domain-record) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-droplets) -->
+    <digitalocean:list-all-droplets config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-droplets) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-droplet) -->
+    <digitalocean:retrieve-existing-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-available-kernels-for-droplet) -->
+    <digitalocean:list-all-available-kernels-for-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-available-kernels-for-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-snapshots-for-droplet) -->
+    <digitalocean:list-all-snapshots-for-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-snapshots-for-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-backups-for-droplet) -->
+    <digitalocean:list-all-backups-for-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-backups-for-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-actions-for-droplet) -->
+    <digitalocean:list-all-actions-for-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-actions-for-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-neighbors-for-droplet) -->
+    <digitalocean:list-all-neighbors-for-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-neighbors-for-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-new-droplet) -->
+    <digitalocean:create-new-droplet config-ref="DigitalOcean">
+        <digitalocean:create-droplet name="example.com" region="nyc3" size="512mb" image="ubuntu-14-04-x64" ipv6="true"/>
+    </digitalocean:create-new-droplet>
+<!-- END_INCLUDE(digitalocean:create-new-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:delete-existing-droplet) -->
+    <digitalocean:delete-existing-droplet dropletId="3164494" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:delete-existing-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-droplet-neighbors) -->
+    <digitalocean:list-all-droplet-neighbors config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-droplet-neighbors) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-droplet-upgrades) -->
+    <digitalocean:list-droplet-upgrades config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-droplet-upgrades) -->
+<!-- BEGIN_INCLUDE(digitalocean:disable-droplet-backups) -->
+    <digitalocean:disable-droplet-backups config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:disable-droplet-backups-request type="disable_backups"/>
+    </digitalocean:disable-droplet-backups>
+<!-- END_INCLUDE(digitalocean:disable-droplet-backups) -->
+<!-- BEGIN_INCLUDE(digitalocean:reboot-droplet) -->
+    <digitalocean:reboot-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:reboot-droplet-request type="reboot"/>
+    </digitalocean:reboot-droplet>
+<!-- END_INCLUDE(digitalocean:reboot-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-cycle-droplet) -->
+    <digitalocean:power-cycle-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-cycle-droplet-request type="power_cycle"/>
+    </digitalocean:power-cycle-droplet>
+<!-- END_INCLUDE(digitalocean:power-cycle-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:shutdown-droplet) -->
+    <digitalocean:shutdown-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:shutdown-droplet-request type="shutdown"/>
+    </digitalocean:shutdown-droplettion>
+<!-- END_INCLUDE(digitalocean:shutdown-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-off-droplet) -->
+    <digitalocean:power-off-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-off-droplet-request type="power_off"/>
+    </digitalocean:power-off-droplet>
+<!-- END_INCLUDE(digitalocean:power-off-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:power-on-droplet) -->
+    <digitalocean:power-on-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:power-on-droplet-request type="power_on"/>
+    </digitalocean:power-on-droplet>
+<!-- END_INCLUDE(digitalocean:power-on-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:restore-droplet) -->
+    <digitalocean:restore-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:restore-droplet-request type="restore" image="12389723"/>
+    </digitalocean:restore-droplet>
+<!-- END_INCLUDE(digitalocean:restore-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:reset-droplet-password) -->
+    <digitalocean:reset-droplet-password config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:reset-droplet-password-request type="password_reset"/>
+    </digitalocean:reset-droplet-password>
+<!-- END_INCLUDE(digitalocean:reset-droplet-password) -->
+<!-- BEGIN_INCLUDE(digitalocean:resize-droplet) -->
+    <digitalocean:resize-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:resize-droplet-request type="resize" size="1gb" disk="true"/>
+    </digitalocean:resize-droplet>
+<!-- END_INCLUDE(digitalocean:resize-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:rebuild-droplet) -->
+    <digitalocean:rebuild-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:rebuild-droplet-request type="rebuild" image="ubuntu-14-04-x64"/>
+    </digitalocean:rebuild-droplet>
+<!-- END_INCLUDE(digitalocean:rebuild-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:rename-droplet) -->
+    <digitalocean:rename-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:rename-droplet-request type="rename" name="nifty-new-name"/>
+    </digitalocean:rename-droplet>
+<!-- END_INCLUDE(digitalocean:rename-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:change-droplet-kernel) -->
+    <digitalocean:change-droplet-kernel config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:change-droplet-kernel-request type="change_kernel" kernel="991"/>
+    </digitalocean:change-droplet-kernel>
+<!-- END_INCLUDE(digitalocean:change-droplet-kernel) -->
+<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-ipv6) -->
+    <digitalocean:enable-droplet-ipv6 config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:enable-droplet-ipv6-request type="enable_ipv6"/>
+    </digitalocean:enable-droplet-ipv6>
+<!-- END_INCLUDE(digitalocean:enable-droplet-ipv6) -->
+<!-- BEGIN_INCLUDE(digitalocean:enable-droplet-private-networking) -->
+    <digitalocean:enable-droplet-private-networking config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:enable-droplet-private-networking-request type="enable_private_networking"/>
+    </digitalocean:enable-droplet-private-networking>
+<!-- END_INCLUDE(digitalocean:enable-droplet-private-networking) -->
+<!-- BEGIN_INCLUDE(digitalocean:snapshot-droplet) -->
+    <digitalocean:snapshot-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:snapshot-droplet-request type="snapshot"/>
+    </digitalocean:snapshot-droplet>
+<!-- END_INCLUDE(digitalocean:snapshot-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:upgrade-droplet) -->
+    <digitalocean:upgrade-droplet config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:upgrade-droplet-request type="upgrade"/>
+    </digitalocean:upgrade-droplet>
+<!-- END_INCLUDE(digitalocean:upgrade-droplet) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-droplet-action) -->
+    <digitalocean:retrieve-existing-droplet-action dropletId="3164450" actionId="36804807" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-droplet-action) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-images) -->
+    <digitalocean:list-all-images config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-images) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-image) -->
+    <digitalocean:retrieve-existing-image imageId="7555620" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-actions-for-image) -->
+    <digitalocean:list-all-actions-for-image imageId="7555620" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-actions-for-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-existing-image) -->
+    <digitalocean:update-existing-image config-ref="DigitalOcean" imageId="7938391">
+        <digitalocean:update-image name="new-image-name"/>
+    </digitalocean:update-existing-image>
+<!-- END_INCLUDE(digitalocean:update-existing-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:delete-existing-image) -->
+    <digitalocean:delete-existing-image imageId="7555620" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:delete-existing-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:transfer-image) -->
+    <digitalocean:transfer-image config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:transfer-image-request type="transfer" region="nyc2"/>
+    </digitalocean:transfer-image>
+<!-- END_INCLUDE(digitalocean:transfer-image) -->
+<!-- BEGIN_INCLUDE(digitalocean:convert-image-to-snapshot) -->
+    <digitalocean:convert-image-to-snapshot config-ref="DigitalOcean" dropletId="3164450">
+        <digitalocean:convert-image-to-snapshot-request type="convert"/>
+    </digitalocean:convert-image-to-snapshot>
+<!-- END_INCLUDE(digitalocean:convert-image-to-snapshot) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-image-action) -->
+    <digitalocean:retrieve-existing-image-action imageId="7938269" actionId="36805527" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-image-action) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-keys) -->
+    <digitalocean:list-all-keys config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-keys) -->
+<!-- BEGIN_INCLUDE(digitalocean:retrieve-existing-key) -->
+    <digitalocean:retrieve-existing-key keyId="512190" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:retrieve-existing-key) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-new-key) -->
+    <digitalocean:create-new-key config-ref="DigitalOcean">
+        <digitalocean:create-key name="My SSH Public Key" publicKey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example"/>
+    </digitalocean:create-new-key>
+<!-- END_INCLUDE(digitalocean:create-new-key) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-existing-key) -->
+    <digitalocean:update-existing-key config-ref="DigitalOcean" keyId="512190">
+        <digitalocean:update-key name="Renamed SSH Key"/>
+    </digitalocean:update-existing-key>
+<!-- END_INCLUDE(digitalocean:update-existing-key) -->
+<!-- BEGIN_INCLUDE(digitalocean:delete-existing-key) -->
+    <digitalocean:delete-existing-key keyId="512190" config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:delete-existing-key) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-regions) -->
+    <digitalocean:list-all-regions config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-regions) -->
+<!-- BEGIN_INCLUDE(digitalocean:list-all-sizes) -->
+    <digitalocean:list-all-sizes config-ref="DigitalOcean"/>
+<!-- END_INCLUDE(digitalocean:list-all-sizes) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-account-response) -->
+    <digitalocean:string-to-account-response/>
+<!-- END_INCLUDE(digitalocean:string-to-account-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-action-collection-response) -->
+    <digitalocean:string-to-action-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-action-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-action-response) -->
+    <digitalocean:string-to-action-response/>
+<!-- END_INCLUDE(digitalocean:string-to-action-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-domain-collection-response) -->
+    <digitalocean:string-to-domain-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-domain-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-domain-response) -->
+    <digitalocean:string-to-domain-response/>
+<!-- END_INCLUDE(digitalocean:string-to-domain-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-domain-record-collection-response) -->
+    <digitalocean:string-to-domain-record-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-domain-record-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-domain-record-response) -->
+    <digitalocean:string-to-domain-record-response/>
+<!-- END_INCLUDE(digitalocean:string-to-domain-record-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-droplet-collection-response) -->
+    <digitalocean:string-to-droplet-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-droplet-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-droplet-response) -->
+    <digitalocean:string-to-droplet-response/>
+<!-- END_INCLUDE(digitalocean:string-to-droplet-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-kernel-collection-response) -->
+    <digitalocean:string-to-kernel-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-kernel-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-neighbors-collection-response) -->
+    <digitalocean:string-to-neighbors-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-neighbors-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-upgrade-collection-response) -->
+    <digitalocean:string-to-upgrade-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-upgrade-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-image-collection-response) -->
+    <digitalocean:string-to-image-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-image-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-image-response) -->
+    <digitalocean:string-to-image-response/>
+<!-- END_INCLUDE(digitalocean:string-to-image-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-key-collection-response) -->
+    <digitalocean:string-to-key-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-key-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-key-response) -->
+    <digitalocean:string-to-key-response/>
+<!-- END_INCLUDE(digitalocean:string-to-key-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-region-collection-response) -->
+    <digitalocean:string-to-region-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-region-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:string-to-size-collection-response) -->
+    <digitalocean:string-to-size-collection-response/>
+<!-- END_INCLUDE(digitalocean:string-to-size-collection-response) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-domain-record-request-to-string) -->
+    <digitalocean:create-domain-record-request-to-string/>
+<!-- END_INCLUDE(digitalocean:create-domain-record-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-domain-request-to-string) -->
+    <digitalocean:create-domain-request-to-string/>
+<!-- END_INCLUDE(digitalocean:create-domain-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-droplet-request-to-string) -->
+    <digitalocean:create-droplet-request-to-string/>
+<!-- END_INCLUDE(digitalocean:create-droplet-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:create-key-request-to-string) -->
+    <digitalocean:create-key-request-to-string/>
+<!-- END_INCLUDE(digitalocean:create-key-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-domain-record-request-to-string) -->
+    <digitalocean:update-domain-record-request-to-string/>
+<!-- END_INCLUDE(digitalocean:update-domain-record-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-image-request-to-string) -->
+    <digitalocean:update-image-request-to-string/>
+<!-- END_INCLUDE(digitalocean:update-image-request-to-string) -->
+<!-- BEGIN_INCLUDE(digitalocean:update-key-request-to-string) -->
+    <digitalocean:update-key-request-to-string/>
+<!-- END_INCLUDE(digitalocean:update-key-request-to-string) -->

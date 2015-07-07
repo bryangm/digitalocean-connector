@@ -3,6 +3,8 @@ package org.mule.modules.digitalocean.objects.requests;
 import java.io.Serializable;
 import java.util.List;
 
+import org.mule.api.annotations.display.FriendlyName;
+
 import com.google.gson.annotations.SerializedName;
 
 public class CreateDropletRequest implements Serializable {
@@ -10,21 +12,29 @@ public class CreateDropletRequest implements Serializable {
 	
 	private String name;
 	
-	private String region;
+	@SerializedName("region")
+	private String regionSlug;
 	
-	private String size;
+	@SerializedName("size")
+	private String sizeSlug;
 	
-	private Integer image;
+	@SerializedName("image")
+	private Integer imageId;
 	
+	@FriendlyName("SSH Keys")
 	@SerializedName("ssh_keys")
 	private List<Integer> sshKeys;
 	
-	private boolean backups;
+	@SerializedName("backups")
+	private Boolean enableBackups;
 	
-	private boolean ipv6;
+	@FriendlyName("Enable IPv6")
+	@SerializedName("ipv6")
+	private Boolean enableIpv6;
 	
+	@FriendlyName("Enable Private Networking")
 	@SerializedName("private_networking")
-	private boolean privateNetworking;
+	private Boolean enablePrivateNetworking;
 	
 	@SerializedName("user_data")
 	private String userData;
@@ -44,45 +54,45 @@ public class CreateDropletRequest implements Serializable {
 	}
 
 	/**
-	 * @return the region
+	 * @return the regionSlug
 	 */
-	public String getRegion() {
-		return region;
+	public String getRegionSlug() {
+		return regionSlug;
 	}
 
 	/**
-	 * @param region the region to set
+	 * @param regionSlug the regionSlug to set
 	 */
-	public void setRegion(String region) {
-		this.region = region;
+	public void setRegionSlug(String regionSlug) {
+		this.regionSlug = regionSlug;
 	}
 
 	/**
-	 * @return the size
+	 * @return the sizeSlug
 	 */
-	public String getSize() {
-		return size;
+	public String getSizeSlug() {
+		return sizeSlug;
 	}
 
 	/**
-	 * @param size the size to set
+	 * @param sizeSlug the sizeSlug to set
 	 */
-	public void setSize(String size) {
-		this.size = size;
+	public void setSizeSlug(String sizeSlug) {
+		this.sizeSlug = sizeSlug;
 	}
 
 	/**
-	 * @return the image
+	 * @return the imageId
 	 */
-	public Integer getImage() {
-		return image;
+	public Integer getImageId() {
+		return imageId;
 	}
 
 	/**
-	 * @param image the image to set
+	 * @param imageId the imageId to set
 	 */
-	public void setImage(Integer image) {
-		this.image = image;
+	public void setImageId(Integer imageId) {
+		this.imageId = imageId;
 	}
 
 	/**
@@ -100,45 +110,45 @@ public class CreateDropletRequest implements Serializable {
 	}
 
 	/**
-	 * @return the backups
+	 * @return the enableBackups
 	 */
-	public boolean isBackups() {
-		return backups;
+	public Boolean isEnableBackups() {
+		return enableBackups;
 	}
 
 	/**
-	 * @param backups the backups to set
+	 * @param enableBackups the enableBackups to set
 	 */
-	public void setBackups(boolean backups) {
-		this.backups = backups;
+	public void setEnableBackups(Boolean enableBackups) {
+		this.enableBackups = enableBackups;
 	}
 
 	/**
-	 * @return the ipv6
+	 * @return the enableIpv6
 	 */
-	public boolean isIpv6() {
-		return ipv6;
+	public Boolean isEnableIpv6() {
+		return enableIpv6;
 	}
 
 	/**
-	 * @param ipv6 the ipv6 to set
+	 * @param enableIpv6 the enableIpv6 to set
 	 */
-	public void setIpv6(boolean ipv6) {
-		this.ipv6 = ipv6;
+	public void setEnableIpv6(Boolean enableIpv6) {
+		this.enableIpv6 = enableIpv6;
 	}
 
 	/**
-	 * @return the privateNetworking
+	 * @return the enablePrivateNetworking
 	 */
-	public boolean isPrivateNetworking() {
-		return privateNetworking;
+	public Boolean isEnablePrivateNetworking() {
+		return enablePrivateNetworking;
 	}
 
 	/**
-	 * @param privateNetworking the privateNetworking to set
+	 * @param enablePrivateNetworking the enablePrivateNetworking to set
 	 */
-	public void setPrivateNetworking(boolean privateNetworking) {
-		this.privateNetworking = privateNetworking;
+	public void setEnablePrivateNetworking(Boolean enablePrivateNetworking) {
+		this.enablePrivateNetworking = enablePrivateNetworking;
 	}
 
 	/**

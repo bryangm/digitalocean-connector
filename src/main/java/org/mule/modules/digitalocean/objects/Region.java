@@ -19,7 +19,7 @@ public class Region implements Serializable {
 	
 	private List<String> features;
 	
-	private boolean available;
+	private Boolean available;
 
 	/**
 	 * @return the name
@@ -80,14 +80,14 @@ public class Region implements Serializable {
 	/**
 	 * @return the available
 	 */
-	public boolean isAvailable() {
+	public Boolean isAvailable() {
 		return available;
 	}
 
 	/**
 	 * @param available the available to set
 	 */
-	public void setAvailable(boolean available) {
+	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
 }

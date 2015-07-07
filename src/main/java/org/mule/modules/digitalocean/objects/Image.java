@@ -23,7 +23,7 @@ public class Image implements Serializable {
 	private String slug;
 	
 	@SerializedName("public")
-	private boolean publicImage;
+	private Boolean publicImage;
 	
 	private List<String> regions;
 	
@@ -94,14 +94,14 @@ public class Image implements Serializable {
 	/**
 	 * @return the publicImage
 	 */
-	public boolean isPublicImage() {
+	public Boolean isPublicImage() {
 		return publicImage;
 	}
 
 	/**
 	 * @param publicImage the publicImage to set
 	 */
-	public void setPublicImage(boolean publicImage) {
+	public void setPublicImage(Boolean publicImage) {
 		this.publicImage = publicImage;
 	}
 

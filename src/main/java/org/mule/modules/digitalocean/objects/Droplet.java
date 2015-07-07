@@ -24,7 +24,7 @@ public class Droplet implements Serializable {
 	
 	private Integer disk;
 	
-	private boolean locked;
+	private Boolean locked;
 	
 	@SerializedName("created_at")
 	private Date createdAt;
@@ -126,14 +126,14 @@ public class Droplet implements Serializable {
 	/**
 	 * @return the locked
 	 */
-	public boolean isLocked() {
+	public Boolean isLocked() {
 		return locked;
 	}
 
 	/**
 	 * @param locked the locked to set
 	 */
-	public void setLocked(boolean locked) {
+	public void setLocked(Boolean locked) {
 		this.locked = locked;
 	}
 
