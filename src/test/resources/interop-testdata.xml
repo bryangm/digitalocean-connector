@@ -1,0 +1,1052 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<connector name="DigitalOcean">
+    <properties>
+        <connectivity-support>false</connectivity-support>
+        <OAuth-authentication>false</OAuth-authentication>
+        <metadata>static</metadata>
+        <datasense-enabled>true</datasense-enabled>
+        <transformer>true</transformer>
+    </properties>
+    <global-config credentialsFile="">
+        <config name="config">
+            <attributes>
+                <attribute name="name" use="required" caption="Name" group="Basic Settings" type="name" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="token" use="required" caption="Token" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </config>
+    </global-config>
+    <message-processors>
+        <processor name="getUserInformation" xmlName="get-user-information" caption="Get user information">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="listAllActions" xmlName="list-all-actions" caption="List all actions">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingAction" xmlName="retrieve-existing-action" caption="Retrieve existing action">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="actionId" use="required" caption="Action Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllDomains" xmlName="list-all-domains" caption="List all domains">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingDomain" xmlName="retrieve-existing-domain" caption="Retrieve existing domain">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createNewDomain" xmlName="create-new-domain" caption="Create new domain">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <childElements>
+                <childElement name="create-domain" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ipAddress" use="optional" caption="IP Address" type="string" javaType="java.lang.String" base="create-domain" category="General"></attribute>
+<attribute name="ref" use="optional" caption="Create Domain Reference" type="string" javaType="java.lang.String" base="create-domain" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Create Domain Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="deleteExistingDomain" xmlName="delete-existing-domain" caption="Delete existing domain">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllDomainRecords" xmlName="list-all-domain-records" caption="List all domain records">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingDomainRecord" xmlName="retrieve-existing-domain-record" caption="Retrieve existing domain record">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="domainRecordId" use="required" caption="Domain Record Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createNewDomainRecord" xmlName="create-new-domain-record" caption="Create new domain record">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="create-domain-record" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.DomainRecordType" base="create-domain-record" category="General"></attribute>
+<attribute name="data" use="optional" caption="Data" type="string" javaType="java.lang.String" base="create-domain-record" category="General"></attribute>
+<attribute name="priority" use="optional" caption="Priority" type="integer" javaType="java.lang.Integer" base="create-domain-record" category="General"></attribute>
+<attribute name="port" use="optional" caption="Port" type="integer" javaType="java.lang.Integer" base="create-domain-record" category="General"></attribute>
+<attribute name="weight" use="optional" caption="Weight" type="integer" javaType="java.lang.Integer" base="create-domain-record" category="General"></attribute>
+<attribute name="ref" use="optional" caption="Create Domain Record Reference" type="string" javaType="java.lang.String" base="create-domain-record" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Create Domain Record Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="updateExistingDomainRecord" xmlName="update-existing-domain-record" caption="Update existing domain record">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="domainRecordId" use="required" caption="Domain Record Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="update-domain-record" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.DomainRecordType" base="update-domain-record" category="General"></attribute>
+<attribute name="data" use="optional" caption="Data" type="string" javaType="java.lang.String" base="update-domain-record" category="General"></attribute>
+<attribute name="priority" use="optional" caption="Priority" type="integer" javaType="java.lang.Integer" base="update-domain-record" category="General"></attribute>
+<attribute name="port" use="optional" caption="Port" type="integer" javaType="java.lang.Integer" base="update-domain-record" category="General"></attribute>
+<attribute name="weight" use="optional" caption="Weight" type="integer" javaType="java.lang.Integer" base="update-domain-record" category="General"></attribute>
+<attribute name="ref" use="optional" caption="Update Domain Record Reference" type="string" javaType="java.lang.String" base="update-domain-record" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Update Domain Record Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="deleteExistingDomainRecord" xmlName="delete-existing-domain-record" caption="Delete existing domain record">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="domainName" use="required" caption="Domain Name" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+                <attribute name="domainRecordId" use="required" caption="Domain Record Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllDroplets" xmlName="list-all-droplets" caption="List all droplets">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingDroplet" xmlName="retrieve-existing-droplet" caption="Retrieve existing droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllAvailableKernelsForDroplet" xmlName="list-all-available-kernels-for-droplet" caption="List all available kernels for droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllSnapshotsForDroplet" xmlName="list-all-snapshots-for-droplet" caption="List all snapshots for droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllBackupsForDroplet" xmlName="list-all-backups-for-droplet" caption="List all backups for droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllActionsForDroplet" xmlName="list-all-actions-for-droplet" caption="List all actions for droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllNeighborsForDroplet" xmlName="list-all-neighbors-for-droplet" caption="List all neighbors for droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createNewDroplet" xmlName="create-new-droplet" caption="Create new droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <childElements>
+                <childElement name="create-droplet" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Create Droplet Reference" type="string" javaType="java.lang.String" base="create-droplet" category="General"></attribute>
+<attribute name="regionSlug" use="optional" caption="Region Slug" type="string" javaType="java.lang.String" base="create-droplet" category="General"></attribute>
+<attribute name="sizeSlug" use="optional" caption="Size Slug" type="string" javaType="java.lang.String" base="create-droplet" category="General"></attribute>
+<attribute name="imageId" use="optional" caption="Image Id" type="integer" javaType="java.lang.Integer" base="create-droplet" category="General"></attribute>
+<attribute name="enableBackups" use="optional" caption="Enable Backups" type="boolean" javaType="java.lang.Boolean" base="create-droplet" category="General"></attribute>
+<attribute name="enableIpv6" use="optional" caption="Enable IPv6" type="boolean" javaType="java.lang.Boolean" base="create-droplet" category="General"></attribute>
+<attribute name="enablePrivateNetworking" use="optional" caption="Enable Private Networking" type="boolean" javaType="java.lang.Boolean" base="create-droplet" category="General"></attribute>
+<attribute name="userData" use="optional" caption="User Data" type="string" javaType="java.lang.String" base="create-droplet" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Create Droplet Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements>
+                        <childElement name="ssh-keys" use="optional" category="General">
+                            <attributes>
+<controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+    <attributes>
+        <attribute name="ref" use="optional" caption="Create Droplet Reference" type="string" javaType="java.lang.String" base="create-droplet" category="General"></attribute>
+    </attributes>
+</controller>
+<controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+    <attributes>
+        <attribute name="ref" use="optional" caption="Create Droplet Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+    </attributes>
+</controller>
+                            </attributes>
+                            <childElements>
+<childElement name="ssh-key" use="optional" category="General">
+    <attributes>
+        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+            <attributes/>
+        </controller>
+        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+            <attributes>
+                <attribute name="ref" use="optional" caption="Create Droplet Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </controller>
+    </attributes>
+    <childElements/>
+</childElement>
+                            </childElements>
+                        </childElement>
+                    </childElements>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="deleteExistingDroplet" xmlName="delete-existing-droplet" caption="Delete existing droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllDropletNeighbors" xmlName="list-all-droplet-neighbors" caption="List all droplet neighbors">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="listDropletUpgrades" xmlName="list-droplet-upgrades" caption="List droplet upgrades">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+        </processor>
+        <processor name="disableDropletBackups" xmlName="disable-droplet-backups" caption="Disable droplet backups">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="disable-droplet-backups-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.DisableBackupsType" base="disable-droplet-backups-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Disable Droplet Backups Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="rebootDroplet" xmlName="reboot-droplet" caption="Reboot droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="reboot-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.RebootType" base="reboot-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Reboot Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="powerCycleDroplet" xmlName="power-cycle-droplet" caption="Power cycle droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="power-cycle-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.PowerCycleType" base="power-cycle-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Power Cycle Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="shutdownDroplet" xmlName="shutdown-droplet" caption="Shutdown droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="shutdown-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.ShutdownType" base="shutdown-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Shutdown Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="powerOffDroplet" xmlName="power-off-droplet" caption="Power off droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="power-off-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.PowerOffType" base="power-off-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Power Off Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="powerOnDroplet" xmlName="power-on-droplet" caption="Power on droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="power-on-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.PowerOnType" base="power-on-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Power On Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="restoreDroplet" xmlName="restore-droplet" caption="Restore droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="restore-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.RestoreType" base="restore-droplet-request" category="General"></attribute>
+<attribute name="imageIdOrSlug" use="optional" caption="Image Id Or Slug" type="string" javaType="java.lang.String" base="restore-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Restore Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="resetDropletPassword" xmlName="reset-droplet-password" caption="Reset droplet password">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="reset-droplet-password-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.PasswordResetType" base="reset-droplet-password-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Reset Droplet Password Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="resizeDroplet" xmlName="resize-droplet" caption="Resize droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="resize-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.ResizeType" base="resize-droplet-request" category="General"></attribute>
+<attribute name="sizeSlug" use="optional" caption="Size Slug" type="string" javaType="java.lang.String" base="resize-droplet-request" category="General"></attribute>
+<attribute name="upgradeDisk" use="optional" caption="Upgrade Disk" type="boolean" javaType="java.lang.Boolean" base="resize-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Resize Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="rebuildDroplet" xmlName="rebuild-droplet" caption="Rebuild droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="rebuild-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.RebuildType" base="rebuild-droplet-request" category="General"></attribute>
+<attribute name="imageIdOrSlug" use="optional" caption="Image Id Or Slug" type="string" javaType="java.lang.String" base="rebuild-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Rebuild Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="renameDroplet" xmlName="rename-droplet" caption="Rename droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="rename-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.RenameType" base="rename-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Rename Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="changeDropletKernel" xmlName="change-droplet-kernel" caption="Change droplet kernel">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="change-droplet-kernel-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.ChangeKernelType" base="change-droplet-kernel-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Change Droplet Kernel Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="enableDropletIpv6" xmlName="enable-droplet-ipv6" caption="Enable droplet ipv6">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="enable-droplet-ipv6-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.EnableIpv6Type" base="enable-droplet-ipv6-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Enable Droplet Ipv6 Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="enableDropletPrivateNetworking" xmlName="enable-droplet-private-networking" caption="Enable droplet private networking">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="enable-droplet-private-networking-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.EnablePrivateNetworkingType" base="enable-droplet-private-networking-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Enable Droplet Private Networking Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="snapshotDroplet" xmlName="snapshot-droplet" caption="Snapshot droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="snapshot-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.SnapshotType" base="snapshot-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Snapshot Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="upgradeDroplet" xmlName="upgrade-droplet" caption="Upgrade droplet">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="upgrade-droplet-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.UpgradeType" base="upgrade-droplet-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Upgrade Droplet Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="retrieveExistingDropletAction" xmlName="retrieve-existing-droplet-action" caption="Retrieve existing droplet action">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="dropletId" use="required" caption="Droplet Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="actionId" use="required" caption="Action Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllImages" xmlName="list-all-images" caption="List all images">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageType" use="optional" caption="Image Type" group="General" type="enum" javaType="org.mule.modules.digitalocean.common.ImageType" default="all" category="General"></attribute>
+                <attribute name="privateUserImagesOnly" use="optional" caption="Private User Images Only" group="General" type="boolean" javaType="java.lang.Boolean" default="false" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingImage" xmlName="retrieve-existing-image" caption="Retrieve existing image">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageIdOrSlug" use="required" caption="Image Id Or Slug" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllActionsForImage" xmlName="list-all-actions-for-image" caption="List all actions for image">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="updateExistingImage" xmlName="update-existing-image" caption="Update existing image">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="update-image" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes/>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Update Image Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="deleteExistingImage" xmlName="delete-existing-image" caption="Delete existing image">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="transferImage" xmlName="transfer-image" caption="Transfer image">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="transfer-image-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.TransferType" base="transfer-image-request" category="General"></attribute>
+<attribute name="regionSlug" use="optional" caption="Region Slug" type="string" javaType="java.lang.String" base="transfer-image-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Transfer Image Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="convertImageToSnapshop" xmlName="convert-image-to-snapshop" caption="Convert image to snapshop">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="convert-image-to-snapshot-request" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="type" use="optional" caption="Type" type="enum" javaType="org.mule.modules.digitalocean.common.ConvertType" base="convert-image-to-snapshot-request" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Convert Image To Snapshot Request Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="retrieveExistingImageAction" xmlName="retrieve-existing-image-action" caption="Retrieve existing image action">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="imageId" use="required" caption="Image Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+                <attribute name="actionId" use="required" caption="Action Id" group="General" type="integer" javaType="java.lang.Integer" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllKeys" xmlName="list-all-keys" caption="List all keys">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="retrieveExistingKey" xmlName="retrieve-existing-key" caption="Retrieve existing key">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="keyIdOrFingerprint" use="required" caption="Key Id Or Fingerprint" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="createNewKey" xmlName="create-new-key" caption="Create new key">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <childElements>
+                <childElement name="create-key" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="publicKey" use="optional" caption="Public Key" type="string" javaType="java.lang.String" base="create-key" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Create Key Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="updateExistingKey" xmlName="update-existing-key" caption="Update existing key">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="keyIdOrFingerprint" use="required" caption="Key Id Or Fingerprint" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+            <childElements>
+                <childElement name="update-key" use="required" group="General" category="General">
+                    <attributes>
+                        <controller caption="Define attributes" controlled="complex" controllerType="radioBoolean">
+                            <attributes/>
+                        </controller>
+                        <controller caption="Reference or expression" controlled="useReference" controllerType="radioBoolean">
+                            <attributes>
+<attribute name="ref" use="optional" caption="Update Key Reference" type="string" javaType="java.lang.String" category="General"></attribute>
+                            </attributes>
+                        </controller>
+                    </attributes>
+                    <childElements/>
+                </childElement>
+            </childElements>
+        </processor>
+        <processor name="deleteExistingKey" xmlName="delete-existing-key" caption="Delete existing key">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="keyIdOrFingerprint" use="required" caption="Key Id Or Fingerprint" group="General" type="string" javaType="java.lang.String" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllRegions" xmlName="list-all-regions" caption="List all regions">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+        <processor name="listAllSizes" xmlName="list-all-sizes" caption="List all sizes">
+            <properties>
+                <datamapper input="" output=""/>
+                <auto-paging>false</auto-paging>
+                <query-support>false</query-support>
+            </properties>
+            <attributes>
+                <attribute name="page" use="optional" caption="Page" group="Paging" type="integer" javaType="java.lang.Integer" default="1" category="General"></attribute>
+                <attribute name="perPage" use="optional" caption="Per Page" group="Paging" type="integer" javaType="java.lang.Integer" default="20" category="General"></attribute>
+            </attributes>
+        </processor>
+    </message-processors>
+</connector>

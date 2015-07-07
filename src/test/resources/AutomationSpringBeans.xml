@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+<!--getUserInformation-->
+<util:map id="getUserInformationTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ </util:map>
+<!--listAllActions-->
+<util:map id="listAllActionsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingAction-->
+<util:map id="retrieveExistingActionTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="actionId" value=""/>
+    </util:map>
+<!--listAllDomains-->
+<util:map id="listAllDomainsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingDomain-->
+<util:map id="retrieveExistingDomainTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+    </util:map>
+<!--createNewDomain-->
+<util:map id="createNewDomainTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="create-domain" value-ref="createNewDomain_CreateDomain"/>
+    </util:map>
+    <bean class="" id="createNewDomain_CreateDomain">
+        <property name="" value=""/>
+    </bean>
+<!--deleteExistingDomain-->
+<util:map id="deleteExistingDomainTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+    </util:map>
+<!--listAllDomainRecords-->
+<util:map id="listAllDomainRecordsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingDomainRecord-->
+<util:map id="retrieveExistingDomainRecordTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+        <entry key="domainRecordId" value=""/>
+    </util:map>
+<!--createNewDomainRecord-->
+<util:map id="createNewDomainRecordTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+        <entry key="create-domain-record" value-ref="createNewDomainRecord_CreateDomainRecord"/>
+    </util:map>
+    <bean class="" id="createNewDomainRecord_CreateDomainRecord">
+        <property name="" value=""/>
+    </bean>
+<!--updateExistingDomainRecord-->
+<util:map id="updateExistingDomainRecordTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+        <entry key="domainRecordId" value=""/>
+        <entry key="update-domain-record" value-ref="updateExistingDomainRecord_UpdateDomainRecord"/>
+    </util:map>
+    <bean class="" id="updateExistingDomainRecord_UpdateDomainRecord">
+        <property name="" value=""/>
+    </bean>
+<!--deleteExistingDomainRecord-->
+<util:map id="deleteExistingDomainRecordTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="domainName" value=""/>
+        <entry key="domainRecordId" value=""/>
+    </util:map>
+<!--listAllDroplets-->
+<util:map id="listAllDropletsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingDroplet-->
+<util:map id="retrieveExistingDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+    </util:map>
+<!--listAllAvailableKernelsForDroplet-->
+<util:map id="listAllAvailableKernelsForDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--listAllSnapshotsForDroplet-->
+<util:map id="listAllSnapshotsForDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--listAllBackupsForDroplet-->
+<util:map id="listAllBackupsForDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--listAllActionsForDroplet-->
+<util:map id="listAllActionsForDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--listAllNeighborsForDroplet-->
+<util:map id="listAllNeighborsForDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+    </util:map>
+<!--createNewDroplet-->
+<util:map id="createNewDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="create-droplet" value-ref="createNewDroplet_CreateDroplet"/>
+    </util:map>
+    <bean class="" id="createNewDroplet_CreateDroplet">
+        <property name="" value=""/>
+    </bean>
+<!--deleteExistingDroplet-->
+<util:map id="deleteExistingDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+    </util:map>
+<!--listAllDropletNeighbors-->
+<util:map id="listAllDropletNeighborsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ </util:map>
+<!--listDropletUpgrades-->
+<util:map id="listDropletUpgradesTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ </util:map>
+<!--disableDropletBackups-->
+<util:map id="disableDropletBackupsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="disable-droplet-backups-request" value-ref="disableDropletBackups_DisableDropletBackupsRequest"/>
+    </util:map>
+    <bean class="" id="disableDropletBackups_DisableDropletBackupsRequest">
+        <property name="" value=""/>
+    </bean>
+<!--rebootDroplet-->
+<util:map id="rebootDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="reboot-droplet-request" value-ref="rebootDroplet_RebootDropletRequest"/>
+    </util:map>
+    <bean class="" id="rebootDroplet_RebootDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--powerCycleDroplet-->
+<util:map id="powerCycleDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="power-cycle-droplet-request" value-ref="powerCycleDroplet_PowerCycleDropletRequest"/>
+    </util:map>
+    <bean class="" id="powerCycleDroplet_PowerCycleDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--shutdownDroplet-->
+<util:map id="shutdownDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="shutdown-droplet-request" value-ref="shutdownDroplet_ShutdownDropletRequest"/>
+    </util:map>
+    <bean class="" id="shutdownDroplet_ShutdownDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--powerOffDroplet-->
+<util:map id="powerOffDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="power-off-droplet-request" value-ref="powerOffDroplet_PowerOffDropletRequest"/>
+    </util:map>
+    <bean class="" id="powerOffDroplet_PowerOffDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--powerOnDroplet-->
+<util:map id="powerOnDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="power-on-droplet-request" value-ref="powerOnDroplet_PowerOnDropletRequest"/>
+    </util:map>
+    <bean class="" id="powerOnDroplet_PowerOnDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--restoreDroplet-->
+<util:map id="restoreDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="restore-droplet-request" value-ref="restoreDroplet_RestoreDropletRequest"/>
+    </util:map>
+    <bean class="" id="restoreDroplet_RestoreDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--resetDropletPassword-->
+<util:map id="resetDropletPasswordTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="reset-droplet-password-request" value-ref="resetDropletPassword_ResetDropletPasswordRequest"/>
+    </util:map>
+    <bean class="" id="resetDropletPassword_ResetDropletPasswordRequest">
+        <property name="" value=""/>
+    </bean>
+<!--resizeDroplet-->
+<util:map id="resizeDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="resize-droplet-request" value-ref="resizeDroplet_ResizeDropletRequest"/>
+    </util:map>
+    <bean class="" id="resizeDroplet_ResizeDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--rebuildDroplet-->
+<util:map id="rebuildDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="rebuild-droplet-request" value-ref="rebuildDroplet_RebuildDropletRequest"/>
+    </util:map>
+    <bean class="" id="rebuildDroplet_RebuildDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--renameDroplet-->
+<util:map id="renameDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="rename-droplet-request" value-ref="renameDroplet_RenameDropletRequest"/>
+    </util:map>
+    <bean class="" id="renameDroplet_RenameDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--changeDropletKernel-->
+<util:map id="changeDropletKernelTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="change-droplet-kernel-request" value-ref="changeDropletKernel_ChangeDropletKernelRequest"/>
+    </util:map>
+    <bean class="" id="changeDropletKernel_ChangeDropletKernelRequest">
+        <property name="" value=""/>
+    </bean>
+<!--enableDropletIpv6-->
+<util:map id="enableDropletIpv6TestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="enable-droplet-ipv6-request" value-ref="enableDropletIpv6_EnableDropletIpv6Request"/>
+    </util:map>
+    <bean class="" id="enableDropletIpv6_EnableDropletIpv6Request">
+        <property name="" value=""/>
+    </bean>
+<!--enableDropletPrivateNetworking-->
+<util:map id="enableDropletPrivateNetworkingTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="enable-droplet-private-networking-request" value-ref="enableDropletPrivateNetworking_EnableDropletPrivateNetworkingRequest"/>
+    </util:map>
+    <bean class="" id="enableDropletPrivateNetworking_EnableDropletPrivateNetworkingRequest">
+        <property name="" value=""/>
+    </bean>
+<!--snapshotDroplet-->
+<util:map id="snapshotDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="snapshot-droplet-request" value-ref="snapshotDroplet_SnapshotDropletRequest"/>
+    </util:map>
+    <bean class="" id="snapshotDroplet_SnapshotDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--upgradeDroplet-->
+<util:map id="upgradeDropletTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="upgrade-droplet-request" value-ref="upgradeDroplet_UpgradeDropletRequest"/>
+    </util:map>
+    <bean class="" id="upgradeDroplet_UpgradeDropletRequest">
+        <property name="" value=""/>
+    </bean>
+<!--retrieveExistingDropletAction-->
+<util:map id="retrieveExistingDropletActionTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="dropletId" value=""/>
+        <entry key="actionId" value=""/>
+    </util:map>
+<!--listAllImages-->
+<util:map id="listAllImagesTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageType" value="all"/>
+        <entry key="privateUserImagesOnly" value="false"/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingImage-->
+<util:map id="retrieveExistingImageTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageIdOrSlug" value=""/>
+    </util:map>
+<!--listAllActionsForImage-->
+<util:map id="listAllActionsForImageTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+        <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--updateExistingImage-->
+<util:map id="updateExistingImageTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+        <entry key="update-image" value-ref="updateExistingImage_UpdateImage"/>
+    </util:map>
+    <bean class="" id="updateExistingImage_UpdateImage">
+        <property name="" value=""/>
+    </bean>
+<!--deleteExistingImage-->
+<util:map id="deleteExistingImageTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+    </util:map>
+<!--transferImage-->
+<util:map id="transferImageTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+        <entry key="transfer-image-request" value-ref="transferImage_TransferImageRequest"/>
+    </util:map>
+    <bean class="" id="transferImage_TransferImageRequest">
+        <property name="" value=""/>
+    </bean>
+<!--convertImageToSnapshop-->
+<util:map id="convertImageToSnapshopTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+        <entry key="convert-image-to-snapshot-request" value-ref="convertImageToSnapshop_ConvertImageToSnapshotRequest"/>
+    </util:map>
+    <bean class="" id="convertImageToSnapshop_ConvertImageToSnapshotRequest">
+        <property name="" value=""/>
+    </bean>
+<!--retrieveExistingImageAction-->
+<util:map id="retrieveExistingImageActionTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="imageId" value=""/>
+        <entry key="actionId" value=""/>
+    </util:map>
+<!--listAllKeys-->
+<util:map id="listAllKeysTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--retrieveExistingKey-->
+<util:map id="retrieveExistingKeyTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="keyIdOrFingerprint" value=""/>
+    </util:map>
+<!--createNewKey-->
+<util:map id="createNewKeyTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="create-key" value-ref="createNewKey_CreateKey"/>
+    </util:map>
+    <bean class="" id="createNewKey_CreateKey">
+        <property name="" value=""/>
+    </bean>
+<!--updateExistingKey-->
+<util:map id="updateExistingKeyTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="keyIdOrFingerprint" value=""/>
+        <entry key="update-key" value-ref="updateExistingKey_UpdateKey"/>
+    </util:map>
+    <bean class="" id="updateExistingKey_UpdateKey">
+        <property name="" value=""/>
+    </bean>
+<!--deleteExistingKey-->
+<util:map id="deleteExistingKeyTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="keyIdOrFingerprint" value=""/>
+    </util:map>
+<!--listAllRegions-->
+<util:map id="listAllRegionsTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+<!--listAllSizes-->
+<util:map id="listAllSizesTestData" key-type="java.lang.String" map-class="java.util.HashMap" scope="prototype" value-type="java.lang.Object">
+ <entry key="page" value="1"/>
+        <entry key="perPage" value="20"/>
+    </util:map>
+</beans>

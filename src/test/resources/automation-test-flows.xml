@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:digitalocean="http://www.mulesoft.org/schema/mule/digitalocean" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.6.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.mulesoft.org/schema/mule/digitalocean http://www.mulesoft.org/schema/mule/digitalocean/current/mule-digitalocean.xsd"
+>
+
+<context:property-placeholder location="automation-credentials.properties" />
+
+<digitalocean:config token="${digitalocean.token}" name="Digitalocean" doc:name="Digitalocean"></digitalocean:config>
+
+<flow name="get-user-information" doc:name="GetUserInformation">
+	<digitalocean:get-user-information config-ref="Digitalocean"/>
+</flow>
+
+<flow name="list-all-actions" doc:name="ListAllActions">
+	<digitalocean:list-all-actions config-ref="Digitalocean"/>
+</flow>
+
+<flow name="retrieve-existing-action" doc:name="RetrieveExistingAction">
+	<digitalocean:retrieve-existing-action config-ref="Digitalocean" actionId="#[flowVars.actionId]" />
+</flow>
+
+<flow name="list-all-domains" doc:name="ListAllDomains">
+	<digitalocean:list-all-domains config-ref="Digitalocean"/>
+</flow>
+
+<flow name="retrieve-existing-domain" doc:name="RetrieveExistingDomain">
+	<digitalocean:retrieve-existing-domain config-ref="Digitalocean" domainName="#[flowVars.domainName]" />
+</flow>
+
+<flow name="create-new-domain" doc:name="CreateNewDomain">
+	<digitalocean:create-new-domain config-ref="Digitalocean">
+		<digitalocean:create-domain ref="#[flowVars.CreateDomainRef]"/>
+	</digitalocean:create-new-domain>
+</flow>
+
+<flow name="delete-existing-domain" doc:name="DeleteExistingDomain">
+	<digitalocean:delete-existing-domain config-ref="Digitalocean" domainName="#[flowVars.domainName]" />
+</flow>
+
+<flow name="list-all-domain-records" doc:name="ListAllDomainRecords">
+	<digitalocean:list-all-domain-records config-ref="Digitalocean" domainName="#[flowVars.domainName]" />
+</flow>
+
+<flow name="retrieve-existing-domain-record" doc:name="RetrieveExistingDomainRecord">
+	<digitalocean:retrieve-existing-domain-record config-ref="Digitalocean" domainName="#[flowVars.domainName]"  domainRecordId="#[flowVars.domainRecordId]" />
+</flow>
+
+<flow name="create-new-domain-record" doc:name="CreateNewDomainRecord">
+	<digitalocean:create-new-domain-record config-ref="Digitalocean" domainName="#[flowVars.domainName]" >
+		<digitalocean:create-domain-record ref="#[flowVars.CreateDomainRecordRef]"/>
+	</digitalocean:create-new-domain-record>
+</flow>
+
+<flow name="update-existing-domain-record" doc:name="UpdateExistingDomainRecord">
+	<digitalocean:update-existing-domain-record config-ref="Digitalocean" domainName="#[flowVars.domainName]"  domainRecordId="#[flowVars.domainRecordId]" >
+		<digitalocean:update-domain-record ref="#[flowVars.UpdateDomainRecordRef]"/>
+	</digitalocean:update-existing-domain-record>
+</flow>
+
+<flow name="delete-existing-domain-record" doc:name="DeleteExistingDomainRecord">
+	<digitalocean:delete-existing-domain-record config-ref="Digitalocean" domainName="#[flowVars.domainName]"  domainRecordId="#[flowVars.domainRecordId]" />
+</flow>
+
+<flow name="list-all-droplets" doc:name="ListAllDroplets">
+	<digitalocean:list-all-droplets config-ref="Digitalocean"/>
+</flow>
+
+<flow name="retrieve-existing-droplet" doc:name="RetrieveExistingDroplet">
+	<digitalocean:retrieve-existing-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-available-kernels-for-droplet" doc:name="ListAllAvailableKernelsForDroplet">
+	<digitalocean:list-all-available-kernels-for-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-snapshots-for-droplet" doc:name="ListAllSnapshotsForDroplet">
+	<digitalocean:list-all-snapshots-for-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-backups-for-droplet" doc:name="ListAllBackupsForDroplet">
+	<digitalocean:list-all-backups-for-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-actions-for-droplet" doc:name="ListAllActionsForDroplet">
+	<digitalocean:list-all-actions-for-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-neighbors-for-droplet" doc:name="ListAllNeighborsForDroplet">
+	<digitalocean:list-all-neighbors-for-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="create-new-droplet" doc:name="CreateNewDroplet">
+	<digitalocean:create-new-droplet config-ref="Digitalocean">
+		<digitalocean:create-droplet ref="#[flowVars.CreateDropletRef]"/>
+	</digitalocean:create-new-droplet>
+</flow>
+
+<flow name="delete-existing-droplet" doc:name="DeleteExistingDroplet">
+	<digitalocean:delete-existing-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" />
+</flow>
+
+<flow name="list-all-droplet-neighbors" doc:name="ListAllDropletNeighbors">
+	<digitalocean:list-all-droplet-neighbors config-ref="Digitalocean"/>
+</flow>
+
+<flow name="list-droplet-upgrades" doc:name="ListDropletUpgrades">
+	<digitalocean:list-droplet-upgrades config-ref="Digitalocean"/>
+</flow>
+
+<flow name="disable-droplet-backups" doc:name="DisableDropletBackups">
+	<digitalocean:disable-droplet-backups config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:disable-droplet-backups-request ref="#[flowVars.DisableDropletBackupsRequestRef]"/>
+	</digitalocean:disable-droplet-backups>
+</flow>
+
+<flow name="reboot-droplet" doc:name="RebootDroplet">
+	<digitalocean:reboot-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:reboot-droplet-request ref="#[flowVars.RebootDropletRequestRef]"/>
+	</digitalocean:reboot-droplet>
+</flow>
+
+<flow name="power-cycle-droplet" doc:name="PowerCycleDroplet">
+	<digitalocean:power-cycle-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:power-cycle-droplet-request ref="#[flowVars.PowerCycleDropletRequestRef]"/>
+	</digitalocean:power-cycle-droplet>
+</flow>
+
+<flow name="shutdown-droplet" doc:name="ShutdownDroplet">
+	<digitalocean:shutdown-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:shutdown-droplet-request ref="#[flowVars.ShutdownDropletRequestRef]"/>
+	</digitalocean:shutdown-droplet>
+</flow>
+
+<flow name="power-off-droplet" doc:name="PowerOffDroplet">
+	<digitalocean:power-off-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:power-off-droplet-request ref="#[flowVars.PowerOffDropletRequestRef]"/>
+	</digitalocean:power-off-droplet>
+</flow>
+
+<flow name="power-on-droplet" doc:name="PowerOnDroplet">
+	<digitalocean:power-on-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:power-on-droplet-request ref="#[flowVars.PowerOnDropletRequestRef]"/>
+	</digitalocean:power-on-droplet>
+</flow>
+
+<flow name="restore-droplet" doc:name="RestoreDroplet">
+	<digitalocean:restore-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:restore-droplet-request ref="#[flowVars.RestoreDropletRequestRef]"/>
+	</digitalocean:restore-droplet>
+</flow>
+
+<flow name="reset-droplet-password" doc:name="ResetDropletPassword">
+	<digitalocean:reset-droplet-password config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:reset-droplet-password-request ref="#[flowVars.ResetDropletPasswordRequestRef]"/>
+	</digitalocean:reset-droplet-password>
+</flow>
+
+<flow name="resize-droplet" doc:name="ResizeDroplet">
+	<digitalocean:resize-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:resize-droplet-request ref="#[flowVars.ResizeDropletRequestRef]"/>
+	</digitalocean:resize-droplet>
+</flow>
+
+<flow name="rebuild-droplet" doc:name="RebuildDroplet">
+	<digitalocean:rebuild-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:rebuild-droplet-request ref="#[flowVars.RebuildDropletRequestRef]"/>
+	</digitalocean:rebuild-droplet>
+</flow>
+
+<flow name="rename-droplet" doc:name="RenameDroplet">
+	<digitalocean:rename-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:rename-droplet-request ref="#[flowVars.RenameDropletRequestRef]"/>
+	</digitalocean:rename-droplet>
+</flow>
+
+<flow name="change-droplet-kernel" doc:name="ChangeDropletKernel">
+	<digitalocean:change-droplet-kernel config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:change-droplet-kernel-request ref="#[flowVars.ChangeDropletKernelRequestRef]"/>
+	</digitalocean:change-droplet-kernel>
+</flow>
+
+<flow name="enable-droplet-ipv6" doc:name="EnableDropletIpv6">
+	<digitalocean:enable-droplet-ipv6 config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:enable-droplet-ipv6-request ref="#[flowVars.EnableDropletIpv6RequestRef]"/>
+	</digitalocean:enable-droplet-ipv6>
+</flow>
+
+<flow name="enable-droplet-private-networking" doc:name="EnableDropletPrivateNetworking">
+	<digitalocean:enable-droplet-private-networking config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:enable-droplet-private-networking-request ref="#[flowVars.EnableDropletPrivateNetworkingRequestRef]"/>
+	</digitalocean:enable-droplet-private-networking>
+</flow>
+
+<flow name="snapshot-droplet" doc:name="SnapshotDroplet">
+	<digitalocean:snapshot-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:snapshot-droplet-request ref="#[flowVars.SnapshotDropletRequestRef]"/>
+	</digitalocean:snapshot-droplet>
+</flow>
+
+<flow name="upgrade-droplet" doc:name="UpgradeDroplet">
+	<digitalocean:upgrade-droplet config-ref="Digitalocean" dropletId="#[flowVars.dropletId]" >
+		<digitalocean:upgrade-droplet-request ref="#[flowVars.UpgradeDropletRequestRef]"/>
+	</digitalocean:upgrade-droplet>
+</flow>
+
+<flow name="retrieve-existing-droplet-action" doc:name="RetrieveExistingDropletAction">
+	<digitalocean:retrieve-existing-droplet-action config-ref="Digitalocean" dropletId="#[flowVars.dropletId]"  actionId="#[flowVars.actionId]" />
+</flow>
+
+<flow name="list-all-images" doc:name="ListAllImages">
+	<digitalocean:list-all-images config-ref="Digitalocean"/>
+</flow>
+
+<flow name="retrieve-existing-image" doc:name="RetrieveExistingImage">
+	<digitalocean:retrieve-existing-image config-ref="Digitalocean" imageIdOrSlug="#[flowVars.imageIdOrSlug]" />
+</flow>
+
+<flow name="list-all-actions-for-image" doc:name="ListAllActionsForImage">
+	<digitalocean:list-all-actions-for-image config-ref="Digitalocean" imageId="#[flowVars.imageId]" />
+</flow>
+
+<flow name="update-existing-image" doc:name="UpdateExistingImage">
+	<digitalocean:update-existing-image config-ref="Digitalocean" imageId="#[flowVars.imageId]" >
+		<digitalocean:update-image ref="#[flowVars.UpdateImageRef]"/>
+	</digitalocean:update-existing-image>
+</flow>
+
+<flow name="delete-existing-image" doc:name="DeleteExistingImage">
+	<digitalocean:delete-existing-image config-ref="Digitalocean" imageId="#[flowVars.imageId]" />
+</flow>
+
+<flow name="transfer-image" doc:name="TransferImage">
+	<digitalocean:transfer-image config-ref="Digitalocean" imageId="#[flowVars.imageId]" >
+		<digitalocean:transfer-image-request ref="#[flowVars.TransferImageRequestRef]"/>
+	</digitalocean:transfer-image>
+</flow>
+
+<flow name="convert-image-to-snapshop" doc:name="ConvertImageToSnapshop">
+	<digitalocean:convert-image-to-snapshop config-ref="Digitalocean" imageId="#[flowVars.imageId]" >
+		<digitalocean:convert-image-to-snapshot-request ref="#[flowVars.ConvertImageToSnapshotRequestRef]"/>
+	</digitalocean:convert-image-to-snapshop>
+</flow>
+
+<flow name="retrieve-existing-image-action" doc:name="RetrieveExistingImageAction">
+	<digitalocean:retrieve-existing-image-action config-ref="Digitalocean" imageId="#[flowVars.imageId]"  actionId="#[flowVars.actionId]" />
+</flow>
+
+<flow name="list-all-keys" doc:name="ListAllKeys">
+	<digitalocean:list-all-keys config-ref="Digitalocean"/>
+</flow>
+
+<flow name="retrieve-existing-key" doc:name="RetrieveExistingKey">
+	<digitalocean:retrieve-existing-key config-ref="Digitalocean" keyIdOrFingerprint="#[flowVars.keyIdOrFingerprint]" />
+</flow>
+
+<flow name="create-new-key" doc:name="CreateNewKey">
+	<digitalocean:create-new-key config-ref="Digitalocean">
+		<digitalocean:create-key ref="#[flowVars.CreateKeyRef]"/>
+	</digitalocean:create-new-key>
+</flow>
+
+<flow name="update-existing-key" doc:name="UpdateExistingKey">
+	<digitalocean:update-existing-key config-ref="Digitalocean" keyIdOrFingerprint="#[flowVars.keyIdOrFingerprint]" >
+		<digitalocean:update-key ref="#[flowVars.UpdateKeyRef]"/>
+	</digitalocean:update-existing-key>
+</flow>
+
+<flow name="delete-existing-key" doc:name="DeleteExistingKey">
+	<digitalocean:delete-existing-key config-ref="Digitalocean" keyIdOrFingerprint="#[flowVars.keyIdOrFingerprint]" />
+</flow>
+
+<flow name="list-all-regions" doc:name="ListAllRegions">
+	<digitalocean:list-all-regions config-ref="Digitalocean"/>
+</flow>
+
+<flow name="list-all-sizes" doc:name="ListAllSizes">
+	<digitalocean:list-all-sizes config-ref="Digitalocean"/>
+</flow>
+
+
+</mule>
