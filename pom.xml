@@ -33,6 +33,23 @@
     		<version>2.3.1</version>
 		</dependency>
     </dependencies>
+    <build>
+	    <plugins>
+	       <plugin>
+	            <groupId>org.mule.certification</groupId>
+	            <artifactId>project-structure-validation</artifactId>
+	            <version>1.0.4</version>
+	            <executions>
+	                <execution>
+	                    <phase>package</phase>
+	                    <goals>
+	                        <goal>validate</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>
+	    </plugins>
+	</build>
     <repositories>
         <repository>
             <id>mulesoft-releases</id>

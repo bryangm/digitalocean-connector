@@ -29,7 +29,7 @@ import org.mule.modules.digitalocean.objects.requests.*;
 import org.mule.modules.digitalocean.objects.responses.*;
 
 /**
- * Anypoint Connector
+ * DigitalOcean Anypoint Connector
  *
  * @author MuleSoft, Inc.
  */
